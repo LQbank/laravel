@@ -244,8 +244,8 @@
                     <li>
                         <a href="#"><i class="icon-list"></i> 分类管理</a>
                         <ul class="closed">
-                            <li><a href="form_layouts.html">分类列表</a></li>
-                            <li><a href="form_elements.html">分类添加</a></li>
+                            <li><a href="/admin/cates">分类列表</a></li>
+                            <li><a href="/admin/cates/create">分类添加</a></li>
                         </ul>
                     </li>
 
