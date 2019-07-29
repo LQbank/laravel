@@ -241,27 +241,35 @@
                         </ul>
                     </li>
 
+                    
+
+
+
+
+
+
+
                     <li>
-                        <a href="#"><i class="icon-list"></i> 分类管理</a>
+                        <a href="#"><i class="icon-list"></i> 管理员管理</a>
                         <ul class="closed">
-                            <li><a href="form_layouts.html">分类列表</a></li>
-                            <li><a href="form_elements.html">分类添加</a></li>
+                            <li><a href="/admin/adminuser"> 管理员列表</a></li>
+                            <li><a href="/admin/adminuser/create"> 管理员添加</a></li>
                         </ul>
                     </li>
 
                     <li>
-                        <a href="#"><i class="icon-list"></i> 商品管理</a>
-                        <ul class="closed">
-                            <li><a href="form_layouts.html">商品列表</a></li>
-                            <li><a href="form_elements.html">商品添加</a></li>
+                        <a href="#"><i class="icon-users"></i>  角色管理</a>
+                        <ul>
+                            <li><a href="/admin/roles"> 角色列表</a></li>
+                            <li><a href="/admin/roles/create"> 角色添加</a></li>
                         </ul>
                     </li>
 
-                    <li>
-                        <a href="#"><i class="icon-list"></i> 推荐管理</a>
-                        <ul class="closed">
-                            <li><a href="form_layouts.html">推荐列表</a></li>
-                            <li><a href="form_elements.html">推荐添加</a></li>
+                    <li class="active">
+                        <a href="#"><i class="icon-users"></i>  权限管理</a>
+                        <ul>
+                            <li><a href="/admin/nodes"> 权限列表</a></li>
+                            <li><a href="/admin/nodes/create"> 权限添加</a></li>
                         </ul>
                     </li>
                 </ul>
