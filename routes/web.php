@@ -14,3 +14,20 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+//前台 登录
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+
+// 后台 首页 的路由
+Route::get('admin','Admin\IndexController@index');
+
+// 后台 用户 路由
+Route::resource('admin/users','Admin\UsersController');
+
+
