@@ -42,6 +42,8 @@ Route::group(['middleware'=>['login']],function(){
 	Route::resource('admin/users','Admin\UsersController');
 
 	
+	// 后台 分类 路由
+	Route::resource('admin/cates','Admin\CatesController');
 
 	// 后台 管理员 管理
 	Route::resource('admin/adminuser','Admin\AdminuserController');
@@ -73,5 +75,3 @@ Route::group(['middleware'=>['login']],function(){
 
 
 
-// 后台 分类 路由
-Route::resource('admin/cates','Admin\CatesController');
