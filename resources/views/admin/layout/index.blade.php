@@ -242,12 +242,13 @@
                     </li>
 
                     
-
-
-
-
-
-
+                    <li>
+                        <a href="#"><i class="icon-list"></i> 分类管理</a>
+                        <ul class="closed">
+                             <li><a href="/admin/cates">分类列表</a></li>
+                            <li><a href="/admin/cates/create">分类添加</a></li>
+                        </ul>
+                    </li>
 
                     <li>
                         <a href="#"><i class="icon-list"></i> 管理员管理</a>
@@ -259,7 +260,7 @@
 
                     <li>
                         <a href="#"><i class="icon-users"></i>  角色管理</a>
-                        <ul>
+                        <ul  class="closed">
                             <li><a href="/admin/roles"> 角色列表</a></li>
                             <li><a href="/admin/roles/create"> 角色添加</a></li>
                         </ul>
