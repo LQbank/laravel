@@ -53,6 +53,9 @@ Route::group(['middleware'=>['login']],function(){
 
 	// 后台 角色 管理
 	Route::resource('admin/roles','Admin\RolesController'); 
+
+	// 后台 商品 管理
+	Route::resource('admin/goods','Admin\GoodsController'); 
 	
 });
 

@@ -274,6 +274,14 @@
                             <li><a href="/admin/nodes/create"> 权限添加</a></li>
                         </ul>
                     </li>
+
+                    <li>
+                        <a href="#"><i class="icon-users"></i> 商品管理</a>
+                        <ul class="closed">
+                            <li><a href="/admin/goods"> 商品列表</a></li>
+                            <li><a href="/admin/goods/create"> 商品添加</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>         
         </div>
