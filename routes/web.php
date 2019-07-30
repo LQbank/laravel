@@ -33,7 +33,7 @@ Route::get('admin/allow',function(){
 
 
 // 权限验证的中间件  【allow】
-Route::group(['middleware'=>['login','allow']],function(){
+Route::group(['middleware'=>['login']],function(){
 
 	// 后台 首页 的路由
 	Route::get('admin','Admin\IndexController@index');
@@ -42,6 +42,8 @@ Route::group(['middleware'=>['login','allow']],function(){
 	Route::resource('admin/users','Admin\UsersController');
 
 	
+	// 后台 分类 路由
+	Route::resource('admin/cates','Admin\CatesController');
 
 	// 后台 管理员 管理
 	Route::resource('admin/adminuser','Admin\AdminuserController');
@@ -73,5 +75,3 @@ Route::group(['middleware'=>['login','allow']],function(){
 
 
 
-// 后台 分类 路由
-Route::resource('admin/cates','Admin\CatesController');
