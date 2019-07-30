@@ -14,6 +14,9 @@ class RolesController extends Controller
         return [
             'userscontroller'=>'用户管理',
             'goodscontroller'=>'商品管理',
+            'catescontroller'=>'分类管理',
+            'rolescontroller'=>'角色管理',
+            'nodescontroller'=>'权限管理',
         ];
     } 
 
@@ -28,7 +31,7 @@ class RolesController extends Controller
             $temp['aname'] = $value->aname;
             $arr[$value->cname][] = $temp;
         }
-      
+  
         return $arr;
     }
 
@@ -87,7 +90,6 @@ class RolesController extends Controller
             
         }
 
-
         DB::commit();
         return redirect('admin/roles')->with('success','添加成功');
 
@@ -112,7 +114,25 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-        //
+        //查询 角色权限分支
+        $nodes = self::node();
+
+        //查询 角色名
+        $role = DB::table('role')->find($id);
+        
+        //查询 角色 的权限id
+        $role_node = DB::table('role_node')->where('rid',$id)->pluck('nid');
+
+        //权限 总名称 数据
+        $controllernames = self::controllernames();
+
+        // dump($nodes);
+        // dump($role_node);
+        // dump($role);
+        // dump($controllernames);
+        
+        // 加载视图
+        return view('admin.roles.edit',['role'=>$role,'nodes'=>$nodes,'controllernames'=>$controllernames,'role_node'=>$role_node]);
     }
 
     /**
@@ -124,7 +144,32 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::beginTransaction();
+
+        // dd($id);
+        // dd($request->input());
+
+        //获取 提交的数组
+        $nid = $request->input('nid');
+
+        // dd($nid);
+        //找到  rode表id
+        $rid = $id;
+
+        if($rid){
+            //遍历往role_node表  插入
+            foreach ($nid as $key => $value) {
+               $res =  DB::table('role_node')->insert(['rid'=>$rid,'nid'=>$value]);
+                if(!$res){
+                    DB::rollBack();
+                    return back()->with('error','修改失败');
+                }
+            }
+            
+        }
+
+        DB::commit();
+        return redirect('admin/roles')->with('success','修改成功');
     }
 
     /**

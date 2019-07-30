@@ -259,9 +259,9 @@
                         </ul>
                     </li>
 
-                    <li>
+                    <li  class="active">
                         <a href="#"><i class="icon-users"></i>  角色管理</a>
-                        <ul  class="closed">
+                        <ul  >
                             <li><a href="/admin/roles"> 角色列表</a></li>
                             <li><a href="/admin/roles/create"> 角色添加</a></li>
                         </ul>
@@ -342,6 +342,10 @@
 
     <!-- Demo Scripts (remove if not needed) -->
     <script src="/file/js/demo/demo.dashboard.js"></script>
+
+    @section('js')
+                    
+    @show
 
 </body>
 </html>
