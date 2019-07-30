@@ -7,29 +7,41 @@
                     	<span>Inline Form</span>
                     </div>
                     <div class="mws-panel-body no-padding">
-                    	<form class="mws-form" action="/admin/roles" method="post">
+                    	<form class="mws-form" action="/admin/roles/{{ $role->id }}" method="post">
                     		{{ csrf_field() }}
+                            {{ method_field('PUT') }}
                     		<div class="mws-form-inline">
                     			<div class="mws-form-row">
                     				<label class="mws-form-label">角色名称</label>
                     				<div class="mws-form-item">
-                    					<input type="text" name="rname" class="small">
+                    					<input type="text" disabled  name="rname" value="{{$role->rname}}" class="small">
                     				</div>
                     			</div>
                     			
                     		
                     			<div class="mws-form-row">
                     				<label class="mws-form-label">角色权限</label>
-									<input type="checkbox" id="all">
+                                    <input type="checkbox" id="all">
                                     <input type="button" value="全选" class="btn" id="selectAll">  
     	                            <input type="button" value="全不选" class="btn" id="unSelect">
                     				<div class="mws-form-item clearfix" id="list">
                     					@foreach($nodes as $k=>$v)
                     					<h3>{{ $controllernames[$k] }}</h3>
-                    					<ul class="mws-form-list inline">
+                    					<ul class="mws-form-list inline"  >
                     						@foreach($v as $kk=>$vv)
-                    						<li><input type="checkbox" value="{{ $vv['id'] }}" name="nid[]"> <label>{{ $vv['desc'] }}</label></li>
-                    						@endforeach
+
+                    						<li><input type="checkbox" 
+
+                                            {{--判断是否包含此权限，初始选中--}}
+                                            @if (in_array($vv['id'],$role_node->toArray()))
+                                            checked='true'
+                                            @else
+                                                
+                                            @endif
+
+                                              value="{{ $vv['id'] }}" name="nid[]"> <label>{{ $vv['desc'] }}</label></li>
+                    						
+                                            @endforeach
                     					</ul>
 										@endforeach
 
@@ -45,6 +57,9 @@
                     	</form>
                     </div>    	
                 </div>
+
+
+            
 
 @endsection
 

@@ -22,7 +22,7 @@
                         <td>{{ $v->id }}</td>
                         <td>{{ $v->rname }}</td>
                         <td>
-                            <a href="">修改权限</a>
+                        <a href="/admin/roles/{{ $v->id }}/edit" class="btn  btn-info  btn-ms " style="margin-left:50px">修改权限</a>
                         </td>
                     </tr>
                     @endforeach
