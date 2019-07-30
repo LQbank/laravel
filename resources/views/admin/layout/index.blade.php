@@ -249,21 +249,21 @@
                         </ul>
                     </li>
 
-                    <li>
-                        <a href="#"><i class="icon-list"></i> 商品管理</a>
-                        <ul class="closed">
-                            <li><a href="form_layouts.html">商品列表</a></li>
-                            <li><a href="form_elements.html">商品添加</a></li>
-                        </ul>
-                    </li>
 
-                    <li>
-                        <a href="#"><i class="icon-list"></i> 推荐管理</a>
-                        <ul class="closed">
-                            <li><a href="form_layouts.html">推荐列表</a></li>
-                            <li><a href="form_elements.html">推荐添加</a></li>
-                        </ul>
-                    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 </ul>
             </div>         
         </div>
