@@ -25,7 +25,7 @@
                         	<img src="/uploads/{{ $v->profile }}" style="width: 60px;">
                         </td>
                         <td>
-							<a href="/admin/adminuser/{{$v->id}}/edit">修改角色</a>
+							<a href="/admin/adminuser/{{$v->id}}/edit"   class="btn btn-info">修改角色</a>
                         </td>
                     </tr>
                     @endforeach

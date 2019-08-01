@@ -116,31 +116,38 @@ class AdminuserController extends Controller
     public function update(Request $request, $id)
     {
         
+        DB::beginTransaction();
+
+        //获取 页面提交 数据
         $role_id = $request->input('role');
         // dd($role_id);
-        // 把所有的关联都删除
-
-
+       
+        //查看当前角色
         $role = DB::table('user_role')->where('uid',$id)->get();
         // dd(gettype($id));
         
         
-
+        // 如果不为空  把所有的角色都删除
         if(!empty($role)){
             $role = DB::table('user_role')->where('uid',$id)->delete();
         }
         
-
-        foreach($role_id as $v){
-            // 添加关联
-            $res = DB::insert('insert into user_role (uid, rid) values (?, ?)', [$id,$v]);
+        if($role_id){
+            foreach($role_id as $v){
+                // 添加角色
+                $res = DB::insert('insert into user_role (uid, rid) values (?, ?)', [$id,$v]);
+                if(!$res){
+                    DB::rollBack();
+                    return back()->with('error','修改失败');
+                }
+            
+            }
         }
 
-        if($res){
-            return redirect("admin/adminuser")->with('success', '添加成功');
-        }else{
-            return back()->with('error', '添加失败');
-        }
+        DB::commit();
+        
+        return redirect("admin/adminuser")->with('success', '修改成功');
+        
     }
 
     /**

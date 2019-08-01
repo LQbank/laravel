@@ -119,7 +119,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+    
         // 检查用户是否有文件上传
         if(!$request->hasFile('avatar')){
             $user = Users::find($id);

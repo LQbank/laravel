@@ -6,13 +6,18 @@
 <!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <!-- Viewport Metatag -->
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<!-- Plugin Stylesheets first to ease overrides -->
 <link rel="stylesheet" type="text/css" href="/file/plugins/colorpicker/colorpicker.css" media="screen">
-<link rel="stylesheet" type="text/css" href="/file/custom-plugins/wizard/wizard.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/file/plugins/fullcalendar/fullcalendar.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/file/plugins/fullcalendar/fullcalendar.print.css" media="print">
+
+<link rel="stylesheet" type="text/css" href="/file/plugins/select2/select2.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/file/plugins/ibutton/jquery.ibutton.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/file/plugins/cleditor/jquery.cleditor.css" media="screen">
 
 <!-- Required Stylesheets -->
 <link rel="stylesheet" type="text/css" href="/file/bootstrap/css/bootstrap.min.css" media="screen">
@@ -33,6 +38,12 @@
 <!-- Theme Stylesheet -->
 <link rel="stylesheet" type="text/css" href="/file/css/mws-theme.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/file/css/themer.css" media="screen">
+
+
+
+<link rel="stylesheet" type="text/css" href="/file/plugins/prettyphoto/css/prettyPhoto.css" media="screen">
+
+
 
 <title>后台管理</title>
 
@@ -60,126 +71,9 @@
         <div id="mws-user-tools" class="clearfix">
         
         	<!-- Notifications -->
-        	<div id="mws-user-notif" class="mws-dropdown-menu">
-            	<a href="#" data-toggle="dropdown" class="mws-dropdown-trigger"><i class="icon-exclamation-sign"></i></a>
-                
-                <!-- Unread notification count -->
-                <span class="mws-dropdown-notif">35</span>
-                
-                <!-- Notifications dropdown -->
-                <div class="mws-dropdown-box">
-                	<div class="mws-dropdown-content">
-                        <ul class="mws-notifications">
-                        	<li class="read">
-                            	<a href="#">
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        	<li class="read">
-                            	<a href="#">
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        	<li class="unread">
-                            	<a href="#">
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        	<li class="unread">
-                            	<a href="#">
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="mws-dropdown-viewall">
-	                        <a href="#">View All Notifications</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
+        	
             <!-- Messages -->
-            <div id="mws-user-message" class="mws-dropdown-menu">
-            	<a href="#" data-toggle="dropdown" class="mws-dropdown-trigger"><i class="icon-envelope"></i></a>
-                
-                <!-- Unred messages count -->
-                <span class="mws-dropdown-notif">35</span>
-                
-                <!-- Messages dropdown -->
-                <div class="mws-dropdown-box">
-                	<div class="mws-dropdown-content">
-                        <ul class="mws-messages">
-                        	<li class="read">
-                            	<a href="#">
-                                    <span class="sender">John Doe</span>
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        	<li class="read">
-                            	<a href="#">
-                                    <span class="sender">John Doe</span>
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        	<li class="unread">
-                            	<a href="#">
-                                    <span class="sender">John Doe</span>
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        	<li class="unread">
-                            	<a href="#">
-                                    <span class="sender">John Doe</span>
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="mws-dropdown-viewall">
-	                        <a href="#">View All Messages</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
             
             <!-- User Information and functions section -->
             <div id="mws-user-info" class="mws-inset">
@@ -233,7 +127,7 @@
             <div id="mws-navigation">
                 <ul>
                     <li>
-                        <a href="#"><i class="icon-list"></i> 用户管理</a>
+                        <a href="#"><i class="icon-list-2"></i> 用户管理</a>
                         <ul class="closed">
                             <li><a href="/admin/users">用户列表</a></li>
                             <li><a href="/admin/users/create">用户添加</a></li>
@@ -243,7 +137,7 @@
 
                     
                     <li>
-                        <a href="#"><i class="icon-list"></i> 分类管理</a>
+                        <a href="#"><i class="icon-th-list"></i> 分类管理</a>
                         <ul class="closed">
                              <li><a href="/admin/cates">分类列表</a></li>
                             <li><a href="/admin/cates/create">分类添加</a></li>
@@ -252,26 +146,54 @@
 
 
                     <li>
-                        <a href="#"><i class="icon-list"></i> 管理员管理</a>
+                        <a href="#"><i class="icon-user"></i> 管理员管理</a>
                         <ul class="closed">
                             <li><a href="/admin/adminuser"> 管理员列表</a></li>
                             <li><a href="/admin/adminuser/create"> 管理员添加</a></li>
                         </ul>
                     </li>
 
-                    <li  class="active">
+                    <li>
                         <a href="#"><i class="icon-users"></i>  角色管理</a>
-                        <ul  >
+                        <ul class="closed" >
                             <li><a href="/admin/roles"> 角色列表</a></li>
                             <li><a href="/admin/roles/create"> 角色添加</a></li>
                         </ul>
                     </li>
 
                     <li>
-                        <a href="#"><i class="icon-users"></i>  权限管理</a>
+                        <a href="#"><i class="icon-exclamation-sign"></i>  权限管理</a>
                         <ul class="closed">
                             <li><a href="/admin/nodes"> 权限列表</a></li>
                             <li><a href="/admin/nodes/create"> 权限添加</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="icon-bag"></i> 商品管理</a>
+                        <ul class="closed">
+                            <li><a href="/admin/nodes"> 商品列表</a></li>
+                            <li><a href="/admin/nodes/create"> 商品添加</a></li>
+                        </ul>
+                    </li>
+
+                    <li> 
+                        <a href="#"><i class="icon-pictures"></i>轮播图模块</a>
+                        <ul class="closed" >
+                        
+                            <li><a href="/admin/cartoon">浏览轮播图</a></li>
+                            <li><a href="/admin/cartoon/create">添加轮播图</a></li>
+                            
+                        </ul>
+                    </li>
+
+                    <li  class="active"> 
+                        <a href="#"><i class="icon-envelope"></i>友情链接模块</a>
+                        <ul  >
+                        
+                            <li><a href="/admin/link">浏览友情链接</a></li>
+                            <li><a href="/admin/link/create">添加友情链接</a></li>
+                            
                         </ul>
                     </li>
                 </ul>
@@ -300,7 +222,6 @@
         
     </div>
 
-    <!-- JavaScript Plugins -->
     <script src="/file/js/libs/jquery-1.8.3.min.js"></script>
     <script src="/file/js/libs/jquery.mousewheel.min.js"></script>
     <script src="/file/js/libs/jquery.placeholder.min.js"></script>
@@ -311,29 +232,45 @@
     <script src="/file/jui/jquery-ui.custom.min.js"></script>
     <script src="/file/jui/js/jquery.ui.touch-punch.js"></script>
 
-    <!-- Plugin Scripts -->
-    <script src="/file/plugins/datatables/jquery.dataTables.min.js"></script>
-    <!--[if lt IE 9]>
-    <script src="file/js/libs/excanvas.min.js"></script>
-    <![endif]-->
-    <script src="/file/plugins/flot/jquery.flot.min.js"></script>
-    <script src="/file/plugins/flot/plugins/jquery.flot.tooltip.min.js"></script>
-    <script src="/file/plugins/flot/plugins/jquery.flot.pie.min.js"></script>
-    <script src="/file/plugins/flot/plugins/jquery.flot.stack.min.js"></script>
-    <script src="/file/plugins/flot/plugins/jquery.flot.resize.min.js"></script>
-    <script src="/file/plugins/colorpicker/colorpicker-min.js"></script>
-    <script src="/file/plugins/validate/jquery.validate-min.js"></script>
-    <script src="/file/custom-plugins/wizard/wizard.min.js"></script>
 
+    <!-- Plugin Scripts -->
+    <script src="/file/plugins/fullcalendar/fullcalendar.min.js"></script>
+    <script src="/file/plugins/colorpicker/colorpicker-min.js"></script>
+   
+   
     <!-- Core Script -->
     <script src="/file/bootstrap/js/bootstrap.min.js"></script>
     <script src="/file/js/core/mws.js"></script>
 
     <!-- Themer Script (Remove if not needed) -->
     <script src="/file/js/core/themer.js"></script>
-
+ 
     <!-- Demo Scripts (remove if not needed) -->
-    <script src="/file/js/demo/demo.dashboard.js"></script>
+    <script src="/file/js/demo/demo.calendar.js"></script>
+    <!-- <script src="/file/plugins/datatables/jquery.dataTables.min.js"></script> -->
+    <script src="/file/js/demo/demo.table.js"></script>
+
+    <script src="/file/js/demo/demo.formelements.js"></script>
+
+
+    <!-- Plugin Scripts -->
+    <script src="/file/plugins/select2/select2.min.js"></script>
+    <script src="/file/plugins/colorpicker/colorpicker-min.js"></script>
+    <script src="/file/plugins/validate/jquery.validate-min.js"></script>
+    <script src="/file/plugins/ibutton/jquery.ibutton.min.js"></script>
+
+    <!-- 模态框 -->
+    <!-- <script src="/file/js/demo/demo.widget.js"></script> -->
+
+    
+    <!-- ajax -->
+    <script>
+     $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
 
     @section('js')
                     

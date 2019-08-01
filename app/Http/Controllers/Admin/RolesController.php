@@ -17,6 +17,7 @@ class RolesController extends Controller
             'catescontroller'=>'分类管理',
             'rolescontroller'=>'角色管理',
             'nodescontroller'=>'权限管理',
+            'adminusercontroller'=>'管理员管理',
         ];
     } 
 
@@ -149,23 +150,35 @@ class RolesController extends Controller
         // dd($id);
         // dd($request->input());
 
-        //获取 提交的数组
-        $nid = $request->input('nid');
+        
 
         // dd($nid);
         //找到  rode表id
         $rid = $id;
 
+        // dd($request->input('nid'));
+
+        //先将role_node表rid 之前  权限清空
+        $role = DB::table('role_node')->where('rid',$rid)->delete();
+
+        //获取 提交的数组
+        $nid = $request->input('nid');
+
+     
+
         if($rid){
-            //遍历往role_node表  插入
-            foreach ($nid as $key => $value) {
-               $res =  DB::table('role_node')->insert(['rid'=>$rid,'nid'=>$value]);
-                if(!$res){
-                    DB::rollBack();
-                    return back()->with('error','修改失败');
+
+            if($nid ){
+                 //遍历往role_node表  插入
+                foreach ($nid as $key => $value) {
+                    $res =  DB::table('role_node')->insert(['rid'=>$rid,'nid'=>$value]);
+                    if(!$res){
+                        DB::rollBack();
+                        return back()->with('error','修改失败');
+                    }
                 }
             }
-            
+
         }
 
         DB::commit();
