@@ -15,34 +15,40 @@
 <link rel="stylesheet" type="text/css" href="/file/plugins/fullcalendar/fullcalendar.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/file/plugins/fullcalendar/fullcalendar.print.css" media="print">
 
+
 <link rel="stylesheet" type="text/css" href="/file/plugins/select2/select2.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/file/plugins/ibutton/jquery.ibutton.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/file/plugins/cleditor/jquery.cleditor.css" media="screen">
+
+
 
 <!-- Required Stylesheets -->
 <link rel="stylesheet" type="text/css" href="/file/bootstrap/css/bootstrap.min.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/file/css/fonts/ptsans/stylesheet.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/file/css/fonts/icomoon/style.css" media="screen">
 
+
 <link rel="stylesheet" type="text/css" href="/file/css/mws-style.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/file/css/icons/icol16.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/file/css/icons/icol32.css" media="screen">
 
+
 <!-- Demo Stylesheet -->
 <link rel="stylesheet" type="text/css" href="/file/css/demo.css" media="screen">
+
 
 <!-- jQuery-UI Stylesheet -->
 <link rel="stylesheet" type="text/css" href="/file/jui/css/jquery.ui.all.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/file/jui/jquery-ui.custom.css" media="screen">
+
 
 <!-- Theme Stylesheet -->
 <link rel="stylesheet" type="text/css" href="/file/css/mws-theme.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/file/css/themer.css" media="screen">
 
 
-
 <link rel="stylesheet" type="text/css" href="/file/plugins/prettyphoto/css/prettyPhoto.css" media="screen">
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 
 <title>后台管理</title>
@@ -155,7 +161,7 @@
 
                     <li>
                         <a href="#"><i class="icon-users"></i>  角色管理</a>
-                        <ul class="closed" >
+                        <ul class="closed">
                             <li><a href="/admin/roles"> 角色列表</a></li>
                             <li><a href="/admin/roles/create"> 角色添加</a></li>
                         </ul>
@@ -172,8 +178,8 @@
                     <li>
                         <a href="#"><i class="icon-bag"></i> 商品管理</a>
                         <ul class="closed">
-                            <li><a href="/admin/nodes"> 商品列表</a></li>
-                            <li><a href="/admin/nodes/create"> 商品添加</a></li>
+                            <li><a href="/admin/goods"> 商品列表</a></li>
+                            <li><a href="/admin/goods/create"> 商品添加</a></li>
                         </ul>
                     </li>
 
@@ -194,6 +200,7 @@
                             <li><a href="/admin/link">浏览友情链接</a></li>
                             <li><a href="/admin/link/create">添加友情链接</a></li>
                             
+
                         </ul>
                     </li>
                 </ul>
@@ -232,7 +239,6 @@
     <script src="/file/jui/jquery-ui.custom.min.js"></script>
     <script src="/file/jui/js/jquery.ui.touch-punch.js"></script>
 
-
     <!-- Plugin Scripts -->
     <script src="/file/plugins/fullcalendar/fullcalendar.min.js"></script>
     <script src="/file/plugins/colorpicker/colorpicker-min.js"></script>
@@ -242,15 +248,18 @@
     <script src="/file/bootstrap/js/bootstrap.min.js"></script>
     <script src="/file/js/core/mws.js"></script>
 
+
     <!-- Themer Script (Remove if not needed) -->
     <script src="/file/js/core/themer.js"></script>
  
     <!-- Demo Scripts (remove if not needed) -->
     <script src="/file/js/demo/demo.calendar.js"></script>
+
     <!-- <script src="/file/plugins/datatables/jquery.dataTables.min.js"></script> -->
     <script src="/file/js/demo/demo.table.js"></script>
 
     <script src="/file/js/demo/demo.formelements.js"></script>
+
 
 
     <!-- Plugin Scripts -->
@@ -259,13 +268,14 @@
     <script src="/file/plugins/validate/jquery.validate-min.js"></script>
     <script src="/file/plugins/ibutton/jquery.ibutton.min.js"></script>
 
+
     <!-- 模态框 -->
     <!-- <script src="/file/js/demo/demo.widget.js"></script> -->
 
-    
     <!-- ajax -->
     <script>
      $.ajaxSetup({
+
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
