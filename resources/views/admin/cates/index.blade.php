@@ -21,7 +21,7 @@
             </thead>
             <tbody>
             	@foreach($cates as $k=>$v)
-                <tr>
+                <tr align='center'>
                     <td>{{ $v->id }}</td>
                     <td>{{ $v->cname }}</td>
                     <td>{{ $v->pid }}</td>
@@ -37,6 +37,9 @@
                     <td>
                     	@if(substr_count($v->path,',') < 2)
 						<a href="/admin/cates/create?id={{ $v->id }}" class="btn btn-primary">添加子分类</a>
+                        @if($v->pid == 0)
+                        <a href="/admin/tags/index/{{ $v->id }}" class="btn btn-primary">编辑分类属性</a>
+                        @endif
                     	@endif
                     </td>
                 </tr>

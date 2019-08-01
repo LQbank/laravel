@@ -17,6 +17,7 @@ class RolesController extends Controller
             'catescontroller'=>'分类管理',
             'rolescontroller'=>'角色管理',
             'nodescontroller'=>'权限管理',
+            'adminusercontroller'=>'管理员管理',
         ];
     } 
 

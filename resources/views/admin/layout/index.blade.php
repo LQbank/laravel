@@ -12,27 +12,42 @@
 
 <!-- Plugin Stylesheets first to ease overrides -->
 <link rel="stylesheet" type="text/css" href="/file/plugins/colorpicker/colorpicker.css" media="screen">
-<link rel="stylesheet" type="text/css" href="/file/custom-plugins/wizard/wizard.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/file/plugins/fullcalendar/fullcalendar.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/file/plugins/fullcalendar/fullcalendar.print.css" media="print">
+
+
+<link rel="stylesheet" type="text/css" href="/file/plugins/select2/select2.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/file/plugins/ibutton/jquery.ibutton.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/file/plugins/cleditor/jquery.cleditor.css" media="screen">
+
 
 <!-- Required Stylesheets -->
 <link rel="stylesheet" type="text/css" href="/file/bootstrap/css/bootstrap.min.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/file/css/fonts/ptsans/stylesheet.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/file/css/fonts/icomoon/style.css" media="screen">
 
+
 <link rel="stylesheet" type="text/css" href="/file/css/mws-style.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/file/css/icons/icol16.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/file/css/icons/icol32.css" media="screen">
 
+
 <!-- Demo Stylesheet -->
 <link rel="stylesheet" type="text/css" href="/file/css/demo.css" media="screen">
+
 
 <!-- jQuery-UI Stylesheet -->
 <link rel="stylesheet" type="text/css" href="/file/jui/css/jquery.ui.all.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/file/jui/jquery-ui.custom.css" media="screen">
 
+
 <!-- Theme Stylesheet -->
 <link rel="stylesheet" type="text/css" href="/file/css/mws-theme.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/file/css/themer.css" media="screen">
+
+
+<link rel="stylesheet" type="text/css" href="/file/plugins/prettyphoto/css/prettyPhoto.css" media="screen">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <title>后台管理</title>
 
@@ -259,9 +274,9 @@
                         </ul>
                     </li>
 
-                    <li  class="active">
+                    <li>
                         <a href="#"><i class="icon-users"></i>  角色管理</a>
-                        <ul  >
+                        <ul class="closed">
                             <li><a href="/admin/roles"> 角色列表</a></li>
                             <li><a href="/admin/roles/create"> 角色添加</a></li>
                         </ul>
@@ -275,9 +290,9 @@
                         </ul>
                     </li>
 
-                    <li>
+                    <li class="active">
                         <a href="#"><i class="icon-users"></i> 商品管理</a>
-                        <ul class="closed">
+                        <ul>
                             <li><a href="/admin/goods"> 商品列表</a></li>
                             <li><a href="/admin/goods/create"> 商品添加</a></li>
                         </ul>
@@ -308,7 +323,6 @@
         
     </div>
 
-    <!-- JavaScript Plugins -->
     <script src="/file/js/libs/jquery-1.8.3.min.js"></script>
     <script src="/file/js/libs/jquery.mousewheel.min.js"></script>
     <script src="/file/js/libs/jquery.placeholder.min.js"></script>
@@ -319,29 +333,49 @@
     <script src="/file/jui/jquery-ui.custom.min.js"></script>
     <script src="/file/jui/js/jquery.ui.touch-punch.js"></script>
 
-    <!-- Plugin Scripts -->
-    <script src="/file/plugins/datatables/jquery.dataTables.min.js"></script>
-    <!--[if lt IE 9]>
-    <script src="file/js/libs/excanvas.min.js"></script>
-    <![endif]-->
-    <script src="/file/plugins/flot/jquery.flot.min.js"></script>
-    <script src="/file/plugins/flot/plugins/jquery.flot.tooltip.min.js"></script>
-    <script src="/file/plugins/flot/plugins/jquery.flot.pie.min.js"></script>
-    <script src="/file/plugins/flot/plugins/jquery.flot.stack.min.js"></script>
-    <script src="/file/plugins/flot/plugins/jquery.flot.resize.min.js"></script>
-    <script src="/file/plugins/colorpicker/colorpicker-min.js"></script>
-    <script src="/file/plugins/validate/jquery.validate-min.js"></script>
-    <script src="/file/custom-plugins/wizard/wizard.min.js"></script>
 
+
+
+    <!-- Plugin Scripts -->
+    <script src="/file/plugins/fullcalendar/fullcalendar.min.js"></script>
+    <script src="/file/plugins/colorpicker/colorpicker-min.js"></script>
+   
+   
     <!-- Core Script -->
     <script src="/file/bootstrap/js/bootstrap.min.js"></script>
     <script src="/file/js/core/mws.js"></script>
 
+
     <!-- Themer Script (Remove if not needed) -->
     <script src="/file/js/core/themer.js"></script>
-
+ 
     <!-- Demo Scripts (remove if not needed) -->
-    <script src="/file/js/demo/demo.dashboard.js"></script>
+    <script src="/file/js/demo/demo.calendar.js"></script>
+    <script src="/file/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/file/js/demo/demo.table.js"></script>
+
+
+    <script src="/file/js/demo/demo.formelements.js"></script>
+
+
+
+
+    <!-- Plugin Scripts -->
+    <script src="/file/plugins/select2/select2.min.js"></script>
+    <script src="/file/plugins/colorpicker/colorpicker-min.js"></script>
+    <script src="/file/plugins/validate/jquery.validate-min.js"></script>
+    <script src="/file/plugins/ibutton/jquery.ibutton.min.js"></script>
+
+
+    <!-- 模态框 -->
+    <!-- <script src="/file/js/demo/demo.widget.js"></script> -->
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
 
     @section('js')
                     

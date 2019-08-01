@@ -123,4 +123,5 @@ class CatesController extends Controller
     {
         //
     }
+
 }
