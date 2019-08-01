@@ -159,13 +159,13 @@ Route::group(['middleware'=>['login']],function(){
 
 
  
-// 前台  注册
+// 前台 注册
 Route::get('home/register','Home\RegisterController@index');
-// 邮箱注册
+// 邮箱 注册
 Route::post('home/register','Home\RegisterController@store');
 // 激活
 Route::get('home/register/changestatus','Home\RegisterController@changeStatus');
-// 手机号验证
+// 手机号 验证
 Route::get('home/register/sendPhone','Home\RegisterController@sendPhone');
-// 手机号注册
+// 手机号 注册
 Route::post('home/register/phone','Home\RegisterController@insert');

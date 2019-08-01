@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Users;
 use APP\Models\Usersinfo;
+use App\Http\Requests\UsersStore;
 use Hash;
 use Mail;
 
@@ -18,21 +19,21 @@ class RegisterController extends Controller
     	return view('home.register.index');
     }
 
-    public function store(Request $request)
+    public function store(UsersStore $request)
     {
 
-    	$this->validate($request, [
-	        'email' => 'required|email',
-	        'upass' => 'required|regex:/^[\w]{6,18}$/',
-	        'repass' => 'required|same:upass',
-	    ],[
-	    	'email.required'=>'邮箱必填',    
-            'email.email'=>'邮箱格式错误',
-	    	'upass.required'=>'密码必填',    
-            'upass.regex'=>'密码格式错误',    
-            'repass.required'=>'确认密码必填',    
-            'repass.same'=>'俩次密码不一致', 
-	    ]);
+    	// $this->validate($request, [
+	    //     'email' => 'required|email',
+	    //     'upass' => 'required|regex:/^[\w]{6,18}$/',
+	    //     'repass' => 'required|same:upass',
+	    // ],[
+	    // 	'email.required'=>'邮箱必填',    
+        //     'email.email'=>'邮箱格式错误',
+	    // 	'upass.required'=>'密码必填',    
+        //     'upass.regex'=>'密码格式错误',    
+        //     'repass.required'=>'确认密码必填',    
+        //     'repass.same'=>'俩次密码不一致', 
+	    // ]);
     	if ($request->input('upass') != $request->input('repass')) {
     		echo "<script>alert('两次密码不一致');location.href='/home/register';</script>";
     		exit;

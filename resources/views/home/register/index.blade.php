@@ -15,6 +15,23 @@
 		<script src="/h/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
 		<script src="/h/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
 
+	<style>
+		.alert-danger {
+		color: #761b18;
+		background-color: #f9d6d5;
+		border-color: #f7c6c5;
+		}
+		li {
+			font-size: 12px;
+			display: list-item;
+			text-align: -webkit-match-parent;
+			list-style-position: inside;
+			list-style-type: inherit;
+			margin: 0;
+			line-height: 20px;
+		}
+
+	</style>
 	</head>
 
 	<body>
@@ -56,12 +73,13 @@
 										    </label>
 										    <input type="password" name="repass" id="passwordRepeat" placeholder="确认密码">
 										</div>
+										
 										@if ($errors->has('email'))
-										    <div class="alert alert-danger">
+										    <ul class="alert alert-danger">
 										        @foreach ($errors->all() as $error)
-										            <span style="margin-right: 10px;color: red;margin-left: 10px;">{{ $error }}</span>
+										            <li>{{ $error }}</li>
 										        @endforeach
-										    </div>
+										    </ul>
 										@endif
 										<div class="am-cf">
 											<input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
@@ -78,6 +96,7 @@
 
 								<div class="am-tab-panel">
 									<form method="post" action="/home/register/phone">
+									
 										{{ csrf_field() }}
 									  	<div class="user-phone">
 										    <label for="phone">
@@ -106,15 +125,13 @@
 										    </label>
 										    <input type="password" name="repass" id="passwordRepeat" placeholder="确认密码">
 										</div>
-										@if ($errors->has('phone'))
-										    <div class="alert alert-danger">
-										        <ul>
-										            @foreach ($errors->all() as $error)
-										                 <span style="margin-right: 10px;color: red;margin-left: 10px;">{{ $error }}</span>
-										            @endforeach
-										        </ul>
-										    </div>
-										@endif
+										<!-- @if ($errors->has('phone'))
+											<ul class="alert alert-danger">
+										        @foreach ($errors->all() as $error)
+										            <li>{{ $error }}</li>
+										        @endforeach
+										    </ul>
+										@endif -->
 										<div class="am-cf">
 											<input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
 										</div>
