@@ -29,7 +29,7 @@
     			<div class="mws-form-row">
     				<label class="mws-form-label">用户名</label>
     				<div class="mws-form-item">
-    					<input type="text" name="name" value="{{ old('uname') }}" class="small">
+    					<input type="text" name="name" value="{{ old('name') }}" class="small">
     				</div>
     			</div>
 

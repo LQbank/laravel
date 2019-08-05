@@ -6,38 +6,25 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Users;
 use APP\Models\Usersinfo;
-use App\Http\Requests\UsersStore;
+use App\Http\Requests\HoemusersStore;
+use App\Http\Requests\HoemphoneStore;
 use Hash;
 use Mail;
 
 class RegisterController extends Controller
 {
-    //
+    
     public function index()
     {
     	// 加载模板
     	return view('home.register.index');
     }
 
-    public function store(UsersStore $request)
+    public function store(HoemusersStore  $request)
     {
 
-    	// $this->validate($request, [
-	    //     'email' => 'required|email',
-	    //     'upass' => 'required|regex:/^[\w]{6,18}$/',
-	    //     'repass' => 'required|same:upass',
-	    // ],[
-	    // 	'email.required'=>'邮箱必填',    
-        //     'email.email'=>'邮箱格式错误',
-	    // 	'upass.required'=>'密码必填',    
-        //     'upass.regex'=>'密码格式错误',    
-        //     'repass.required'=>'确认密码必填',    
-        //     'repass.same'=>'俩次密码不一致', 
-	    // ]);
-    	if ($request->input('upass') != $request->input('repass')) {
-    		echo "<script>alert('两次密码不一致');location.href='/home/register';</script>";
-    		exit;
-    	}
+    
+		
     	// 注册
     	$users=new Users;
     	$users->email = $request->input('email','');
@@ -49,10 +36,21 @@ class RegisterController extends Controller
     		// 发送邮件 
     		Mail::send('home.email.email',['id'=>$users->id,'token'=>$users->token],function ($m) use ($users) {
     			$m->to($users->email)->subject('[lamp软件学院]注册激活邮件！');
-    		});
-    		echo "添加成功";
+			});
+			
+			// echo "添加成功";
+			// return redirect('/home/login')->with('success', '添加成功');
+
+			echo "<script>alert('注册成功，请前往邮箱激活');location.href='/home/login'</script>";
+    		
     	}else{
-    		echo "<script>alert('添加失败');location.href='/home/register'</script>";
+			
+			return redirect('/home/register');
+			
+		
+			
+	
+    		// echo "<script>alert('添加失败');location.href='/home/register'</script>";
     	}
     }
 
@@ -70,29 +68,17 @@ class RegisterController extends Controller
     	$user->status = '1';
     	$user->token = str_random(30);
     	if($user->save()){
-    		echo "激活成功";
+			echo "激活成功";
+			
     	}else{
     		echo "<script>alert('激活失败');location.href='/home/register'</script>";
     	}
     }
 
     // 手机号注册
-    public function insert(Request $request)
+    public function insert(HoemphoneStore $request)
     {
-    	$this->validate($request, [
-            'phone' => 'required|regex:/^1{1}[3-9]{1}[\d]{9}$/',
-            'code' => 'required',
-            'upass' => 'required|regex:/^[\w]{6,18}$/',
-            'repass' => 'required|same:upass',
-        ],[
-            'phone.required'=>'手机号必填',    
-            'phone.regex'=>'手机号格式错误',
-            'code.required'=>'验证码必填',
-            'upass.required'=>'密码必填',    
-            'upass.regex'=>'密码格式错误',    
-            'repass.required'=>'确认密码必填',    
-            'repass.same'=>'俩次密码不一致', 
-        ]);
+    	
 
     	// 验证手机的验证码
     	$phone=$request->input('phone',0);
@@ -122,8 +108,12 @@ class RegisterController extends Controller
     	$users->token = str_random(30);
     	$users->avatar = '20190727/DFl323SLCZq4QyXzt95SSE63L02nl4TuZCq59RIs.jpeg';
         if ($users->save()) {
-            echo "添加成功";
+			echo "添加成功";
+			
+
         }else{
+
+			// return redirect('/home/register');
             echo "<script>alert('添加失败');location.href='/home/register'</script>";
         }
     }

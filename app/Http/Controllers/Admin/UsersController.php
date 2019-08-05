@@ -26,7 +26,11 @@ class UsersController extends Controller
         // 获取数据
         $users = Users::where('name','like','%'.$search.'%')->paginate(2);
 
-
+       
+        if(!empty($users)){
+            $users = Users::paginate(2);
+            
+        }
         // $users = Users::paginate(2);
        
         // 加载模板

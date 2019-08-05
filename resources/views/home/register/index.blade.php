@@ -16,22 +16,49 @@
 		<script src="/h/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
 
 	<style>
-		.alert-danger {
+		 /* .alert-danger {
 		color: #761b18;
 		background-color: #f9d6d5;
 		border-color: #f7c6c5;
-		}
+		} */
 		li {
-			font-size: 12px;
+			font-size: 13px;
 			display: list-item;
 			text-align: -webkit-match-parent;
 			list-style-position: inside;
 			list-style-type: inherit;
 			margin: 0;
 			line-height: 20px;
+		} 
+		
+		.mws-form-message.error {
+		
+		background-color: #ffcbca;
+		
+		border-color: #eb979b;
+		color: #9b4449;
+		margin:0 auto;
+		width:auto;
+		height:auto;
 		}
 
+		.mws-form-message {
+		font-size: 13px;
+		cursor: pointer;
+		border: 1px solid #d2d2d2;
+		padding: 15px 8px 15px 45px;
+		position: relative;
+		vertical-align: middle;
+		background-color: #f8f8f8;
+		background-position: 12px 12px;
+		background-repeat: no-repeat;
+		margin-bottom: 12px;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+		}
 	</style>
+	
 	</head>
 
 	<body>
@@ -39,6 +66,36 @@
 		<div class="login-boxtitle">
 			<a href="home/demo.html"><img alt="" src="/h/images/logobig.png" /></a>
 		</div>
+
+		<div id="error">
+			@if ( $errors->getBag('email')->any())
+			<div class="mws-form-message error">
+				<ul class="alert alert-danger">
+					@foreach ( $errors->getBag('email')->all() as $error)
+						<li>{{ $error }}</li>
+					@endforeach
+				</ul>
+			</div>
+			@endif
+    	
+			@if ( $errors->getBag('phone')->any())
+				<div class="mws-form-message error">
+				<ul class="alert alert-danger">
+					@foreach ($errors->getBag('phone')->all() as $error)
+						<li>{{ $error }}</li>
+					@endforeach
+				</ul>
+				</div>
+			@endif
+		</div>
+		<script>
+		$('#error').click(function(){
+			console.log('11');
+
+				$(this).css('display','none');
+		})
+	
+	</script>
 
 		<div class="res-banner">
 			<div class="res-main">
@@ -59,14 +116,16 @@
 										    <label for="email">
 										     	<i class="am-icon-envelope-o"></i>
 										    </label>
-										    <input type="email" name="email" id="email" placeholder="请输入邮箱账号">
+										    <input type="email" name="email" id="email" value="{{ old('email') }}" placeholder="请输入邮箱账号">
 										</div>
 										<div class="user-pass">
 										    <label for="password">
 										     	<i class="am-icon-lock"></i>
 										    </label>
-										    <input type="password" name="upass" id="password" placeholder="设置密码">
+										    <input type="password" name="passwd" id="password" placeholder="设置密码">
 										</div>
+
+							
 										<div class="user-pass">
 										    <label for="passwordRepeat">
 										     	<i class="am-icon-lock"></i>
@@ -74,13 +133,7 @@
 										    <input type="password" name="repass" id="passwordRepeat" placeholder="确认密码">
 										</div>
 										
-										@if ($errors->has('email'))
-										    <ul class="alert alert-danger">
-										        @foreach ($errors->all() as $error)
-										            <li>{{ $error }}</li>
-										        @endforeach
-										    </ul>
-										@endif
+										
 										<div class="am-cf">
 											<input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
 										</div>
@@ -117,7 +170,7 @@
 										    <label for="password">
 										      	<i class="am-icon-lock"></i>
 										    </label>
-										    <input type="password" name="upass" id="password" placeholder="设置密码">
+										    <input type="password" name="passwd" id="password" placeholder="设置密码">
 										</div>
 									  	<div class="user-pass">
 										    <label for="passwordRepeat">
@@ -125,24 +178,17 @@
 										    </label>
 										    <input type="password" name="repass" id="passwordRepeat" placeholder="确认密码">
 										</div>
-										<!-- @if ($errors->has('phone'))
-											<ul class="alert alert-danger">
-										        @foreach ($errors->all() as $error)
-										            <li>{{ $error }}</li>
-										        @endforeach
-										    </ul>
-										@endif -->
+										
+
 										<div class="am-cf">
 											<input type="submit" name="" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
 										</div>
 									</form>
-								 <div class="login-links">
-										<label for="reader-me">
-											<input id="reader-me" type="checkbox"> 点击表示您同意商城《服务协议》
-										</label>
-							  	</div>
-										
-								
+									<div class="login-links">
+											<label for="reader-me">
+												<input id="reader-me" type="checkbox"> 点击表示您同意商城《服务协议》
+											</label>
+									</div>
 									<hr>
 								</div>
 
@@ -198,8 +244,6 @@
 											},'json');
 
 										}
-
-
 
 									}
 								</script>

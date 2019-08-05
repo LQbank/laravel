@@ -78,10 +78,6 @@ Route::group(['middleware'=>['login']],function(){
 	// 后台 商品 更改商品的状态
 	Route::get('admin/goods/changeskustatus/{id}/{name}/{status}/{gid}','Admin\GoodsController@changeskustatus');
 
-
-
-
-
 	// 后台 用户 路由
 	Route::resource('admin/users','Admin\UsersController');
 
@@ -218,3 +214,22 @@ Route::get('home/register/changestatus','Home\RegisterController@changeStatus');
 Route::get('home/register/sendPhone','Home\RegisterController@sendPhone');
 // 手机号 注册
 Route::post('home/register/phone','Home\RegisterController@insert');
+
+
+
+//前台 登录 路由
+Route::get('home/login','Home\LoginController@index');
+// Route::resource('home/login','Home\LoginController');
+
+//前台 执行登录 路由
+Route::post('home/login/dologin','Home\LoginController@dologin');
+
+// 前台首页
+Route::get('home','Home\IndexController@index');
+
+//退出 登录
+Route::get('/home/logout','Home\IndexController@logout');
+// 列表页
+Route::get('home/list','Home\ListController@list');
+// 详情页
+Route::get('home/details','Home\DetailsController@details');
