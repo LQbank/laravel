@@ -115,7 +115,7 @@ class LoginController extends Controller
             echo "<script>alert('该邮箱没有激活，请前往邮箱激活');location.href='/home/login';</script>";   			
    			exit;
         }
-
+      
    		// 验证密码正确
    		if (!Hash::check($passwd, $user->passwd)) {
 

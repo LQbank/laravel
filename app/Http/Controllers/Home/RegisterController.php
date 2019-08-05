@@ -23,12 +23,10 @@ class RegisterController extends Controller
     public function store(HoemusersStore  $request)
     {
 
-    
-		
     	// 注册
     	$users=new Users;
     	$users->email = $request->input('email','');
-    	$users->passwd = Hash::make($request->input('upass',''));
+    	$users->passwd = Hash::make($request->input('passwd',''));
     	$users->token = str_random(30);
     	$users->avatar = '20190727/DFl323SLCZq4QyXzt95SSE63L02nl4TuZCq59RIs.jpeg';
 

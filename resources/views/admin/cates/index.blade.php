@@ -14,7 +14,7 @@
                     <th>分类名称</th>
                     <th>父级ID</th>
                     <th>分类路径</th>
-                    <th>状态</th>
+                    
                     <th>创建时间</th>
                     <th>操作</th>
                 </tr>
@@ -26,13 +26,7 @@
                     <td>{{ $v->cname }}</td>
                     <td>{{ $v->pid }}</td>
                     <td>{{ $v->path }}</td>
-                    <td>
-                    	@if($v->status == 1)
-						<span style="background: #76B249">启用</span>
-						@else 
-						<span style="background: #E2641C">未启用</span>
-                    	@endif
-                    </td>
+                    
                     <td>{{ $v->created_at }}</td>
                     <td>
                     	@if(substr_count($v->path,',') < 2)
