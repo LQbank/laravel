@@ -43,15 +43,6 @@
                     
                     <hr id='tag'>
                     
-                    <!-- <div class="mws-form-row">
-                        <label class="mws-form-label">颜色</label>
-                        <div class="mws-form-item">
-                            <select class="small">
-                                <option>白色</option>
-                            </select>
-                        </div>
-                    </div> -->
-
                     <div class="mws-form-row ">
                         <label class="mws-form-label">图片：</label>
                         <div class="mws-form-item">
@@ -111,6 +102,8 @@
 @endsection
     
 @section('js')
+<!-- 百度编辑器 -->
+
 <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.all.min.js"> </script>
 <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
@@ -134,6 +127,7 @@ toolbars: [
 
 </script>
 
+<!-- 显示的商品的标签属性 -->
 <script type="text/javascript">
     // 当选择分类时 显示他的sku
     $('select:eq(0)').change(function(){
@@ -194,6 +188,7 @@ toolbars: [
     }
 </script>
 
+<!-- 点击图片上传 -->
 <script type="text/javascript">
     console.log($('#good')[0]);
     //给表单元素绑定change事件
@@ -214,7 +209,9 @@ toolbars: [
     }
 </script>
 
+<!-- 添加sku的条数 -->
 <script>
+
     $('#sku').click(function(){
         var num = $('input[name="num"]').val();
         var price = $('input[name="price"]').val();
@@ -265,6 +262,7 @@ toolbars: [
     }
 </script>
 
+<!-- 把新增的sku写入数据库 -->
 <script>
     function sendGood(){
         var skus = [];

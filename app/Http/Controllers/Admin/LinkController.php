@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 class LinkController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 轮播图的显示
      *
      * @return \Illuminate\Http\Response
      */
@@ -24,7 +24,7 @@ class LinkController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 添加轮播图的页面
      *
      * @return \Illuminate\Http\Response
      */
@@ -35,7 +35,7 @@ class LinkController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 执行轮播图添加
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -100,7 +100,7 @@ class LinkController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 执行轮播图的删除
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -109,15 +109,12 @@ class LinkController extends Controller
     {
         // 获取友情链接图片
         $userinfo = links::where('id',$id)->first();
-
-        
-
         $path = $userinfo->pic;
 
         // 删除主用户
         $res1 = links::destroy($id);
     
-        // 判断
+        // 判断删除是否成功
         if($res1){
            
             // 删除图片
@@ -130,20 +127,26 @@ class LinkController extends Controller
         }
     }
 
-    public function  changeStatus(Request $request){
-
-
-        // echo  $request->input('id');
-
+    /**
+     * 改变轮播图的状态
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function  changeStatus(Request $request)
+    {
         $mod = new links;
         
+        // 查出当前轮播图数据
         $res = $mod->find( $request->input('id'));
         
-        // dump($res);
+        // 把轮播图状态取反
         $res->status =  $res->status  ? '0' : '1';
             
+        // 执行修改
         $save = $res->save();
         
+        // 判断是否成功
         if($save){
             echo 'ok';
         }else{

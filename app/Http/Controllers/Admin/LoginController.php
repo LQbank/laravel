@@ -10,7 +10,12 @@ use DB;
 
 class LoginController extends Controller
 {
-    //
+    /**
+     * 执行轮播图的删除
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
    	public function login()
    	{
    		// 加载登录页面
@@ -45,8 +50,6 @@ class LoginController extends Controller
 
    		// 验证密码正确
    		if (!Hash::check($passwd, $userinfo->passwd)) {
-
-			
    		    echo "<script>alert('用户名或者密码错误');location.href='/admin/login';</script>";   			
       			exit;
    		}
@@ -57,11 +60,11 @@ class LoginController extends Controller
    		session(['admin_userinfo'=>$userinfo]);
 
 
-         // 获取当前用户的权限
-         $node = DB::select('select n.cname,n.aname from node as n,user_role as ur,role_node as rn where ur.uid = '.$userinfo->id.' and ur.rid = rn.rid and rn.nid = n.id');
+        // 获取当前用户的权限
+        $node = DB::select('select n.cname,n.aname from node as n,user_role as ur,role_node as rn where ur.uid = '.$userinfo->id.' and ur.rid = rn.rid and rn.nid = n.id');
 
-         $node_data = [];
-         foreach ($node as $key => $value) {
+        $node_data = [];
+        foreach ($node as $key => $value) {
             if($value->aname == 'create'){
                $node_data[$value->cname][] = 'store'; 
             }
@@ -72,14 +75,14 @@ class LoginController extends Controller
 
             $node_data[$value->cname][] = $value->aname; 
 
-         }
-         // 压入后台首页权限
-		 $node_data['indexcontroller'][] = 'index'; 
+        }
+        // 压入后台首页权限
+		$node_data['indexcontroller'][] = 'index'; 
 		 
 		//  dd($node_data);
 
-         // 将权限压入session
-		 session(['admin_nodes'=>$node_data]);
+        // 将权限压入session
+		session(['admin_nodes'=>$node_data]);
 		 
 	
 

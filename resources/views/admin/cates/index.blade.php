@@ -14,7 +14,7 @@
                     <th>分类名称</th>
                     <th>父级ID</th>
                     <th>分类路径</th>
-                    
+                    <th>是否上架</th>
                     <th>创建时间</th>
                     <th>操作</th>
                 </tr>
@@ -26,7 +26,15 @@
                     <td>{{ $v->cname }}</td>
                     <td>{{ $v->pid }}</td>
                     <td>{{ $v->path }}</td>
-                    
+                    <td>
+                        @if($v->pid == 0)
+                        <div style="height:20px;" class="status" cid="{{ $v->id }}">
+                            <input  class="ibutton" type="checkbox" data-label-on="上架" data-label-off="下架" @if($v->status == 1) checked @endif>
+                        </div>
+                        @else
+                        主类才能上架
+                        @endif
+                    </td>
                     <td>{{ $v->created_at }}</td>
                     <td>
                     	@if(substr_count($v->path,',') < 2)
@@ -43,4 +51,34 @@
     </div>
 </div>
 
+@endsection
+
+@section('js')
+    <script type="text/javascript">
+        $('.status').click(function(){
+            var checked = $(this).find('input').attr('checked');
+            // console.log(checked);
+
+            var status;
+
+            if(checked == 'checked'){
+                status = 1;
+            }else{
+                status = 0;
+            }
+            
+            var cid = $(this).attr('cid');
+
+            console.log(cid);
+            $.ajax({
+                url:"/admin/cates/changestatus",
+                type:'POST',
+                data:{'cid':cid,'status':status},
+                // dataType:"json",
+                success:function(data){
+                    console.log(data);
+                }
+            });
+        })
+    </script>
 @endsection

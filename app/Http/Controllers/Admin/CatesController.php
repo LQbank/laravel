@@ -9,6 +9,13 @@ use DB;
 
 class CatesController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * 获取所有的分类
+     *
+     * @return \Illuminate\Http\Response
+     */
     public static function getCates()
     {
         // $cates = Cates::all();
@@ -25,7 +32,7 @@ class CatesController extends Controller
 
 
     /**
-     * Display a listing of the resource.
+     * 查看分类页面
      *
      * @return \Illuminate\Http\Response
      */
@@ -36,12 +43,26 @@ class CatesController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of the resource.
+     *
+     * 改变商品分类是否上架
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function changestatus(Request $request)
+    {
+        // 修改商品分类是否上架
+        DB::table('cates')->where('id',$request->input('cid'))->update(['status' => $request->input('status')]);
+    }
+
+    /**
+     * 加载分类添加页面
      *
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
     {
+        // 获取传参的id
         $id = $request->input('id',0);
 
         // 加载添加视图
@@ -49,7 +70,7 @@ class CatesController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 执行添加分类
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -58,6 +79,8 @@ class CatesController extends Controller
     {
         // 获取pid
         $pid = $request->input('pid');
+
+        // 判断是否为父分类
         if($pid == 0){
             $path = 0;
         }else{
@@ -72,6 +95,7 @@ class CatesController extends Controller
         $cate->pid = $pid;
         $cate->path = $path;
 
+        // 判断分类添加是否成功
         if($cate->save()){
             return redirect('admin/cates')->with('success','添加成功');
         }else{

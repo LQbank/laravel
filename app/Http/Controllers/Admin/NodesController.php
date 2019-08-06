@@ -9,19 +9,20 @@ use DB;
 class NodesController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 查看权限显示
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
+        // 查出所有的权限
         $data = DB::table('node')->get();
         // 显示数据
         return view('admin.nodes.index',['data'=>$data]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 加载添加权限页面
      *
      * @return \Illuminate\Http\Response
      */
@@ -33,7 +34,7 @@ class NodesController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 执行添加权限
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -42,18 +43,21 @@ class NodesController extends Controller
     {
         
         // dump($request->all());
+        // 获取数据
         $data = $request->except('_token');
+
+        // 加上控制器名
         $data['cname'] = $data['cname'].'controller';
 
-
+        // 添加权限
         $res = DB::table('node')->insert($data);
 
+        // 判断添加权限是否成功
         if($res){
             return redirect('admin/nodes')->with('success','添加成功');
         }else{
             return back()->with('error','添加失败');
         }
-
     }
 
     /**

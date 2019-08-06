@@ -10,13 +10,13 @@ use Illuminate\Support\Facades\Storage;
 class CartoonController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 轮播图查看页面
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //获取 数据
+        //获取所有轮播图数据
         $Cartoons = Cartoons::get();
 
         // dd($Cartoons);
@@ -26,7 +26,7 @@ class CartoonController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 加载添加轮播图页面
      *
      * @return \Illuminate\Http\Response
      */
@@ -38,6 +38,8 @@ class CartoonController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
+     * 完成上传图片并添加
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -59,8 +61,10 @@ class CartoonController extends Controller
          $user->name = $request->input('name','');
          $user->pic = $path;
         
-
+         // 保存
          $res1 = $user->save();
+
+         // 判断是否成功
          if($res1){
              return redirect('admin/cartoon')->with('success', '添加成功');
          }else{
@@ -103,7 +107,7 @@ class CartoonController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 删除轮播图
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -113,17 +117,14 @@ class CartoonController extends Controller
         // 获取轮播图图片
         $userinfo = Cartoons::where('id',$id)->first();
 
-        
-
         $path = $userinfo->pic;
 
-        // 删除主用户
+        // 删除轮播图
         $res1 = Cartoons::destroy($id);
     
-        // 判断
+        // 判断是你出轮播图是否成功
         if($res1){
-           
-            // 删除图片
+            // 删除上传的图片
             $res2 = Storage::delete([$path]);
 
             return redirect('admin/cartoon')->with('success', '删除成功');
@@ -133,21 +134,28 @@ class CartoonController extends Controller
         }
     }
 
-
-    public function  changeStatus(Request $request){
-
-        // echo $request->input('id');
-      
-        
+    /**
+     * Store a newly created resource in storage.
+     *
+     * 更改轮播图的状态
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function  changeStatus(Request $request)
+    {
         $mod = new Cartoons;
         
+        // 拿出当前的数据
         $res = $mod->find( $request->input('id'));
         
-        // dump($res );
+        // 把状态取反
         $res->status =  $res->status  ? '0' : '1';
-            
+        
+        // 保存
         $save = $res->save();
         
+        // 判断是否成功
         if($save){
             echo 'ok';
         }else{
