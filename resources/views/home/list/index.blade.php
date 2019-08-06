@@ -171,7 +171,17 @@
 @section('js')
 		<script>
 		
+		
+			function  getSku(){
+				var sku_str = '';
 
+				$('.aaa').each(function(){
+
+					sku_str += '/'+$(this).text();
+				})
+				return sku_str;
+
+			}
 		
 
 		$('.dd-conent').each(function(){
@@ -180,18 +190,51 @@
 			$(this).click(function(){
 				// console.log($(this).find('.selected').text());
 				
-
+				
 				console.log($('#selectA').text());
 				console.log($('#selectB').text());
 				console.log($('#selectC').text());
+				//获取当前选中的值
+				
+				sku_str='';
+				
+				if($('#selectA').text()){
+					sku_str += '/'+$('#selectA').text();
+				}
+				if($('#selectB').text()){
+					sku_str += '/'+$('#selectB').text();
+				}
+				if($('#selectC').text()){
+					sku_str += '/'+$('#selectC').text();
+				}
+
+				console.log(sku_str);
+
+			})	
+
+
+		})
+
+		// //发送ajax请求新的查询数据
+		// $.ajax({
+		// 		url:"/home/getGoods",
+		// 		data:data,
+		// 		type:"POST",
+		// 		dataType:"Json",
+		// 		success:function(mes){
+
+				
+		// 			if(mes ==""){
+
+		// 				// 没有查到相关商品
+							
+		// 			}
 
 				
 
-			})
 
-			
+		// })
 
-		})
 		
 		</script>
 @endsection
