@@ -16,7 +16,7 @@ Route::get('/', function () {
 	session(['admin_login'=>null]);
 	session(['admin_userinfo'=>null]);
 	session(['admin_nodes'=>null]);
-    return view('welcome');
+    return view('home/index/index');
 });
 
 
@@ -228,8 +228,8 @@ Route::post('home/login/dologin','Home\LoginController@dologin');
 Route::get('home','Home\IndexController@index');
 
 //退出 登录
-Route::get('/home/logout','Home\IndexController@logout');
+Route::get('home/logout','Home\IndexController@logout');
 // 列表页
-Route::get('home/list','Home\ListController@list');
+Route::get('home/list/{id}','Home\ListController@index');
 // 详情页
-Route::get('home/details','Home\DetailsController@details');
+Route::get('home/details/{id}','Home\DetailsController@index');
