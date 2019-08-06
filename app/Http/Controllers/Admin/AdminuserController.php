@@ -12,7 +12,7 @@ use DB;
 class AdminuserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 查看所有后台用户
      *
      * @return \Illuminate\Http\Response
      */
@@ -26,7 +26,7 @@ class AdminuserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 加载添加用户页面
      *
      * @return \Illuminate\Http\Response
      */
@@ -37,7 +37,7 @@ class AdminuserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 执行添加
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -50,8 +50,6 @@ class AdminuserController extends Controller
             $path = $request->file('profile')->store(date('Ymd'));
         }
 
-       
-
         // 实例化模型
         $user = new Adminusers;
         $user->name = $request->input('name','');
@@ -62,7 +60,10 @@ class AdminuserController extends Controller
             $user->profile = $path;
         }
         
+        // 保存
         $res1 = $user->save();
+
+        // 判断是否成功
         if($res1){
             return redirect('admin/adminuser')->with('success', '添加成功');
         }else{
@@ -82,7 +83,7 @@ class AdminuserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 加载修改页面
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -97,6 +98,7 @@ class AdminuserController extends Controller
 
         $array = [];
         
+        // 把已有权限遍历压入数组
         foreach($user_role as $v){
             array_push($array,$v->rid);
         }
@@ -107,7 +109,7 @@ class AdminuserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 执行用户修改
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -115,7 +117,7 @@ class AdminuserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        // 开启事务
         DB::beginTransaction();
 
         //获取 页面提交 数据
@@ -132,10 +134,14 @@ class AdminuserController extends Controller
             $role = DB::table('user_role')->where('uid',$id)->delete();
         }
         
+        // 判断页面是否提交数据
         if($role_id){
+            // 把提交的数据遍历添加到角色中
             foreach($role_id as $v){
                 // 添加角色
                 $res = DB::insert('insert into user_role (uid, rid) values (?, ?)', [$id,$v]);
+
+                // 判断添加角色是否成功
                 if(!$res){
                     DB::rollBack();
                     return back()->with('error','修改失败');

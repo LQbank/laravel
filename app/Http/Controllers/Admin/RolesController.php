@@ -9,6 +9,11 @@ use DB;
 
 class RolesController extends Controller
 {
+    /**
+     * 返回所有的控制权限大类别
+     *
+     * @return \Illuminate\Http\Response
+     */
     public static function controllernames()
     {
         return [
@@ -21,15 +26,26 @@ class RolesController extends Controller
         ];
     } 
 
+    /**
+     * 查看所有的权限
+     *
+     * @return \Illuminate\Http\Response
+     */
     public static function node()
     {
+        // 查看所有权限
         $node = DB::table('node')->get();
         $arr = [];
         $temp = [];
+
+        // 遍历权限并压入数组中
         foreach ($node as $key => $value) {
+            // 压入数组中的数据
             $temp['id'] = $value->id;
             $temp['desc'] = $value->desc;
             $temp['aname'] = $value->aname;
+
+            // 压入数组
             $arr[$value->cname][] = $temp;
         }
   
@@ -37,7 +53,7 @@ class RolesController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * 显示角色页面
      *
      * @return \Illuminate\Http\Response
      */
@@ -49,15 +65,16 @@ class RolesController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 加载添加角色的页面
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        
+        // 查出所有权限
         $nodes = self::node();
       
+        // 查出所有的权限大分类
         $controllernames = self::controllernames();
        
         // 加载页面
@@ -65,25 +82,35 @@ class RolesController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 执行添加操作
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        // 开启事务
         DB::beginTransaction();
 
         // dd($request->input());
 
+        // 添加的数据
         $rname = $request->input('rname');
         $nid = $request->input('nid');
+
+        // 执行添加并返回id
         $rid = DB::table('role')->insertGetId(['rname'=>$rname]);
 
+        // 判断添加是否成功
         if($rid){
+            // 遍历传过来的所有权限的id
             foreach ($nid as $key => $value) {
-               $res =  DB::table('role_node')->insert(['rid'=>$rid,'nid'=>$value]);
+                // 关联角色和权限
+                $res =  DB::table('role_node')->insert(['rid'=>$rid,'nid'=>$value]);
+
+                // 判断是否关联成功
                 if(!$res){
+                    // 回滚事务
                     DB::rollBack();
                     return back()->with('error','添加失败');
                 }
@@ -91,6 +118,7 @@ class RolesController extends Controller
             
         }
 
+        // 提交事务
         DB::commit();
         return redirect('admin/roles')->with('success','添加成功');
 
@@ -108,7 +136,7 @@ class RolesController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 加载修改角色权限的页面
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -137,7 +165,7 @@ class RolesController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 修改角色权限
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -165,13 +193,16 @@ class RolesController extends Controller
         $nid = $request->input('nid');
 
      
-
+        // 判断role 的id是否存在
         if($rid){
 
             if($nid ){
                  //遍历往role_node表  插入
                 foreach ($nid as $key => $value) {
+                    // 关联角色与权限
                     $res =  DB::table('role_node')->insert(['rid'=>$rid,'nid'=>$value]);
+
+                    // 判断是否关联成功
                     if(!$res){
                         DB::rollBack();
                         return back()->with('error','修改失败');

@@ -47,9 +47,6 @@ class GoodsController extends Controller
         $cate_id = $request->all()['cate_id'];
        
         // 查出cate_id的数据库数据
-        // $pid = explode(',',DB::table('cates')->find($cate_id)->path)[1];
-        // dump($pid);
-        // // 判断是否存在
         if(!$pid = explode(',',DB::table('cates')->find($cate_id)->path)[1]){
             $pid = $cate_id;
         }
@@ -59,8 +56,10 @@ class GoodsController extends Controller
 
         // 把所有的标签属性放到标签名称的数组中
         foreach($tags as &$tag){
+            // 查出当前标签属性的值
             $vals = DB::table('val')->where('tag_id',$tag->id)->get();
-          
+            
+            // 压入标签属性数组
             $tag->vals = $vals;
         }
 
@@ -77,6 +76,7 @@ class GoodsController extends Controller
      */
     public function picUpload(Request $request)
     {
+        // 上传图片
         $path = $request->file('pic')->store(date('Ymd'));
         echo $path;
     }
@@ -91,16 +91,12 @@ class GoodsController extends Controller
      */
     public function insert(Request $request)
     {
+        // 开启事务
         DB::beginTransaction();
-        // dump(Cache::get('skus'));
-        // dd($request->all());
-        // dump($request->input('name'));
-
         
-        // $mod = D('Good');
-        // $gid = $mod->create();
         $array = [];
 
+        // 把数据放入数组
         $array['cate_id'] = $request->input('cate_id');
         $array['name'] = $request->input('name');
         $array['company'] = $request->input('company');
@@ -110,10 +106,11 @@ class GoodsController extends Controller
 
         // 插入tag表并返回id
         $Id = DB::table('good')->insertGetId($array);
-        // dd($Id);
         
+        // 调用添加sku方法 传参id
         $status = $this->add_sku($Id);
 
+        // 判断是否成功
         if($Id && $status){
             DB::commit();
             return redirect('admin/goods')->with('success', '添加成功');
@@ -123,13 +120,20 @@ class GoodsController extends Controller
         }
     }
 
-    // 添加商品的sku
+     /**
+     * Display a listing of the resource.
+     * 
+     * @return \Illuminate\Http\Response
+     *
+     * 添加商品的sku
+     *
+     */
     public function add_sku($Id){
         $flag = true;
-        // $mod = M('sku');
-        // sleep(0.1);
 
+        // 遍历缓存中的数据
         foreach(Cache::get('skus') as $sku){
+            // 把数据放入数组
             $data['good_id'] = $Id;
             $data['sku'] = $sku['sku'];
             $data['price'] = $sku['price'];
@@ -137,8 +141,10 @@ class GoodsController extends Controller
             $data['pic'] = $sku['pic'];
             $data['status'] = 1;
             
+            // 添加sku 并返回id
             $res = DB::table('sku')->insertGetId($data);
 
+            // 判断是否成功
             if(!$res){
                 $flag = false;
             }
@@ -161,7 +167,7 @@ class GoodsController extends Controller
      */
     public function addsku(Request $request)
     {
-        // S('skus',$request->all()['skus']);
+        // 把传过来的数据写入缓存
         Cache::forever('skus', $request->all()['skus']);
     }
 
@@ -175,10 +181,8 @@ class GoodsController extends Controller
      */
     public function changestatus(Request $request)
     {
-        // dump($request->input('gid'));
-        // dump($request->input('status'));
+        // 根据id 把status字段改为1或0
         DB::table('good')->where('id',$request->input('gid'))->update(['status' => $request->input('status')]);
-
     }
 
     /**
@@ -222,6 +226,7 @@ class GoodsController extends Controller
      */
     public function indexsku(Request $request,$id,$name)
     {
+        // 查出id指定商品的所有的sku
         $res = DB::table('sku')->where('good_id',$id)->get();
 
         return view('admin/goods/indexsku',['res'=>$res,'name'=>$name,'id'=>$id]);
@@ -237,44 +242,37 @@ class GoodsController extends Controller
      */
     public function changeskustatus(Request $request,$id,$name,$status,$gid)
     {
-
+        // 判断获取状态并取反
         if($status == '1'){
             $status = 0;
         }else{
             $status = 1;
         }
 
+        // 修改sku的状态
         DB::table('sku')->where('id',$id)->update(['status' => $status]);
 
-        
+        // 退回一步
         return back();
     }
 
     /**
      * Display a listing of the resource.
      *
+     * 获取所有的商品和他们的sku
+     *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        // $mod = M('good');
-        // $goods = $mod
-        // ->field('good.*,cate.name as c_name,sku.pic')
-        // ->join('left join sku on sku.good_id=good.id')
-        // ->join('cate on cate.id=good.cate_id')
-        // ->group('good.id')
-        // ->select();
+        // 获取所有的商品和他们的sku
         $goods = DB::table('good')
                     ->select('good.*','cates.cname as c_name','sku.pic','sku.id as sid')
                     ->leftJoin('sku','sku.good_id','=','good.id')
                     ->leftJoin('cates','cates.id','good.cate_id')
                     ->groupBy('good.id')
                     ->get();
-        // dd($goods);
-
-        // $this->assign('goods',$goods);
-        // $this->display();
-
+        
         return view('admin.goods.index',['goods'=>$goods]);
     }
 

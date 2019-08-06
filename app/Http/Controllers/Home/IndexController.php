@@ -52,6 +52,19 @@ class IndexController extends Controller
         return $data;
     }
 
+    /**
+     * Display a listing of the resource.
+     * 
+     * @return \Illuminate\Http\Response
+     *
+     * 查出上架的分类和商品
+     *
+     */
+    public function watchshop()
+    {
+        
+    }
+
     
     // public static function  getGoods()
     // {

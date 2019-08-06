@@ -20,24 +20,20 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        // 页面 查询返回数据
+        // 拿出查询用户参数
         $search = $request->input('search','');
 
-        // 获取数据
+        // 获取当前用户数据
         $users = Users::where('name','like','%'.$search.'%')->paginate(2);
 
-       
+        // 判断用户是否存在
         if(!empty($users)){
             $users = Users::paginate(2);
             
         }
-        // $users = Users::paginate(2);
-       
-        // 加载模板
-        return view('admin.users.index',['users'=>$users,'requests'=>$request->input()]); 
 
-        
-        
+        // 加载模板
+        return view('admin.users.index',['users'=>$users,'requests'=>$request->input()]);  
     }
 
     /**
@@ -49,7 +45,6 @@ class UsersController extends Controller
     {
         // 显示页面
         return view('admin.users.create');
-       
     }
 
     /**
@@ -68,24 +63,26 @@ class UsersController extends Controller
         }else{
             return back();
         }
-       
-
+        
         // 实例化模型
         $user = new Users;
+
+        // 准备添加的参数
         $user->name = $request->input('name','');
         $user->passwd = Hash::make($request->input('passwd',''));
         $user->email = $request->input('email','');
         $user->phone = $request->input('phone','');
         $user->avatar = $path;
+
+        // 添加
         $res1 = $user->save();
+
+        // 判断是否成功
         if($res1){
             return redirect('admin/users')->with('success', '添加成功');
         }else{
             return back()->with('error', '添加失败');
         }
-
-       
-
     }
 
     /**
@@ -107,6 +104,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
+        // 查出当前修改的数据
         $user = Users::find($id);
 
         // 加载视图
@@ -126,9 +124,14 @@ class UsersController extends Controller
     
         // 检查用户是否有文件上传
         if(!$request->hasFile('avatar')){
+            // 查出要修改的数据
             $user = Users::find($id);
+
+            // 修改数据字段
             $user->email = $request->input('email','');
             $user->phone = $request->input('phone','');
+
+            // 保存并判断是否成功
             if($user->save()){
                 return redirect('admin/users')->with('success','修改成功');
             }else{
@@ -136,15 +139,14 @@ class UsersController extends Controller
             }
 
         }else{
-            
-           
             // 接收文件上传
             $path  = $request->file('avatar')->store(date('Ymd'));
 
+            // 查出当前数据
             $usersinfo = Users::where('id',$id)->first();
+
             // 删除图片
             Storage::delete([$usersinfo->avatar]);
-
 
             // 修改用户的主信息
             $user = Users::find($id);
@@ -152,53 +154,35 @@ class UsersController extends Controller
             $user->phone = $request->input('phone','');
             $user->avatar = $path;
 
+            // 保存
             $res = $user->save();
 
+            // 判断是否成功
             if($res){
-               
                 return redirect('admin/users')->with('success','修改成功');
             }else{
-                
                 return back()->with('error','修改失败');
             }
-
-        }   
-
-
-        
-        // // dump($request->all());
-
-        
-        
-
-
-
+        }
     }
 
     /**
-     * 删除
+     * 删除用户
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-      
-
-        
-
         // 获取用户头像
         $userinfo = Users::where('id',$id)->first();
 
         $path = $userinfo->avatar;
         
-
-        
-
         // 删除主用户
         $res1 = Users::destroy($id);
     
-        // 判断
+        // 判断用户删除是否成功
         if($res1){
            
             // 删除图片

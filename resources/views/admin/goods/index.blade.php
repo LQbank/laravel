@@ -21,8 +21,9 @@
                 </tr>
             </thead>
             <tbody>
-               @foreach($goods as $good)
-                <tr>
+                <!-- 遍历出每一个商品 -->
+                @foreach($goods as $good)
+                <tr align="center">
                     <td><a href="/admin/goods/indexsku/{{ $good->id }}/{{ $good->name }}"><img width="80px" src="{{ $good->pic }}" alt=""></a></td>
                     <td>{{$good->c_name}}</td>
                     <td>{{$good->name}}</td>
@@ -46,7 +47,9 @@
 @endsection
 
 @section('js')
+    <!-- 更改商品的状态 -->
     <script type="text/javascript">
+
         $('.status').click(function(){
             var checked = $(this).find('input').attr('checked');
 

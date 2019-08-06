@@ -78,6 +78,16 @@ Route::group(['middleware'=>['login']],function(){
 	// 后台 商品 更改商品的状态
 	Route::get('admin/goods/changeskustatus/{id}/{name}/{status}/{gid}','Admin\GoodsController@changeskustatus');
 
+	// 后台 分类 更改分类的是否上架
+	Route::post('admin/cates/changestatus','Admin\CatesController@changestatus');
+
+
+
+
+
+
+
+
 	// 后台 用户 路由
 	Route::resource('admin/users','Admin\UsersController');
 
