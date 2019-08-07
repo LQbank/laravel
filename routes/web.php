@@ -243,3 +243,28 @@ Route::get('home/logout','Home\IndexController@logout');
 Route::get('home/list/{id}','Home\ListController@index');
 // 详情页
 Route::get('home/details/{id}','Home\DetailsController@index');
+
+//列表页ajax (查询选择属性后的数据)
+Route::post('home/list/getGoods','Home\ListController@getGoods');
+
+
+
+
+
+
+
+
+
+
+
+
+// 购物车
+Route::get('home/car','Home\CarController@index');
+// 个人中心
+Route::get('home/center','Home\CenterController@index');
+// 收藏夹
+Route::get('home/collection','Home\CollectionController@index');
+// 个人资料
+Route::get('home/data','Home\DataController@index');
+// 订单管理
+Route::get('home/order','Home\OrderController@index');

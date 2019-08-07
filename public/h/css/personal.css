@@ -83,7 +83,7 @@ color: #555555;background:none;border-color:transparent;cursor: default;}
 .nav-table{display: none;}
 /*主体部分*/
 .center{width:100%; margin:0px auto;min-height: 1px; overflow:hidden;}
-aside,.wrap-right,.m-logistics,.you-like{ display:none;}
+
 .col-main {padding-bottom: 50px;}
 /*标题*/
 .am-text-lg{ font-size:18px;}

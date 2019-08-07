@@ -62,7 +62,7 @@
 											<dd class="select-all selected"><a href="#">全部</a></dd>
 
 											@foreach($v->sub as $k2=>$v2)
-											<dd><a href="#">{{$v2->val}}</a></dd>
+											<dd class="key"><a href="#">{{$v2->val}}</a></dd>
 											@endforeach
 
 										 </div>
@@ -83,11 +83,12 @@
 								</div>
 								<div class="clear"></div>
 
-								<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
+								
+								<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes " id="good_items">
 									
 								
 									@foreach($goods as $k=>$v)
-									<li>
+									<li class="sku">
 										<div class="i-pic limit">
 											
 											<img src="{{$v->pic}}" />
@@ -102,8 +103,9 @@
 										</div>
 									</li>
 									@endforeach
-									
+								
 								</ul>
+								
 							</div>
 							<div class="search-side">
 
@@ -172,69 +174,174 @@
 		<script>
 		
 		
-			function  getSku(){
-				var sku_str = '';
+		cate_id	 = {{$cate_id}}
 
-				$('.aaa').each(function(){
-
-					sku_str += '/'+$(this).text();
-				})
-				return sku_str;
-
-			}
+		
 		
 
 		$('.dd-conent').each(function(){
-			console.log($(this));
-
+	
 			$(this).click(function(){
-				// console.log($(this).find('.selected').text());
+				// console.log($(this));
+			
+
+				// console.log($('#selectA').text());
+				// console.log($('#selectB').text());
+				// console.log($('#selectC').text());
+
 				
 				
-				console.log($('#selectA').text());
-				console.log($('#selectB').text());
-				console.log($('#selectC').text());
-				//获取当前选中的值
 				
+				// if($('#selectB').text()){
+				// 	sku_str += '/'+$('#selectB').text();
+				// }
+				// if($('#selectC').text()){
+				// 	sku_str += '/'+$('#selectC').text();
+				// }
+				
+
+				//获取当前选中的属性值
 				sku_str='';
-				
+
 				if($('#selectA').text()){
 					sku_str += '/'+$('#selectA').text();
+						//检测是否点击红× (修改sku值)
+						$('#selectA').click(function(){
+							sku_str = '';
+						})
 				}
 				if($('#selectB').text()){
 					sku_str += '/'+$('#selectB').text();
+						//检测是否点击红× (修改sku值)
+						$('#selectB').click(function(){
+							sku_str = '';
+						})
 				}
 				if($('#selectC').text()){
 					sku_str += '/'+$('#selectC').text();
+							//检测是否点击红× (修改sku值)
+							$('#selectC').click(function(){
+								sku_str = '';
+							})
+				}
+				console.log(sku_str);
+				
+				//如果为空则将原来的值写入
+				if(sku_str==""){
+
+						str = '';
+
+						//将数据遍历
+						
+							str+=`
+								@foreach($goods as $k=>$v)
+									<li class="sku">
+										<div class="i-pic limit">
+											
+											<img src="{{$v->pic}}" />
+											<p class="title fl">{{$v->name}} &nbsp;&nbsp; <b>{{$v->sku}}</b></p>
+											<p class="price fl">
+												<b>¥</b>
+												<strong>{{$v->price}}</strong>
+											</p>
+											<p class="number fl">
+												销量<span>{{$v->num}}</span>
+											</p>
+										</div>
+									</li>
+									@endforeach
+							`
+						
+						$('#good_items').append(str);
+
 				}
 
-				console.log(sku_str);
 
-			})	
+				//如果不为空则发送ajax获取新的值
+				if(sku_str){
+
+					//将之前的删除
+					$('.sku').remove();
+
+					send();
+				}
+
+				
+
+			})
+
+				
+
+					
 
 
 		})
 
-		// //发送ajax请求新的查询数据
-		// $.ajax({
-		// 		url:"/home/getGoods",
-		// 		data:data,
-		// 		type:"POST",
-		// 		dataType:"Json",
-		// 		success:function(mes){
+		
+		function  send()
+		{
 
-				
-		// 			if(mes ==""){
+				// 发送ajax请求新的查询数据
+				$.ajax({
+							url:"/home/list/getGoods",
+							data:{cate_id:cate_id,sku:sku_str},
+							type:"POST",
+							dataType:"Json",
+							success:function(mes){
 
-		// 				// 没有查到相关商品
-							
-		// 			}
+								// console.log(mes);
+								var str = "";
+								if(mes.length == 0){
+									
 
-				
+									// 没有查到相关商品
+									str+=`	
+										
+										<div class="pro-text sku">
+											<h4>没有查到相关商品</h4>
+										</div>
+										
+										`
+									// console.log(str);
+								
+										
+								}else{
 
+									//将数据遍历
+									$(mes).each(function()
+									{
+										str+=`
+											<li class="sku">
+												<div class="i-pic limit">
+													
+													<img src="${$(this).attr('pic')}" />
+													<p class="title fl">${$(this).attr('name')} &nbsp;&nbsp; <b>${$(this).attr('sku')}</b></p>
+													<p class="price fl">
+														<b>¥</b>
+														<strong>${$(this).attr('price')}</strong>
+													</p>
+													<p class="number fl">
+														销量<span>${$(this).attr('num')}</span>
+													</p>
+												</div>
+											</li>	
+										`
 
-		// })
+									})
+								}
+								
+								//添加到页面上
+								$('#good_items').append(str);
+								// $('#good_items').replaceWith(str);
+								
+								
+							}
 
+					})	
+					
+
+			
+		}
 		
 		</script>
 @endsection
