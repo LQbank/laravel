@@ -342,7 +342,7 @@
 										@endforeach
 									
 									@endforeach
-									
+
 								</div>
 								<span class="more ">
 						<a class="more-link " href="# ">更多美味</a>
@@ -359,7 +359,9 @@
 											<li class="">
 												<div class="list ">
 													<a href="# ">
-														<a href="/home/details/{{$v4->id}}"><img src="{{$v4->pic}}" /></a>
+
+															<a href="/home/details/{{$v4->id}}"><img style="height:183.15px;" src="{{$v4->pic}}" /></a>
+
 														<div class="pro-title "> {{$v4->name}} </div>
 														<span class="e-price "> {{$v4->price}} ￥</span>
 													</a>

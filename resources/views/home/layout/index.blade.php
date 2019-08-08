@@ -5,6 +5,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 
 		<title>首页</title>
 
@@ -15,6 +16,7 @@
 
 		<link href="/h/css/hmstyle.css" rel="stylesheet" type="text/css"/>
 		<link href="/h/css/skin.css" rel="stylesheet" type="text/css" />
+
 		<script src="/h/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
 		<script src="/h/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
 
@@ -268,6 +270,14 @@
 			window.jQuery || document.write('<script src="/h/basic/js/jquery.min.js "><\/script>');
 		</script>
 		<script type="text/javascript " src="/h/basic/js/quick_links.js "></script>
+		<script>
+		    $.ajaxSetup({
+
+	            headers: {
+	                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	            }
+	        });
+	    </script>
 
 		<script>
 		$.ajaxSetup({

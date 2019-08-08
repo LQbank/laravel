@@ -47,7 +47,7 @@
 						});
 					});
 				</script>
-				<div class="scoll">
+				<!-- <div class="scoll">
 					<section class="slider">
 						<div class="flexslider">
 							<ul class="slides">
@@ -63,7 +63,7 @@
 							</ul>
 						</div>
 					</section>
-				</div>
+				</div> -->
 
 				<!--放大镜-->
 
@@ -83,9 +83,9 @@
 							</script>
 
 							<div class="tb-booth tb-pic tb-s310">
-								<a href="images/01.jpg"><img src="/h/images/01_mid.jpg" alt="细节展示放大镜特效" rel="/h/images/01.jpg" class="jqzoom" /></a>
+								<a href="images/01.jpg"><img src="{{ $good->pic }}" big="{{ $good->pic }}" id="src" alt="细节展示放大镜特效" rel="{{ $good->pic }}" class="jqzoom" /></a>
 							</div>
-							<ul class="tb-thumb" id="thumblist">
+							<!-- <ul class="tb-thumb" id="thumblist">
 								<li class="tb-selected">
 									<div class="tb-pic tb-s40">
 										<a href="#"><img src="/h/images/01_small.jpg" mid="/h/images/01_mid.jpg" big="/h/images/01.jpg"></a>
@@ -101,7 +101,7 @@
 										<a href="#"><img src="/h/images/03_small.jpg" mid="/h/images/03_mid.jpg" big="/h/images/03.jpg"></a>
 									</div>
 								</li>
-							</ul>
+							</ul> -->
 						</div>
 
 						<div class="clear"></div>
@@ -113,7 +113,7 @@
 						<!--名称-->
 						<div class="tb-detail-hd">
 							<h1>	
-				 良品铺子 手剥松子218g 坚果炒货 巴西松子
+				 {{ $good->name }}
 	          </h1>
 						</div>
 						<div class="tb-detail-list">
@@ -121,17 +121,17 @@
 							<div class="tb-detail-price">
 								<li class="price iteminfo_price">
 									<dt>促销价</dt>
-									<dd><em>¥</em><b class="sys_item_price">56.90</b>  </dd>                                 
+									<dd><em>¥</em><b class="sys_item_price" id="price">{{ $good->price }}</b>  </dd>                                 
 								</li>
-								<li class="price iteminfo_mktprice">
+								<!-- <li class="price iteminfo_mktprice">
 									<dt>原价</dt>
 									<dd><em>¥</em><b class="sys_item_mktprice">98.00</b></dd>									
-								</li>
+								</li> -->
 								<div class="clear"></div>
 							</div>
 
 							<!--地址-->
-							<dl class="iteminfo_parameter freight">
+							<!-- <dl class="iteminfo_parameter freight">
 								<dt>配送至</dt>
 								<div class="iteminfo_freprice">
 									<div class="am-form-content address">
@@ -152,7 +152,7 @@
 										快递<b class="sys_item_freprice">10</b>元
 									</div>
 								</div>
-							</dl>
+							</dl> -->
 							<div class="clear"></div>
 
 							<!--销量-->
@@ -185,32 +185,26 @@
 										<div class="theme-popbod dform">
 											<form class="theme-signin" name="loginform" action="" method="post">
 
-												<div class="theme-signin-left">
+												<div class="theme-signin-left act">
 
+													@foreach($sku as $v)
 													<div class="theme-options">
-														<div class="cart-title">口味</div>
+														<div class="cart-title">{{ $v->name }}</div>
 														<ul>
-															<li class="sku-line selected">原味<i></i></li>
-															<li class="sku-line">奶油<i></i></li>
-															<li class="sku-line">炭烧<i></i></li>
-															<li class="sku-line">咸香<i></i></li>
+															@foreach($v->sub as $vv)
+															<li class="sku-line acti">{{ $vv }}</li>
+															@endforeach
 														</ul>
 													</div>
-													<div class="theme-options">
-														<div class="cart-title">包装</div>
-														<ul>
-															<li class="sku-line selected">手袋单人份<i></i></li>
-															<li class="sku-line">礼盒双人份<i></i></li>
-															<li class="sku-line">全家福礼包<i></i></li>
-														</ul>
-													</div>
+													@endforeach
+
 													<div class="theme-options">
 														<div class="cart-title number">数量</div>
 														<dd>
-															<input id="min" class="am-btn am-btn-default" name="" type="button" value="-" />
-															<input id="text_box" name="" type="text" value="1" style="width:30px;" />
-															<input id="add" class="am-btn am-btn-default" name="" type="button" value="+" />
-															<span id="Stock" class="tb-hidden">库存<span class="stock">1000</span>件</span>
+															<input id="min" class="am-btn am-btn-default num1" name="" type="button" value="-" />
+															<input id="text_box" name="" type="text" disabled value="1" style="width:30px;" />
+															<input id="add" class="am-btn am-btn-default num1" name="" type="button" value="+" />
+															<span id="Stock" class="tb-hidden">库存<span class="stock" id="cun">{{ $good->num }}</span>件</span>
 														</dd>
 
 													</div>
@@ -221,7 +215,7 @@
 														<div class="btn close am-btn am-btn-warning">取消</div>
 													</div>
 												</div>
-												<div class="theme-signin-right">
+												<!-- <div class="theme-signin-right">
 													<div class="img-info">
 														<img src="/h/images/songzi.jpg" />
 													</div>
@@ -229,7 +223,7 @@
 														<span class="J_Price price-now">¥39.00</span>
 														<span id="Stock" class="tb-hidden">库存<span class="stock">1000</span>件</span>
 													</div>
-												</div>
+												</div> -->
 
 											</form>
 										</div>
@@ -237,9 +231,9 @@
 
 								</dd>
 							</dl>
-							<div class="clear"></div>
+							<!-- <div class="clear"></div> -->
 							<!--活动	-->
-							<div class="shopPromotion gold">
+							<!-- <div class="shopPromotion gold">
 								<div class="hot">
 									<dt class="tb-metatit">店铺优惠</dt>
 									<div class="gold-list">
@@ -257,7 +251,7 @@
 										</ul>
 									</div>
 								</div>
-							</div>
+							</div> -->
 						</div>
 
 						<div class="pay">
@@ -273,7 +267,7 @@
 							</li>
 							<li>
 								<div class="clearfix tb-btn tb-btn-basket theme-login">
-									<a id="LikBasket" title="加入购物车" href="#"><i></i>加入购物车</a>
+									<a onclick="login({{ $sid }})" sid="{{ $sid }}" id="LikBasket" title="加入购物车" href="#"><i></i>加入购物车</a>
 								</div>
 							</li>
 						</div>
@@ -285,31 +279,7 @@
 				</div>
 
 				<!--优惠套装-->
-				<div class="match">
-					<div class="match-title">优惠套装</div>
-					<div class="match-comment">
-						<ul class="like_list">
-							<li>
-								<div class="s_picBox">
-									<a class="s_pic" href="#"><img src="/h/images/cp.jpg"></a>
-								</div> <a class="txt" target="_blank" href="#">萨拉米 1+1小鸡腿</a>
-								<div class="info-box"> <span class="info-box-price">¥ 29.90</span> <span class="info-original-price">￥ 199.00</span> </div>
-							</li>
-							<li class="plus_icon"><i>+</i></li>
-							<li>
-								<div class="s_picBox">
-									<a class="s_pic" href="#"><img src="/h/images/cp2.jpg"></a>
-								</div> <a class="txt" target="_blank" href="#">ZEK 原味海苔</a>
-								<div class="info-box"> <span class="info-box-price">¥ 8.90</span> <span class="info-original-price">￥ 299.00</span> </div>
-							</li>
-							<li class="plus_icon"><i>=</i></li>
-							<li class="total_price">
-								<p class="combo_price"><span class="c-title">套餐价:</span><span>￥35.00</span> </p>
-								<p class="save_all">共省:<span>￥463.00</span></p> <a href="#" class="buy_now">立即购买</a> </li>
-							<li class="plus_icon"><i class="am-icon-angle-right"></i></li>
-						</ul>
-					</div>
-				</div>
+				
 				<div class="clear"></div>
 				
 							
@@ -333,46 +303,7 @@
 							      	</div>
 							      	<div class="p-price"><strong>￥35.90</strong></div>
 							      </li>
-							      <li>
-							      	<div class="p-img">                    
-							      		<a  href="#"> <img class="" src="/h/images/browse1.jpg"> </a>               
-							      	</div>
-							      	<div class="p-name"><a href="#">
-							      		【三只松鼠_开口松子】零食坚果特产炒货东北红松子原味
-							      	</a>
-							      	</div>
-							      	<div class="p-price"><strong>￥35.90</strong></div>
-							      </li>
-							      <li>
-							      	<div class="p-img">                    
-							      		<a  href="#"> <img class="" src="/h/images/browse1.jpg"> </a>               
-							      	</div>
-							      	<div class="p-name"><a href="#">
-							      		【三只松鼠_开口松子】零食坚果特产炒货东北红松子原味
-							      	</a>
-							      	</div>
-							      	<div class="p-price"><strong>￥35.90</strong></div>
-							      </li>							      
-							      <li>
-							      	<div class="p-img">                    
-							      		<a  href="#"> <img class="" src="/h/images/browse1.jpg"> </a>               
-							      	</div>
-							      	<div class="p-name"><a href="#">
-							      		【三只松鼠_开口松子】零食坚果特产炒货东北红松子原味
-							      	</a>
-							      	</div>
-							      	<div class="p-price"><strong>￥35.90</strong></div>
-							      </li>							      
-							      <li>
-							      	<div class="p-img">                    
-							      		<a  href="#"> <img class="" src="/h/images/browse1.jpg"> </a>               
-							      	</div>
-							      	<div class="p-name"><a href="#">
-							      		【三只松鼠_开口松子218g】零食坚果特产炒货东北红松子原味
-							      	</a>
-							      	</div>
-							      	<div class="p-price"><strong>￥35.90</strong></div>
-							      </li>							      
+							      			      
 					      
 						     </ul>					
 					    </div>
@@ -403,42 +334,9 @@
 
 							<div class="am-tabs-bd">
 
-								<div class="am-tab-panel am-fade am-in am-active">
-									<div class="J_Brand">
-
-										<div class="attr-list-hd tm-clear">
-											<h4>产品参数：</h4></div>
-										<div class="clear"></div>
-										<ul id="J_AttrUL">
-											<li title="">产品类型:&nbsp;烘炒类</li>
-											<li title="">原料产地:&nbsp;巴基斯坦</li>
-											<li title="">产地:&nbsp;湖北省武汉市</li>
-											<li title="">配料表:&nbsp;进口松子、食用盐</li>
-											<li title="">产品规格:&nbsp;210g</li>
-											<li title="">保质期:&nbsp;180天</li>
-											<li title="">产品标准号:&nbsp;GB/T 22165</li>
-											<li title="">生产许可证编号：&nbsp;QS4201 1801 0226</li>
-											<li title="">储存方法：&nbsp;请放置于常温、阴凉、通风、干燥处保存 </li>
-											<li title="">食用方法：&nbsp;开袋去壳即食</li>
-										</ul>
-										<div class="clear"></div>
-									</div>
-
-									<div class="details">
-										<div class="attr-list-hd after-market-hd">
-											<h4>商品细节</h4>
-										</div>
-										<div class="twlistNews">
-											<img src="/h/images/tw1.jpg" />
-											<img src="/h/images/tw2.jpg" />
-											<img src="/h/images/tw3.jpg" />
-											<img src="/h/images/tw4.jpg" />
-											<img src="/h/images/tw5.jpg" />
-											<img src="/h/images/tw6.jpg" />
-											<img src="/h/images/tw7.jpg" />
-										</div>
-									</div>
-									<div class="clear"></div>
+								<div class="am-tab-panel am-fade am-in am-active" id="desc">
+									{!! $good->desc !!}
+									
 
 								</div>
 
@@ -1087,4 +985,125 @@
 
 
 
+@endsection
+
+@section('js')
+<script type="text/javascript">
+	var sku = '{{$good->sku}}';
+	// console.log(sku);
+
+	var val_arr = sku.split('/');
+	// console.log(val_arr);
+	// console.log($('.acti'));
+
+	val_arr.forEach(function(val,index){
+		if(val){
+			$('.acti').each(function(){
+				// console.log(val);
+				// console.log($(this).html());
+				if($(this).html() == val){
+					//console.log(val);
+					$(this).addClass('selected');
+				}
+			})
+		}
+	})
+
+	$('.act').on("click",function(){
+		// if($(this).attr('class') == 'sku-line acti selected'){
+		// 	$(this).removeClass('selected');
+		// }else{
+		// 	$(this).siblings().removeClass('selected');
+		// 	$(this).siblings().addClass('selected');
+		// }
+		var sku = '';
+
+		$('.selected').each(function(){
+			// console.log($(this).html());
+			sku += '/' + $(this).html();
+		});
+		// console.log(sku);
+		send({{$good->good_id}},sku);
+		// console.log({{$good->good_id}});
+	})
+
+	function send(id,sku){
+		// console.log(id);
+		// console.log(sku);
+		$.ajax({
+			url:"/home/details/faajax",
+    		data:{'id':id,'sku':sku},
+    		type:'POST',
+    		dataType:'json',
+    		success:function(mes){
+    			console.log(mes);
+    			// console.log($('#cun').html());
+    			// console.log(mes.length > 0);
+    			if(mes.length > 0){
+    				$(mes).each(function(){
+	    				$('#src').attr('src',$(this).attr('pic'));
+	    				$('#src').attr('rel',$(this).attr('pic'));
+	    				// $('#src').attr('big',$(this).attr('pic'));
+		    			$('#price').html($(this).attr('price'));
+		    			$('#cun').html($(this).attr('num'));
+		    			$('#desc').html($(this).attr('desc'));
+		    			$('#LikBasket').attr('sid',$(this).attr('sid'));
+		    			// var href = "/home/shopcar/insert/" + $(this).attr('sid');
+		    			// // console.log(href);
+		    			// $('#LikBasket').attr('href',href);
+	    			})
+    			}else{
+    				// console.log(123);
+    				$('#src').attr('src','/uploads/20190806/当前.jpg');
+    				$('#src').attr('rel','/uploads/20190806/当前.jpg');
+    				// $('#src').attr('big','/uploads/20190806/当前.jpg');
+    				$('#price').html('');
+    				$('#cun').html(0);
+    				$('#desc').html('暂无详情');
+    			}
+    			// $('#src').removeAttr('src');
+    			
+    		}
+		})
+	}
+
+	// console.log($('.num1').length);
+	
+	$('.num1').on('click',function(){
+		console.log($('#text_box').val());
+		console.log(parseInt($('#cun').html()));
+		if(parseInt($('#text_box').val()) >= parseInt($('#cun').html())){
+			$('#text_box').val(parseInt($('#cun').html()) - 1);
+		}
+		// var href2 = "/home/shopcar/insert/" + $('#LikBasket').attr('sid') + '/' + (parseInt($('#text_box').val()) + 1);
+		// console.log(href2);
+		// $('#LikBasket').attr('href',href2);
+	})
+
+	// $('#LikBasket').click(function(){
+
+	// 	if(parseInt($('#cun').html()) == 0){
+	// 		alert(789);
+	// 		return false;
+	// 	}
+	// })
+
+	function login(id){
+		// var sku = '';
+		// $('.selected').each(function(){
+		// 	// console.log($(this).html());
+		// 	sku += '.' + $(this).html();
+		// });
+		// console.log(sku);
+
+		// $('#num').html();
+		if(parseInt($('#cun').html()) == 0){
+			// alert(789);
+			return false;
+		}
+		var href2 = '/home/shopcar/insert/' + $('#LikBasket').attr('sid') + '/' + parseInt($('#text_box').val());
+		console.log(href2);
+		window.location.href = href2;
+	}
+</script>
 @endsection

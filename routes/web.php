@@ -147,16 +147,9 @@ Route::get('home','Home\IndexController@index');
 Route::get('home/logout','Home\IndexController@logout');
 // 列表页
 Route::get('home/list/{id}','Home\ListController@index');
-// 详情页
-Route::get('home/details/{id}','Home\DetailsController@index');
 
 //列表页ajax (查询选择属性后的数据排序)
 Route::post('home/list/sort','Home\ListController@sort');
-
-
-
-
-
 // 购物车
 Route::get('home/car','Home\CarController@index');
 // 个人中心
@@ -167,3 +160,68 @@ Route::get('home/collection','Home\CollectionController@index');
 Route::get('home/data','Home\DataController@index');
 // 订单管理
 Route::get('home/order','Home\OrderController@index');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 详情页
+Route::get('home/details/{id}','Home\DetailsController@index');
+
+// 详情页 发送ajax
+Route::post('home/details/faajax','Home\DetailsController@faajax');
+
+// 详情页 加入购物车
+Route::get('home/shopcar/insert/{id}/{num}','Home\ShopCarController@insert');
