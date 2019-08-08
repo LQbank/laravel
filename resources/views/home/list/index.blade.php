@@ -91,14 +91,14 @@
 									<li class="sku">
 										<div class="i-pic limit">
 											
-											<img src="{{$v->pic}}" />
+											<a href="/home/details/{{$v->id}}"><img src="{{$v->pic}}" /></a>
 											<p class="title fl">{{$v->name}} &nbsp;&nbsp; <b>{{$v->sku}}</b></p>
 											<p class="price fl">
 												<b>¥</b>
 												<strong>{{$v->price}}</strong>
 											</p>
 											<p class="number fl">
-												销量<span>{{$v->num}}</span>
+												销量<span>{{$v->sales_nums}}</span>
 											</p>
 										</div>
 									</li>
@@ -156,12 +156,12 @@
 							</div>
 							<div class="clear"></div>
 							<!--分页 -->
-							<ul class="am-pagination am-pagination-right">
+							<!-- <ul class="am-pagination am-pagination-right">
 								<li class="am-disabled"><a href="#">&laquo;</a></li>
 								<li class="am-active"><a href="#">1</a></li>
 								<li><a href="#">2</a></li>
 								<li><a href="#">&raquo;</a></li>
-							</ul>
+							</ul> -->
 
 						</div>
 					</div>
@@ -176,9 +176,8 @@
 		
 		cate_id	 = {{$cate_id}}
 
-		
-		
 
+		
 		$('.dd-conent').each(function(){
 	
 			$(this).click(function(){
@@ -190,69 +189,28 @@
 				// console.log($('#selectC').text());
 
 				
+				// 获取当前选中的值
+				var sku_str = getSku();
 				
-				
-				// if($('#selectB').text()){
-				// 	sku_str += '/'+$('#selectB').text();
-				// }
-				// if($('#selectC').text()){
-				// 	sku_str += '/'+$('#selectC').text();
-				// }
-				
-
-				//获取当前选中的属性值
-				sku_str='';
-
-				if($('#selectA').text()){
-					sku_str += '/'+$('#selectA').text();
-						//检测是否点击红× (修改sku值)
-						$('#selectA').click(function(){
-							sku_str = '';
-						})
-				}
-				if($('#selectB').text()){
-					sku_str += '/'+$('#selectB').text();
-						//检测是否点击红× (修改sku值)
-						$('#selectB').click(function(){
-							sku_str = '';
-						})
-				}
-				if($('#selectC').text()){
-					sku_str += '/'+$('#selectC').text();
-							//检测是否点击红× (修改sku值)
-							$('#selectC').click(function(){
-								sku_str = '';
-							})
-				}
-				console.log(sku_str);
-				
-				//如果为空则将原来的值写入
+				// 如果为空则将原来的值写入
 				if(sku_str==""){
+					//将之前的删除
+					$('.sku').remove();
+					
+					var zi = $('.first').text();
 
-						str = '';
-
-						//将数据遍历
-						
-							str+=`
-								@foreach($goods as $k=>$v)
-									<li class="sku">
-										<div class="i-pic limit">
-											
-											<img src="{{$v->pic}}" />
-											<p class="title fl">{{$v->name}} &nbsp;&nbsp; <b>{{$v->sku}}</b></p>
-											<p class="price fl">
-												<b>¥</b>
-												<strong>{{$v->price}}</strong>
-											</p>
-											<p class="number fl">
-												销量<span>{{$v->num}}</span>
-											</p>
-										</div>
-									</li>
-									@endforeach
-							`
-						
-						$('#good_items').append(str);
+					switch(zi){
+						case "价格优先":
+							ajx({cate_id:cate_id,field:'sku.price'});
+						break;
+						case '销量排序':
+							ajx({cate_id:cate_id,field:'good.sales_nums'});            
+						break;
+						case '综合排序':
+							ajx({cate_id:cate_id,field:'good.id'});
+						break;    	 	 
+					} 
+					
 
 				}
 
@@ -262,86 +220,169 @@
 
 					//将之前的删除
 					$('.sku').remove();
+					
+					
+					var zi = $('.first').text();
 
-					send();
+				
+					switch(zi){
+						case "价格优先":
+							ajx({cate_id:cate_id,field:'sku.price',sku:sku_str});
+						break;
+						case '销量排序':
+							ajx({cate_id:cate_id,field:'good.sales_nums',sku:sku_str});            
+						break;
+						case '综合排序':
+							ajx({cate_id:cate_id,field:'good.id',sku:sku_str});
+						break;    	 	 
+					} 
+
+
 				}
+
+				return false;
+
+			})
+
+		})
+
+		//获取当前选中的值
+		function  getSku(){
+			//获取当前选中的属性值
+			sku_str='';
+
+			if($('#selectA').text()){
+				sku_str += '/'+$('#selectA').text();
+			}
+
+			if($('#selectB').text()){
+				sku_str += '/'+$('#selectB').text();
+					
+			}
+
+			if($('#selectC').text()){
+				sku_str += '/'+$('#selectC').text();
+						
+			}
+			return sku_str;
+
+		}
+
+
+		$('.sort').find('li').each(function(){
+	
+			$(this).click(function(){
+				// console.log($(this));
+
+				$(this).siblings().removeClass("first")
+				
+				$(this).addClass("first") 
+				
+
+				//将之前的删除
+				$('.sku').remove();
+				
+				//获取当前选中的值
+				var sku = getSku();
+
+				var zi = $('.first').text();
+				
+				if(sku=="")
+				{
+					
+						switch(zi)
+						{
+							case "价格优先":
+								ajx({cate_id:cate_id,field:'sku.price'});
+							break;
+							case '销量排序':
+								ajx({cate_id:cate_id,field:'sku.num'});            
+							break;
+							case '综合排序':
+								ajx({cate_id:cate_id,field:'good.id'});
+							break;    	 	 
+						} 
+
+				}else{
+
+					switch(zi){
+					case "价格优先":
+						ajx({cate_id:cate_id,field:'sku.price',sku:sku});
+					break;
+					case '销量排序':
+						ajx({cate_id:cate_id,field:'good.sales_nums',sku:sku});            
+					break;
+					case '综合排序':
+						ajx({cate_id:cate_id,field:'good.id',sku:sku});
+					break;    	 	 
+				} 
+				}
+
+				
+				
+				
 
 				
 
 			})
-
-				
-
-					
-
-
 		})
 
-		
-		function  send()
-		{
 
-				// 发送ajax请求新的查询数据
-				$.ajax({
-							url:"/home/list/getGoods",
-							data:{cate_id:cate_id,sku:sku_str},
-							type:"POST",
-							dataType:"Json",
-							success:function(mes){
 
-								// console.log(mes);
-								var str = "";
-								if(mes.length == 0){
-									
+		function ajx(data){
+			$.ajax({
+				url:"/home/list/sort",
+				data:data,
+				type:"POST",
+				dataType:"Json",
+				success:function(mes){
+					str='';
 
-									// 没有查到相关商品
-									str+=`	
-										
-										<div class="pro-text sku">
-											<h4>没有查到相关商品</h4>
-										</div>
-										
-										`
-									// console.log(str);
+					if(mes.length == 0){
 								
-										
-								}else{
 
-									//将数据遍历
-									$(mes).each(function()
-									{
-										str+=`
-											<li class="sku">
-												<div class="i-pic limit">
-													
-													<img src="${$(this).attr('pic')}" />
-													<p class="title fl">${$(this).attr('name')} &nbsp;&nbsp; <b>${$(this).attr('sku')}</b></p>
-													<p class="price fl">
-														<b>¥</b>
-														<strong>${$(this).attr('price')}</strong>
-													</p>
-													<p class="number fl">
-														销量<span>${$(this).attr('num')}</span>
-													</p>
-												</div>
-											</li>	
-										`
-
-									})
-								}
-								
-								//添加到页面上
-								$('#good_items').append(str);
-								// $('#good_items').replaceWith(str);
-								
-								
-							}
-
-					})	
+						// 没有查到相关商品
+						str+=`	
+							
+							<div class="pro-text sku">
+								<h4>没有查到相关商品</h4>
+							</div>
+							
+							`
+						// console.log(str);
 					
+							
+					}else{
+						$(mes).each(function(){
+							str+=`
+								<li class="sku">
+									<div class="i-pic limit">
+										
+										<img src="${$(this).attr('pic')}" />
+										<p class="title fl">${$(this).attr('name')} &nbsp;&nbsp; <b>${$(this).attr('sku')}</b></p>
+										<p class="price fl">
+											<b>¥</b>
+											<strong>${$(this).attr('price')}</strong>
+										</p>
+										<p class="number fl">
+											销量<span>${$(this).attr('sales_nums')}</span>
+										</p>
+									</div>
+								</li>	
+							`
+							
 
-			
+
+						})
+					}
+
+						$('#good_items').append(str);
+				}
+
+			})
+
 		}
-		
+
+
 		</script>
 @endsection

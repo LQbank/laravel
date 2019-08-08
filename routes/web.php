@@ -81,13 +81,6 @@ Route::group(['middleware'=>['login']],function(){
 	// 后台 分类 更改分类的是否上架
 	Route::post('admin/cates/changestatus','Admin\CatesController@changestatus');
 
-
-
-
-
-
-
-
 	// 后台 用户 路由
 	Route::resource('admin/users','Admin\UsersController');
 
@@ -126,93 +119,6 @@ Route::group(['middleware'=>['login']],function(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  
 // 前台 注册
 Route::get('home/register','Home\RegisterController@index');
@@ -244,15 +150,8 @@ Route::get('home/list/{id}','Home\ListController@index');
 // 详情页
 Route::get('home/details/{id}','Home\DetailsController@index');
 
-//列表页ajax (查询选择属性后的数据)
-Route::post('home/list/getGoods','Home\ListController@getGoods');
-
-
-
-
-
-
-
+//列表页ajax (查询选择属性后的数据排序)
+Route::post('home/list/sort','Home\ListController@sort');
 
 
 

@@ -97,7 +97,7 @@ class IndexController extends Controller
         //                     // 关联查cate表和good表
         //                     ->join('cates','cates.id','=','good.cate_id')
         //                     // // 按照good表id进行分组统计
-        //                     // ->group('good.id')
+        //                     // ->groupBy('good.id')
         //                     ->select('good.*','cates.cname','sku.*')	
         //                     ->get();
         //                     // dump($goods);    

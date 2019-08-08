@@ -27,10 +27,10 @@ class ListController extends Controller
 		// 关联查cates表和good表
         ->join('cates','cates.id','=','good.cate_id')
         ->where('good.cate_id','=',$id)
+        ->orderBy('good.id', 'desc')
         ->select('good.*','cates.cname','sku.*')
         ->get();
-		//分页
-		// ->limit($page->firstRow,$page->listRows)
+		
 		
         // dump($goods);
         
@@ -65,42 +65,6 @@ class ListController extends Controller
     }
 
     /**
-     *  前台ajax
-     * 
-     */
-    public function  getGoods(Request $request)
-    {
-       //将点击后属性值 与数据库比较
-
-       $cate_id =  $request->input('cate_id');
-        $sku =  $request->input('sku');
-       
-        
-		  // $sku = "/黑色";
-		
-		// $cate_id = 16;
-        // $sku = '/黑色/毛线';  //-->sku.sku like '%毛线%' and sku.sku like '%黑色%'
-        
-		// like字段
-        $like = $this->dealSku($sku);
-        
-        // dump($like);
-         
-
-        //  $query = DB::table('good')
-        //  ->join('sku','sku.good_id','=','good.id')
-        // ->where('good.cate_id',$cate_id)
-        // ->where($like)
-        // ->get();
-        // $query->toSql();
-
-        $query = DB::select("select * from good  join sku on  sku.good_id =good.id where(good.cate_id = $cate_id and $like)");
-
-	 	echo json_encode($query);
-    }
-
-
-    /**
      *  处理sku
      */
     private function  dealSku($sku)
@@ -122,4 +86,46 @@ class ListController extends Controller
 	}
 
 
+
+    /**
+     *  排序的ajax
+     */
+    public function  sort(Request $request)
+	{
+        $cate_id = $request->input('cate_id');
+		$field = $request->input('field');
+		$sku = $request->input('sku');
+
+	
+		if(empty($sku)){
+
+			$goods = DB::table('good')
+            // 关联查sku表和good表
+            ->join('sku','sku.good_id','=','good.id')
+            // 关联查cates表和good表
+            ->join('cates','cates.id','=','good.cate_id')
+
+            ->orderBy($field, 'desc')
+            ->where('good.cate_id','=',$cate_id)
+            ->select('good.*','cates.cname','sku.*')
+			->get();	
+
+
+
+		}else{
+
+			$like = $this->dealSku($sku);
+
+			$goods = DB::select("select * from good  join sku on  sku.good_id =good.id   join cates on cates.id = good.cate_id   where(good.cate_id = $cate_id and $like) order by $field desc");
+
+
+
+		}
+		
+		
+		
+		echo json_encode($goods);
+	
+
+	}
 }
