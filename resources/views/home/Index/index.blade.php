@@ -183,7 +183,7 @@
 						@else
 						<div class="mod-vip">
 							<div class="m-baseinfo">
-								<a href="person/index.html">
+								<a href="/home/data">
 									<img src="/uploads/{{session('home_user')->avatar}}">
 								</a>
 								<em>

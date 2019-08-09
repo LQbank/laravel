@@ -15,6 +15,11 @@ class ShopCarController extends Controller
      */
     public function insert(Request $request)
     {
+        // dump($_SESSION);
+        // if(!isset($_SESSION['home_user'])){
+        //     return redirect('/home/login');
+        //     exit;
+        // }
         // $_SESSION['car'] = null;exit;
         // dump($request->id);
         // dump($request->num);
@@ -40,6 +45,80 @@ class ShopCarController extends Controller
         return back();
     }
 
+    /**
+     * 查出购物车商品数目
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public static function number()
+    {
+        // dump($_SESSION['car']);
+        if(empty($_SESSION['car'])){
+            $count = 0;
+        }else{
+            $count = 0;
+
+            foreach($_SESSION['car'] as $key => $value){
+                // dump($value);
+                $count += $value->number;
+            }
+            // dump($_SESSION['car']);
+        }
+
+        return $count;
+    }
+
+    /**
+     * 删除购物车商品
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function shanajax(Request $request)
+    {
+        // dump($request->id);
+        foreach($_SESSION['car'] as $key => $value){
+            if($value->id == $request->id){
+                unset($_SESSION['car'][$request->id]);
+            }
+        }
+    }
+
+    /**
+     * 购物车商品结算
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function jiesuan(Request $request)
+    {
+        if(session('home_user') == null){
+            return redirect('/home/login')->with('message','请去登录');
+            exit;
+        }
+        // echo '123';
+        // dump($request->all());
+        $message = $request->all();
+        dump($message['xuan']);
+        dump($message['num']);
+        $array = [];
+
+        foreach($message['xuan'] as $k=>$v){
+            $sku = DB::table('sku')
+                ->select('sku.*','good.name')
+                ->join('good','good.id','sku.good_id')
+                ->where('sku.id',$v)->first();
+            $array[$v] = $sku;
+
+            foreach($message['num'] as $kk=>$vv){
+                if($kk == $v){
+                    $array[$v]->number = $vv;
+                }
+            }
+        }
+        dump($array);
+        return view('home/car/jiesuan',['array'=>$array]);
+        
+    }
     /**
      * Display a listing of the resource.
      *
