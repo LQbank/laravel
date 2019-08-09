@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+// 前台首页
+Route::get('home','Home\IndexController@index');
 
 Route::get('/', function () {
 
@@ -18,6 +20,8 @@ Route::get('/', function () {
 	session(['admin_nodes'=>null]);
     return view('home/index/index');
 });
+
+
 
 
 //后台 登录 路由
@@ -140,8 +144,7 @@ Route::get('home/login','Home\LoginController@index');
 //前台 执行登录 路由
 Route::post('home/login/dologin','Home\LoginController@dologin');
 
-// 前台首页
-Route::get('home','Home\IndexController@index');
+
 
 //退出 登录
 Route::get('home/logout','Home\IndexController@logout');
@@ -225,3 +228,9 @@ Route::post('home/details/faajax','Home\DetailsController@faajax');
 
 // 详情页 加入购物车
 Route::get('home/shopcar/insert/{id}/{num}','Home\ShopCarController@insert');
+
+// 购物车 删除购物车内的商品
+Route::post('home/car/shanajax','Home\ShopCarController@shanajax');
+
+// 购物车 结算
+Route::post('home/shopcar/jiesuan','Home\ShopCarController@jiesuan');

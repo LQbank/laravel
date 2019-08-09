@@ -130,7 +130,7 @@ class LoginController extends Controller
 
 
    		// 跳转
-        return redirect('/home'); 
+        return redirect('/'); 
        
     }
 

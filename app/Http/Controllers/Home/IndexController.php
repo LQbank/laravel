@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Home\ShopCarController;
 use App\Models\Cates;
 use DB;
 
@@ -117,16 +118,6 @@ class IndexController extends Controller
 
     public function index()
     {
-
-        // $cates_data = self::getPidCateData();
-        // dump($cates_data);
-
-        // return view('home/index/index',['cates_data'=>$cates_data]);
-        
-        // $arr = self::getGoods();
-
-        // dump($arr);
-  
         return view('home/index/index');
     }
 
@@ -139,7 +130,7 @@ class IndexController extends Controller
 
         $request->session()->flush();
         // 跳转
-        return redirect('/home'); 
+        return redirect('/'); 
 
     }
     
