@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
-
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<title>框架</title>
 
 		<link href="/h/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
@@ -14,6 +14,8 @@
 
 		<script src="/h/AmazeUI-2.4.2/assets/js/jquery.min.js" type="text/javascript"></script>
 		<script src="/h/AmazeUI-2.4.2/assets/js/amazeui.js" type="text/javascript"></script>
+
+		
 		
 	</head>
 
@@ -27,8 +29,11 @@
 						<ul class="message-l">
 							<div class="topMessage">
 								<div class="menu-hd">
-									<a href="#" target="_top" class="h">亲，请登录</a>
-									<a href="#" target="_top">免费注册</a>
+									@if(empty(Session::get('home_user')))
+										<a href="/home/login" target="_top" class="h">亲，请登录</a>	 
+										<a href="/home/register" target="_top">免费注册</a>
+									@endif 
+							
 								</div>
 							</div>
 						</ul>
@@ -37,7 +42,10 @@
 								<div class="menu-hd"><a href="/home" target="_top" class="h">商城首页</a></div>
 							</div>
 							<div class="topMessage my-shangcheng">
-								<div class="menu-hd MyShangcheng"><a href="/home/center" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+								@if(!empty(Session::get('home_user')))
+									<div class="menu-hd MyShangcheng"><a href="/home/center" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>	
+								@endif 
+								
 							</div>
 							<div class="topMessage mini-cart">
 								<div class="menu-hd"><a id="mc-menu-hd" href="/home/car" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
@@ -116,23 +124,14 @@
 						<a href="">个人资料</a>
 						<ul>
 							<li> <a href="/home/data">个人信息</a></li>
-							<li> <a href="safety.html">安全设置</a></li>
-							<li> <a href="address.html">收货地址</a></li>
+						
+							<li> <a href="/home/address">收货地址</a></li>
 						</ul>
 					</li>
 					<li class="person">
 						<a href="#">我的交易</a>
 						<ul>
 							<li><a href="/home/order">订单管理</a></li>
-							<li> <a href="change.html">退款售后</a></li>
-						</ul>
-					</li>
-					<li class="person">
-						<a href="#">我的资产</a>
-						<ul>
-							<li> <a href="coupon.html">优惠券 </a></li>
-							<li> <a href="bonus.html">红包</a></li>
-							<li> <a href="bill.html">账单明细</a></li>
 						</ul>
 					</li>
 
@@ -140,9 +139,8 @@
 						<a href="#">我的小窝</a>
 						<ul>
 							<li> <a href="/home/collection">收藏</a></li>
-							<li> <a href="foot.html">足迹</a></li>
-							<li> <a href="comment.html">评价</a></li>
-							<li> <a href="news.html">消息</a></li>
+							<!-- <li> <a href="foot.html">足迹</a></li>
+							<li> <a href="comment.html">评价</a></li> -->
 						</ul>
 					</li>
 
@@ -154,3 +152,15 @@
 	</body>
 
 </html>
+
+<script>
+$.ajaxSetup({
+
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
+</script>
+@section('js')
+					
+@show

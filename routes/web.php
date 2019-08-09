@@ -160,9 +160,18 @@ Route::get('home/collection','Home\CollectionController@index');
 Route::get('home/data','Home\DataController@index');
 // 订单管理
 Route::get('home/order','Home\OrderController@index');
+// 地址管理
+Route::get('home/address','Home\addressController@index');
+//地址添加
+Route::get('home/address/add','Home\addressController@add');
+//地址删除
+Route::get('home/address/del','Home\addressController@del');
 
+//个人信息修改
+Route::post('home/data/changedata','Home\DataController@changedata');
 
-
+//个人头像修改
+Route::post('home/data/avatar','Home\DataController@avatar');
 
 
 
@@ -225,3 +234,12 @@ Route::post('home/details/faajax','Home\DetailsController@faajax');
 
 // 详情页 加入购物车
 Route::get('home/shopcar/insert/{id}/{num}','Home\ShopCarController@insert');
+
+
+
+// 购物车 删除购物车内的商品
+Route::post('home/car/shanajax','Home\ShopCarController@shanajax');
+
+
+// 购物车 结算
+Route::post('home/shopcar/jiesuan','Home\ShopCarController@jiesuan');

@@ -90,7 +90,7 @@
 		</div>
 		<script>
 		$('#error').click(function(){
-			console.log('11');
+			// console.log('11');
 
 				$(this).css('display','none');
 		})
