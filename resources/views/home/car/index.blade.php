@@ -60,6 +60,10 @@
 		<script type="text/javascript" src="/h/js/jquery.js"></script>
 			<!--购物车 -->
 			<div class="concent">
+				@if(empty($car))
+					<img src="/uploads/20190806/gwc_k2.jpg">
+					<a href="/" style="background:red;color:white;padding:5px;border-radius:10%;position:relative;top:-150px;left:545px;z-index:1000">去逛逛</a>
+				@else
 				<div id="cartTable">
 					<div class="col-md-12">
 							<div class="featured-box featured-box-secundary featured-box-cart">
@@ -151,7 +155,7 @@
 					
 				</div>
 				
-
+				@endif
 				
 
 			</div>
