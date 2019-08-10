@@ -77,25 +77,29 @@
 													<th class="product-remove" style="width:10px;">
 														&nbsp;
 													</th>
+
+													<th class="product-price">
+														Pic
+													</th>
 													
 													<th class="product-price">
-														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name
+														Name
 													</th>
 													<th class="product-name">
-														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sku
+														Sku
 													</th>
 													
 													<th class="product-price">
-														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price
+														Price
 													</th>
 													<th class="product-quantity">
-														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Num
+														Num
 													</th>
 													<th class="product-quantity">
-														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number
+														number
 													</th>
 													<th class="product-subtotal">
-														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total
+														Total
 													</th>
 												</tr>
 											</thead>
@@ -108,8 +112,12 @@
 													</td>
 													<td class="product-remove" style="width:10px;">
 														<a onclick="shanchu(this,{{ $car->id }})" title="Remove this item" class="remove">
-															<i class="fa fa-times"></i>
+															<i class="fa fa-times" style="position:relative;left:-50px;"></i>
 														</a>
+													</td>
+
+													<td>
+														<img src="{{ $car->pic }}" style="width:50px;">
 													</td>
 
 													<td>
@@ -211,7 +219,7 @@
 		function num2(){
 			var zong = 0;
 			$('.amount').each(function(){
-				var check = $(this).parent().prev().prev().prev().prev().prev().prev().prev().find('input').attr('checked');
+				var check = $(this).parent().prev().prev().prev().prev().prev().prev().prev().prev().find('input').attr('checked');
 				
 				if(check == 'checked'){
 					zong+=parseInt($(this).text());
