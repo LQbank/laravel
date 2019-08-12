@@ -15,10 +15,44 @@
 		<script src="/h/AmazeUI-2.4.2/assets/js/jquery.min.js" type="text/javascript"></script>
 		<script src="/h/AmazeUI-2.4.2/assets/js/amazeui.js" type="text/javascript"></script>
 
-		
-		
 	</head>
+	<style>
+		li {
+			font-size: 13px;
+			display: list-item;
+			text-align: -webkit-match-parent;
+			list-style-position: inside;
+			list-style-type: inherit;
+			margin: 0;
+			line-height: 20px;
+			list-style-type:none;
+		} 
+		
+		.mws-form-message.error {	
+		background-color: #ffcbca;
+		border-color: #eb979b;
+		color: #9b4449;
+		margin:0 auto;
+		width:auto;
+		height:auto;
+		}
 
+		.mws-form-message {
+		font-size: 13px;
+		cursor: pointer;
+		border: 1px solid #d2d2d2;
+		padding: 15px 8px 15px 45px;
+		position: relative;
+		vertical-align: middle;
+		background-color: #f8f8f8;
+		background-position: 12px 12px;
+		background-repeat: no-repeat;
+		margin-bottom: 12px;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+		}
+	</style>
 	<body>
 		<!--头 -->
 		<header>
@@ -39,7 +73,7 @@
 						</ul>
 						<ul class="message-r">
 							<div class="topMessage home">
-								<div class="menu-hd"><a href="/home" target="_top" class="h">商城首页</a></div>
+								<div class="menu-hd"><a href="/" target="_top" class="h">商城首页</a></div>
 							</div>
 							<div class="topMessage my-shangcheng">
 								@if(!empty(Session::get('home_user')))
@@ -124,6 +158,8 @@
 						<a href="">个人资料</a>
 						<ul>
 							<li> <a href="/home/data">个人信息</a></li>
+
+							<li> <a href="/home/data/safety">安全设置</a></li>
 						
 							<li> <a href="/home/address">收货地址</a></li>
 						</ul>

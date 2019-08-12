@@ -109,30 +109,40 @@ class LoginController extends Controller
 
 
         $user = DB::table('users')->where('email',$email)->first();
+        // dd( $user);
 
-        //状态是否为已经激活
-        if($user->status !== '1'){
-            echo "<script>alert('该邮箱没有激活，请前往邮箱激活');location.href='/home/login';</script>";   			
-   			exit;
-        }
-      
-   		// 验证密码正确
-   		if (!Hash::check($passwd, $user->passwd)) {
-
-   		    echo "<script>alert('用户名或者密码错误');location.href='/home/login';</script>";   			
-      			exit;
-   		}
+            if(!empty($user))
+            {
 
 
-   		// 登录成功
-   		// session(['home_login'=>true]);
-   		session(['home_user'=>$user]);
+        
+                //状态是否为已经激活
+                if($user->status !== '1'){
+                    echo "<script>alert('该邮箱没有激活，请前往邮箱激活');location.href='/home/login';</script>";   			
+                    exit;
+                }
+            
+                // 验证密码正确
+                if (!Hash::check($passwd, $user->passwd)) {
+
+                    echo "<script>alert('用户名或者密码错误');location.href='/home/login';</script>";   			
+                        exit;
+                }
 
 
-   		// 跳转
-        return redirect('/'); 
+                // 登录成功
+                // session(['home_login'=>true]);
+                session(['home_user'=>$user]);
+
+
+                // 跳转
+                return redirect('/'); 
        
-    }
+        
+        }else{
+            return back()->with('success', '账户或密码错误');
+        
+        }
 
-    
+    }
 }

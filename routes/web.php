@@ -178,16 +178,30 @@ Route::post('home/data/avatar','Home\DataController@avatar');
 
 
 
+//安全设置
+Route::get('/home/data/safety','Home\DataController@safety');
 
 
+//修改密码
+Route::get('/home/data/changepassword','Home\DataController@changepassword');
 
+//执行修改密码
+Route::post('/home/data/edit','Home\DataController@edit');
 
+//换绑邮箱页面
+Route::get('/home/data/email','Home\DataController@email');
 
+//换绑邮箱
+Route::post('/home/data/changeemail','Home\DataController@changeemail');
 
+//换绑手机号页面
+Route::get('/home/data/phone','Home\DataController@phone');
 
+//换绑手机号
+Route::post('/home/data/changephone','Home\DataController@changephone');
 
-
-
+//换绑手机号
+Route::post('/home/data/changephone2','Home\DataController@changephone2');
 
 
 

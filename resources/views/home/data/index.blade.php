@@ -1,3 +1,7 @@
+
+@extends('home.layout.center')
+@section('content')
+
 <link href="/h/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
 <link href="/h/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
 
@@ -7,9 +11,7 @@
 <script src="/h/AmazeUI-2.4.2/assets/js/amazeui.js" type="text/javascript"></script>
 
 <script src="/h/ymd/jquery-3.2.0.min.js"></script>
-@extends('home.layout.center')
-@section('content')
-<div class="user-info">
+					<div class="user-info">
 						<!--标题 -->
 						<div class="am-cf am-padding">
 							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">个人资料</strong> / <small>Personal&nbsp;information</small></div>
@@ -147,7 +149,7 @@
 							</form>
 						</div>
 
-</div>
+					</div>
 
 
 @endsection

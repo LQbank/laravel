@@ -128,7 +128,10 @@ class IndexController extends Controller
     public function logout(Request $request)
     {
 
-        $request->session()->flush();
+        $request->session()->flush('home_user');
+
+       
+
         // 跳转
         return redirect('/'); 
 

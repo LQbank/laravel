@@ -140,6 +140,7 @@
 									</form>
                  					
 									 <div class="login-links">
+									 <a href="/home/login"  class="am-btn am-btn-primary" style="font-size: 17px;">已有帐户去登陆</a>
 											<label for="reader-me">
 												<input id="reader-me" type="checkbox"> 点击表示您同意商城《服务协议》
 											</label>
@@ -185,10 +186,15 @@
 										</div>
 									</form>
 									<div class="login-links">
+									<a href="/home/login"  class="am-btn am-btn-primary" style="font-size: 17px;">已有帐户去登陆</a>
 											<label for="reader-me">
 												<input id="reader-me" type="checkbox"> 点击表示您同意商城《服务协议》
 											</label>
+											
 									</div>
+									
+											
+									
 									<hr>
 								</div>
 
@@ -236,7 +242,13 @@
 
 											// 发送ajax  发送验证码
 											$.get('/home/register/sendPhone',{phone},function(res){
-												if (res.error_code == 0) {
+												// if (res.error_code == 0) {
+												// 	alert('发送成功，验证码10分钟有效')
+												// }else{
+												// 	alert('发送失败')
+												// }
+												console.log(res);
+												if (res !== 0) {
 													alert('发送成功，验证码10分钟有效')
 												}else{
 													alert('发送失败')

@@ -93,8 +93,8 @@ class RegisterController extends Controller
     		echo "<script>alert('验证码错误');location.href='/home/register'</script>";
     		exit;
     	}
-    	if ($request->input('upass') != $request->input('repass')) {
-    		echo "<script>alert('两次密码不一致');location.href='home/register';</script>";
+    	if ($request->input('passwd') != $request->input('repass')) {
+    		echo "<script>alert('两次密码不一致');location.href='/home/register';</script>";
     		exit;
     	}
     	// 接受数据
@@ -102,12 +102,13 @@ class RegisterController extends Controller
     	// 压入到数据库
     	$users=new Users;
     	$users->phone = $request->input('phone','');
-    	$users->passwd = Hash::make($request->input('upass',''));
+    	$users->passwd = Hash::make($request->input('passwd',''));
     	$users->token = str_random(30);
     	$users->avatar = '20190727/DFl323SLCZq4QyXzt95SSE63L02nl4TuZCq59RIs.jpeg';
         if ($users->save()) {
-			echo "添加成功";
-			
+			// echo "添加成功";
+			// 跳转
+			echo "<script>alert('添加成功');location.href='/home/login'</script>";
 
         }else{
 
@@ -125,20 +126,25 @@ class RegisterController extends Controller
     	//如果存入redis中 注意键名覆盖
     	$key = $phone.'_code';
 
-    	session([$key=>$code]);
-    	// exit;
-    	$url = "http://v.juhe.cn/sms/send";
-		$params = array(
-		    'key'   => '0be5c345c06fc3b113c6ffe870b37598', //您申请的APPKEY
-		    'mobile'    => $phone, //接受短信的用户手机号码
-		    'tpl_id'    => '176472', //您申请的短信模板ID，根据实际情况修改
-		    'tpl_value' =>'#code#='.$code, //您设置的模板变量，根据实际情况修改
-		    'dtype'=>'json'
-		);
+		session([$key=>$code]);
+		
+		echo  session($key);
+		
+    
+    	// $url = "http://v.juhe.cn/sms/send";
+		// $params = array(
+		//     'key'   => '0be5c345c06fc3b113c6ffe870b37598', //您申请的APPKEY
+		//     'mobile'    => $phone, //接受短信的用户手机号码
+		//     'tpl_id'    => '176472', //您申请的短信模板ID，根据实际情况修改
+		//     'tpl_value' =>'#code#='.$code, //您设置的模板变量，根据实际情况修改
+		//     'dtype'=>'json'
+		// );
 
-		$paramstring = http_build_query($params);
-		$content = self::juheCurl($url, $paramstring);
-		// echo $content;
+		// $paramstring = http_build_query($params);
+		// $content = self::juheCurl($url, $paramstring);
+
+		// echo  $content;
+		
     }
 
 
