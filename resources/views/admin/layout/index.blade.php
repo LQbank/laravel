@@ -203,6 +203,17 @@
 
                         </ul>
                     </li>
+
+                    <li  class="active"> 
+                        <a href="#"><i class="icon-envelope"></i>订单模块</a>
+                        <ul  >
+                        
+                            <li><a href="/admin/order">查看订单</a></li>
+                            <li><a href="/admin/link/create">添加友情链接</a></li>
+                            
+
+                        </ul>
+                    </li>
                 </ul>
             </div>         
         </div>
