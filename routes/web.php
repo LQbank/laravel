@@ -117,6 +117,14 @@ Route::group(['middleware'=>['login']],function(){
 
 	//后台 友情链接状态 ajax
 	Route::post('/admin/link/changeStatus','Admin\linkController@changeStatus');
+
+
+	//后台 订单管理 查看
+	Route::resource('admin/order','Admin\OrderController');
+
+
+	//后台 订单管理 查看订单
+	Route::get('admin/order/showorder/{id}','Admin\OrderController@showorder');
 });
 
 
@@ -258,3 +266,8 @@ Route::post('home/car/shanajax','Home\ShopCarController@shanajax');
 // 购物车 结算
 Route::post('home/shopcar/jiesuan','Home\ShopCarController@jiesuan');
 
+// 购物车 执行结算
+Route::post('home/shopcar/jiesuan2','Home\ShopCarController@jiesuan2');
+
+// 购物车 跳转订单成功页面
+Route::get('home/shopcar/jiesuan3','Home\ShopCarController@jiesuan3');
