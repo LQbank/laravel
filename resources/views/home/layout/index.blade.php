@@ -76,13 +76,10 @@
 <div class="footer ">
 						<div class="footer-hd ">
 							<p>
-								<a href="# ">恒望科技</a>
+							@foreach ($link as $k=>$v)
+								<a href="{{$v->link}}"><img src="/uploads/{{$v->pic}}" style="width: 50px;" alt=""></a>
 								<b>|</b>
-								<a href="# ">商城首页</a>
-								<b>|</b>
-								<a href="# ">支付宝</a>
-								<b>|</b>
-								<a href="# ">物流</a>
+							@endforeach
 							</p>
 						</div>
 						<div class="footer-bd ">

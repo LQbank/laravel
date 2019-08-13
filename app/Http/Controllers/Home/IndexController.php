@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Cates;
+use App\Models\Cartoons;
 use DB;
 
 class IndexController extends Controller
@@ -115,6 +116,7 @@ class IndexController extends Controller
         
     // }
 
+    // public static $link='';
     public function index()
     {
 
@@ -126,8 +128,9 @@ class IndexController extends Controller
         // $arr = self::getGoods();
 
         // dump($arr);
-  
-        return view('home/index/index');
+        // $link=DB::table('links')->get();
+        $cartoon=DB::table('cartoons')->get();
+        return view('home/index/index',['cartoon'=>$cartoon]);
     }
 
     /*

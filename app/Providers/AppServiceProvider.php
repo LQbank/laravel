@@ -6,7 +6,9 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 
+
 use App\Http\Controllers\Home\IndexController;
+use App\Http\Controllers\Home\LayoutController;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
 
         //共享数据
         View::share('common_cates_data',IndexController::getPidCateData());
+        View::share('link', LayoutController::index());
     }
 
     /**
