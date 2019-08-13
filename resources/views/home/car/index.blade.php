@@ -60,6 +60,10 @@
 		<script type="text/javascript" src="/h/js/jquery.js"></script>
 			<!--购物车 -->
 			<div class="concent">
+				@if(empty($car))
+					<img src="/uploads/20190806/gwc_k2.jpg">
+					<a href="/" style="background:red;color:white;padding:5px;border-radius:10%;position:relative;top:-150px;left:545px;z-index:1000">去逛逛</a>
+				@else
 				<div id="cartTable">
 					<div class="col-md-12">
 							<div class="featured-box featured-box-secundary featured-box-cart">
@@ -73,25 +77,29 @@
 													<th class="product-remove" style="width:10px;">
 														&nbsp;
 													</th>
+
+													<th class="product-price">
+														Pic
+													</th>
 													
 													<th class="product-price">
-														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name
+														Name
 													</th>
 													<th class="product-name">
-														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sku
+														Sku
 													</th>
 													
 													<th class="product-price">
-														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price
+														Price
 													</th>
 													<th class="product-quantity">
-														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Num
+														Num
 													</th>
 													<th class="product-quantity">
-														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number
+														number
 													</th>
 													<th class="product-subtotal">
-														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total
+														Total
 													</th>
 												</tr>
 											</thead>
@@ -104,8 +112,12 @@
 													</td>
 													<td class="product-remove" style="width:10px;">
 														<a onclick="shanchu(this,{{ $car->id }})" title="Remove this item" class="remove">
-															<i class="fa fa-times"></i>
+															<i class="fa fa-times" style="position:relative;left:-50px;"></i>
 														</a>
+													</td>
+
+													<td>
+														<img src="{{ $car->pic }}" style="width:50px;">
 													</td>
 
 													<td>
@@ -151,7 +163,7 @@
 					
 				</div>
 				
-
+				@endif
 				
 
 			</div>
@@ -207,7 +219,7 @@
 		function num2(){
 			var zong = 0;
 			$('.amount').each(function(){
-				var check = $(this).parent().prev().prev().prev().prev().prev().prev().prev().find('input').attr('checked');
+				var check = $(this).parent().prev().prev().prev().prev().prev().prev().prev().prev().find('input').attr('checked');
 				
 				if(check == 'checked'){
 					zong+=parseInt($(this).text());

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\Address;
+use DB;
 
 class addressController extends Controller
 {
@@ -20,7 +21,7 @@ class addressController extends Controller
     public function index()
     {
 
-        $address = Address::get();
+        $address = Address::where('user_id', session('home_user')->id)->get();
       
         return view('home/address/index',['address'=>$address]); 
         // return view('home/address/index'); 
@@ -86,70 +87,34 @@ class addressController extends Controller
             die;
         }
     }
-
+    
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     *  ajax地址设为默认
+     *  先将全部设为0，之后将选中设为1
      */
-    public function create()
+    public function   changeStatus(Request $request)
     {
-        //
-    }
+        
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        // $address->phone = $request->input('phone','');
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        $address = DB::update("update addresses set status='0' where user_id = ".session('home_user')->id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        // 查询当前用户的所选地址
+        $address = Address::find($request->input('id'));
+        // dump($address);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $address->status ='1';
+
+        if($address->save())
+        {
+            echo '1';
+        }
+
+     
+
+
     }
+ 
 }

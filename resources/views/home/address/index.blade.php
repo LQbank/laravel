@@ -7,7 +7,20 @@
 <link rel="stylesheet" href="/h/address/base.min.css" />
 <link rel="stylesheet" href="/h/address/main.min.css" />
 <link rel="stylesheet" href="/h/address/address-edit.min.css" />
-
+<style>
+    .new-option-r {
+    top: 0px;
+    background: #ee3495;
+    }
+    .new-option-r {
+    position: absolute;
+    top: 0px;
+    right: 3px;
+    padding: 0px 5px;
+    border-radius: 0 0 5px 5px;
+    color: #fff;
+    }
+</style>
 
     <div class="breadcrumbs">
         <div class="container">
@@ -37,6 +50,11 @@
                                     @if(!empty($address))
                                     @foreach($address as $k=>$v)
                                     <div class="address-item J_addressItem" >
+                                          
+                                            <span class="new-option-r"  style="display:{{$v->status ? 'block' :'none'}}"
+                                          
+                                            >默认地址</span>
+                                           
                                         <dl>
                                             <dt>
                                                 <span class="tag"></span> <em class="uname">{{$v->uname}}</em>
@@ -46,7 +64,13 @@
                                                 {{$v->province}}  {{$v->city}}  {{$v->district}}
                                                 <br>{{$v->address}}</dd>
                                         </dl>
+                                            
                                         <div class="actions">
+
+                                            @if($v->status == 0)
+                                            <a href=""  data-id="{{$v->id}}" class="modify J_addressModify">设为默认</a>
+                                            @endif
+
                                             <!-- <a href="javascript:void(0);" data-id="{{$v->id}}" class="modify J_addressModify">修改</a> -->
                                             <a href="javascript:void(0);"  data-id="{{$v->id}}" class="modify J_addressDel">删除</a>
                                         </div>
@@ -76,4 +100,5 @@
 
 <script src="/h/address/data/indexNav.js"></script>
 <script src="/h/address/data/indexData.js"></script>
+
 @endsection

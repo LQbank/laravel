@@ -277,34 +277,35 @@ var inpData = {};
         }else if(!(inpData.province&&inpData.city&&inpData.country)){
             showerror($('#user_adress'), ["请选择省市区"]);
         }
+        // return false;
     })
 
     // 生成新的收货地址
-    function createAddress(data,aid){
-        var html = '';
-        html += '<div class="address-item J_addressItem selected">';
-        html += '<dl><dt><em class="uname">这些擦</em></dt>';
-        html += '<dd class="utel">12312312312</dd>';
-        html += '<dd class="uaddress"></dd></dl>';
-        html += '<div class="actions">';
-        html += '<!--<a href="javascript:void(0);" data-id="1" class="modify J_addressModify">修改</a>--><a href="javascript:void(0);" class="modify J_addressDel">删除</a>';
-        html += '</div></div>';
+    // function createAddress(data,aid){
+    //     var html = '';
+    //     html += '<div class="address-item J_addressItem selected">';
+    //     html += '<dl><dt><em class="uname">这些擦</em></dt>';
+    //     html += '<dd class="utel">12312312312</dd>';
+    //     html += '<dd class="uaddress"></dd></dl>';
+    //     html += '<div class="actions">';
+    //     html += '<!--<a href="javascript:void(0);" data-id="1" class="modify J_addressModify">修改</a>--><a href="javascript:void(0);" class="modify J_addressDel">删除</a>';
+    //     html += '</div></div>';
 
-        var $newAddress = $(html).insertAfter($('#J_newAddress'));
+    //     var $newAddress = $(html).insertAfter($('#J_newAddress'));
 
-        $newAddress.data('address_id',aid);
-        $newAddress.data('uname',data.uname);
-        $newAddress.data('tel',data.phone);
-        $newAddress.data('province_name',data.province);
-        $newAddress.data('city_name',data.city);
-        $newAddress.data('district_name',data.country);
-        $newAddress.data('address',data.address);
-        $newAddress.find('.uname').html(data.uname);
-        $newAddress.find('.utel').html(data.phone);
-        $newAddress.find('.uaddress').html(data.province+' '+data.city+' '+data.country+' <br>'+data.address);
+    //     $newAddress.data('address_id',aid);
+    //     $newAddress.data('uname',data.uname);
+    //     $newAddress.data('tel',data.phone);
+    //     $newAddress.data('province_name',data.province);
+    //     $newAddress.data('city_name',data.city);
+    //     $newAddress.data('district_name',data.country);
+    //     $newAddress.data('address',data.address);
+    //     $newAddress.find('.uname').html(data.uname);
+    //     $newAddress.find('.utel').html(data.phone);
+    //     $newAddress.find('.uaddress').html(data.province+' '+data.city+' '+data.country+' <br>'+data.address);
 
-        $('#J_confirmAddress').html(data.uname+' '+data.phone+'<br>'+data.province+' '+data.city+' '+data.country+' <br>'+data.address);
-    }
+    //     $('#J_confirmAddress').html(data.uname+' '+data.phone+'<br>'+data.province+' '+data.city+' '+data.country+' <br>'+data.address);
+    // }
 
 
 
@@ -319,6 +320,7 @@ var inpData = {};
         // aid = parents.data('address_id');
         
         aid=$(this).attr('data-id');
+      
         $.ajax({
             url:'/home/address/del',
             data:{id:aid},
@@ -336,6 +338,33 @@ var inpData = {};
         });
     });
 
+     // 点击设为默认，然后发送ajax
 
+     $('.J_addressList ').on('click.status','.J_addressModify',function(){
+            
+            var id =  $(this).attr('data-id');
+        
+            // console.log(id);
+            var _self = $(this);
+            var parents = _self.parents('.J_addressItem');
+            $.ajax({
+                type: 'GET',
+                url: '/home/address/changeStatus', 
+                data: { 'id': id },
+                dataType: 'json',
+                success: function(data){
+                    if(data == '1'){
+                        //跳回之前页面
+                        window.location.href="/home/address";
+                    }
+                },
+                error: function(){
+                
+                }
+            });
 
+        return false;
+    })
+
+    
 }(window.jQuery);

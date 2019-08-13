@@ -118,10 +118,8 @@ Route::group(['middleware'=>['login']],function(){
 	//后台 友情链接状态 ajax
 	Route::post('/admin/link/changeStatus','Admin\linkController@changeStatus');
 
-
 	//后台 订单管理 查看
 	Route::resource('admin/order','Admin\OrderController');
-
 
 	//后台 订单管理 查看订单
 	Route::get('admin/order/showorder/{id}','Admin\OrderController@showorder');
@@ -156,6 +154,16 @@ Route::post('home/login/dologin','Home\LoginController@dologin');
 
 //退出 登录
 Route::get('home/logout','Home\IndexController@logout');
+
+
+// 继承友情链接
+Route::get('home/layout','Home\LayoutController@index');
+
+
+// 继承友情链接
+Route::get('home/layout/center','Home\LayoutController@center');
+
+
 // 列表页
 Route::get('home/list/{id}','Home\ListController@index');
 
@@ -177,6 +185,10 @@ Route::get('home/address','Home\addressController@index');
 Route::get('home/address/add','Home\addressController@add');
 //地址删除
 Route::get('home/address/del','Home\addressController@del');
+
+//修改默认收货地址
+Route::get('/home/address/changeStatus','Home\addressController@changeStatus');
+
 
 //个人信息修改
 Route::post('home/data/changedata','Home\DataController@changedata');
@@ -263,7 +275,7 @@ Route::get('home/shopcar/insert/{id}/{num}','Home\ShopCarController@insert');
 // 购物车 删除购物车内的商品
 Route::post('home/car/shanajax','Home\ShopCarController@shanajax');
 
-// 购物车 结算
+// 购物车 结算页面
 Route::post('home/shopcar/jiesuan','Home\ShopCarController@jiesuan');
 
 // 购物车 执行结算
