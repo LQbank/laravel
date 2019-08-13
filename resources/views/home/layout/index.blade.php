@@ -22,8 +22,9 @@
 	</head>
 
 	<body>
+		<div class="hmtop">
 
-	<div class="am-container header">
+			<div class="am-container header">
 				<ul class="message-l">
 					<div class="topMessage">
 						<div class="menu-hd">
@@ -53,8 +54,6 @@
 				</ul>
 				</div>
 
-				<!--悬浮搜索框-->
-
 				<div class="nav white">
 					<div class="logo"><img src="/h/images/logo.png" /></div>
 					<div class="logoBig">
@@ -71,20 +70,19 @@
 				</div>
 
 				<div class="clear"></div>
-</div>
+			</div>	
+		</div>
+		
 @section('content')
                     
 @show
 <div class="footer ">
 						<div class="footer-hd ">
 							<p>
-								<a href="# ">恒望科技</a>
+							@foreach ($link as $k=>$v)
+								<a href="{{$v->link}}"><img src="/uploads/{{$v->pic}}" style="width: 50px;" alt=""></a>
 								<b>|</b>
-								<a href="# ">商城首页</a>
-								<b>|</b>
-								<a href="# ">支付宝</a>
-								<b>|</b>
-								<a href="# ">物流</a>
+							@endforeach
 							</p>
 						</div>
 						<div class="footer-bd ">

@@ -97,7 +97,7 @@
 									</div>
 								</div> 
 								
-								
+								@if(!empty(Session::get('home_user')->phone))
 								<div class="am-form-group">
 									<label for="user-phone" class="am-form-label">电话</label>
 									<div class="am-form-content">
@@ -107,6 +107,9 @@
 
 									</div>
 								</div>
+								@endif
+
+								@if(!empty(Session::get('home_user')->email))
 								<div class="am-form-group">
 									<label for="user-email" class="am-form-label">电子邮件</label>
 									<div class="am-form-content">
@@ -116,6 +119,7 @@
 
 									</div>
 								</div>
+								@endif
 								<!-- <div class="am-form-group address">
 									<label for="user-address" class="am-form-label">收货地址</label>
 									<div class="am-form-content address">

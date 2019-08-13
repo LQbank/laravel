@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Home\ShopCarController;
 use App\Models\Cates;
+use App\Models\Cartoons;
 use DB;
 
 class IndexController extends Controller
@@ -116,9 +117,23 @@ class IndexController extends Controller
         
     // }
 
+    // public static $link='';
     public function index()
     {
-        return view('home/index/index');
+        // $cates_data = self::getPidCateData();
+        // dump($cates_data);
+
+        // return view('home/index/index',['cates_data'=>$cates_data]);
+        
+        // $arr = self::getGoods();
+
+        // dump($arr);
+        // $link=DB::table('links')->get();
+        $cartoon=DB::table('cartoons')->where('status','1')->get();
+
+        // dd($cartoon);
+        return view('home/index/index',['cartoon'=>$cartoon]);
+
     }
 
     /*

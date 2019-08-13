@@ -10,18 +10,18 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-// 前台首页
-Route::get('/','Home\IndexController@index');
+
 
 Route::get('/', function () {
 
 	session(['admin_login'=>null]);
 	session(['admin_userinfo'=>null]);
 	session(['admin_nodes'=>null]);
-    return view('home/index/index');
+    // return view('home/index/index');
 });
 
-
+// 前台首页
+Route::get('/','Home\IndexController@index');
 
 
 //后台 登录 路由
@@ -272,6 +272,7 @@ Route::post('home/details/faajax','Home\DetailsController@faajax');
 // 详情页 加入购物车
 Route::get('home/shopcar/insert/{id}/{num}','Home\ShopCarController@insert');
 
+
 // 购物车 删除购物车内的商品
 Route::post('home/car/shanajax','Home\ShopCarController@shanajax');
 
@@ -283,3 +284,68 @@ Route::post('home/shopcar/jiesuan2','Home\ShopCarController@jiesuan2');
 
 // 购物车 跳转订单成功页面
 Route::get('home/shopcar/jiesuan3','Home\ShopCarController@jiesuan3');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

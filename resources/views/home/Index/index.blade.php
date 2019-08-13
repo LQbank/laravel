@@ -1,28 +1,32 @@
 @extends('home.layout.index')
 @section('content')
-		    
+  
 		
-		<div class="hmtop">
-			<!--顶部导航条 -->
+		
 			
 			<div class="banner">
-                      <!--轮播 -->
+                   
 						<div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
+						
 							<ul class="am-slides">
-								<li class="banner1"><a href="/home/list"><img src="/h/images/ad1.jpg" /></a></li>
-								<li class="banner1"><a href="/home/list"><img src="/h/images/ad1.jpg" /></a></li>
-
+								@foreach($cartoon as $k=>$v)
+									<li class="banner1" ><a href="/home/list"><img src="/uploads/{{ $v->pic }}"  style="width: 1488px;float: left;display: block;height: 430px;"/></a></li>
+								@endforeach
+								
 							</ul>
+						
 						</div>
 						<div class="clear"></div>	
 			</div>
+			
+
 			<div class="shopNav">
 				<div class="slideall">
 					
-					   <div class="long-title"><span class="all-goods">全部分类</span></div>
+					   
 					   <div class="nav-cont">
 							<ul>
-								<li class="index"><a href="/home">首页</a></li>
+								<li class="index"><a href="/">首页</a></li>
                                 <li class="qc"><a href="#">闪购</a></li>
                                 <li class="qc"><a href="#">限时抢</a></li>
                                 <li class="qc"><a href="#">团购</a></li>
@@ -37,6 +41,7 @@
 						<!--侧边导航 -->
 						<div id="nav" class="navfull">
 							<div class="area clearfix">
+								<div class="long-title" style="margin-top: -45px;"><span class="all-goods">全部分类</span></div>
 								<div class="category-content" id="guide_2">
 									
 									<div class="category">
@@ -333,15 +338,17 @@
 						<div class="am-container ">
 							<div class="shopTitle ">
 								<h4>{{$v->cname}}</h4>
-								<h3>你是我的优乐美么？不，我是你小鱼干</h3>
-								<div class="today-brands ">
-									<!-- <a href="# ">小鱼干</a> -->
-									@foreach($v->sub as $k2=>$v2 )
+								<h3>
+								@foreach($v->sub as $k2=>$v2 )
 										@foreach($v2->sub as $k3=>$v3 )
 										<a class="outer" href="/home/list/{{$v3->id}}"><span class="inner"><b class="text">{{$v3->cname}}</b></span></a>
 										@endforeach
 									
 									@endforeach
+								</h3>
+								<div class="today-brands ">
+									<!-- <a href="# ">小鱼干</a> -->
+									
 
 								</div>
 								<span class="more ">
@@ -387,8 +394,8 @@
 					
 					
 
-		</div>
-		</div>
+			</div>
+	
 
 		
 @endsection
