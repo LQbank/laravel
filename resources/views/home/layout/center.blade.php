@@ -77,7 +77,7 @@
 							</div>
 							<div class="topMessage my-shangcheng">
 								@if(!empty(Session::get('home_user')))
-									<div class="menu-hd MyShangcheng"><a href="/home/center" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>	
+									<div class="menu-hd MyShangcheng"><a href="/home/data" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>	
 								@endif 
 								
 							</div>
@@ -149,7 +149,7 @@
 			<aside class="menu">
 				<ul>
 					<li class="person">
-						<a href="/home/center">个人中心</a>
+						<a href="/home/data">个人中心</a>
 					</li>
 					<li class="person">
 						<a href="">个人资料</a>
@@ -172,8 +172,8 @@
 						<a href="#">我的小窝</a>
 						<ul>
 							<li> <a href="/home/collection">收藏</a></li>
-							<!-- <li> <a href="foot.html">足迹</a></li>
-							<li> <a href="comment.html">评价</a></li> -->
+							<!-- <li> <a href="foot.html">足迹</a></li> -->
+							<li> <a href="/home/comment">评价</a></li> 
 						</ul>
 					</li>
 

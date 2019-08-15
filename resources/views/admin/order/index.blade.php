@@ -28,11 +28,9 @@
                     <td>{{ $order->uname }}</td>
                     <td>{{ $order->phone }}</td>
                     <td>{{ $order->total }}</td>
-                    
-                    <td>
-                        <div style="height:20px;" class="status" gid="">
-                            <input  class="ibutton" type="checkbox" data-label-on="未发货" data-label-off="已发货" >
-                        </div>
+                    <td  class="qy"  info="{{ $order->orderid }}">
+									
+                            <input class="ibutton" type="checkbox" data-label-on="已发货" data-label-off="未发货"  @if($order->status) checked @else @endif }} >
                     </td>
                     <td><a href="/admin/order/showorder/{{ $order->orderid }}" class='btn btn-info'>查看订单</a></td>
                 </tr>
@@ -42,4 +40,38 @@
         </table>
     </div>
 </div>
+@endsection
+
+@section('js')
+    <script>
+
+        $('.qy').each(function(){
+
+        this.onclick=function(evevt){
+
+            var id = this.getAttribute('info');
+            // console.log(id);
+
+            if(evevt.target.nodeName !== 'TD'){
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/admin/order/changeStatus', 
+                    data: { 'id': id },
+                    dataType: 'json',
+                    success: function(data){
+                        
+                    },
+                    error: function(){
+                    
+                    }
+                });
+
+            }
+        }
+
+
+        })
+    </script>
 @endsection

@@ -123,6 +123,10 @@ Route::group(['middleware'=>['login']],function(){
 
 	//后台 订单管理 查看订单
 	Route::get('admin/order/showorder/{id}','Admin\OrderController@showorder');
+
+	
+	//后台 订单管理 修改状态ajax
+	Route::post('admin/order/changeStatus','Admin\OrderController@changeStatus');
 });
 
 
@@ -179,6 +183,10 @@ Route::get('home/collection','Home\CollectionController@index');
 Route::get('home/data','Home\DataController@index');
 // 订单管理
 Route::get('home/order','Home\OrderController@index');
+
+//前台 订单管理 修改状态ajax
+Route::post('home/order/changeStatus','Home\OrderController@changeStatus');
+
 // 地址管理
 Route::get('home/address','Home\addressController@index');
 //地址添加
@@ -223,13 +231,18 @@ Route::post('/home/data/changephone','Home\DataController@changephone');
 //换绑手机号
 Route::post('/home/data/changephone2','Home\DataController@changephone2');
 
+//评价页面
+Route::get('/home/reply/{id}/{sku}/{detail}','Home\ReplyController@index');
+
+//评价添加
+Route::post('home/reply/add/{id}/{sku}/{detail}','Home\ReplyController@add');
+
+//添加成功
+Route::get('home/reply/replyok','Home\ReplyController@replyok');
 
 
-
-
-
-
-
+//评价显示
+Route::get('home/comment','Home\CommentController@index');
 
 
 
@@ -282,13 +295,13 @@ Route::post('home/shopcar/jiesuan','Home\ShopCarController@jiesuan');
 // 购物车 执行结算
 Route::post('home/shopcar/jiesuan2','Home\ShopCarController@jiesuan2');
 
+
+
 // 购物车 跳转订单成功页面
-Route::get('home/shopcar/jiesuan3','Home\ShopCarController@jiesuan3');
+Route::get('home/shopcar/jiesuan3/{total}/{addid}','Home\ShopCarController@jiesuan3');
 
-
-
-
-
+// 中文分词 
+Route::resource('home/search','Home\SearchController');
 
 
 

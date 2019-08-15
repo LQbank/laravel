@@ -15,7 +15,8 @@ class DetailsController extends Controller
 		$res = DB::table('sku')
     	->where('sku.id',$id)
     	->leftJoin('good','sku.good_id','=','good.id')
-    	->first();
+        ->first();
+        // dump($res);
         
         $aaa = DB::table('sku')->where('good_id',$res->good_id)->get();
         $ccc = [];
@@ -48,7 +49,22 @@ class DetailsController extends Controller
             $k->sub = array_unique($k->sub);
         }
         // dump($res5);
-    	return view('home/details/index',['good'=>$res,'res2'=>$res2,'sku'=>$res5,'sid'=>$id]);
+
+
+        //获取商品的所有评论
+        $reply = DB::table('reply')
+        ->join('users','reply.user_id','=','users.id')
+        ->join('sku','reply.sku_id','=','sku.id')
+        ->join('good','reply.good_id','=','good.id')
+        ->where('reply.good_id',$res->good_id)	
+        ->select('reply.*','sku.pic','sku.sku','good.name','users.avatar','users.nickname')
+        ->get();
+       
+        // dump( $reply);
+
+
+
+    	return view('home/details/index',['good'=>$res,'res2'=>$res2,'sku'=>$res5,'sid'=>$id,'reply'=>$reply]);
     }
 
     public function faajax(Request $request){
