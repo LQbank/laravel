@@ -11,6 +11,11 @@ use DB;
 
 class IndexController extends Controller
 {
+    /**
+     * 获取所有的分类
+     *
+     * @return \Illuminate\Http\Response
+     */
     public static function  getPidCateData($pid = 0)
     {
         //获取一级分类
@@ -117,7 +122,12 @@ class IndexController extends Controller
         
     // }
 
-    // public static $link='';
+
+    /**
+     * 商城首页
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         // $cates_data = self::getPidCateData();
@@ -134,12 +144,14 @@ class IndexController extends Controller
         // dd($cartoon);
         return view('home/index/index',['cartoon'=>$cartoon]);
 
+
     }
 
-    /*
-    *
-    *   退出登录
-    */
+    /**
+     * 退出登录
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function logout(Request $request)
     {
 

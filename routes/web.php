@@ -17,7 +17,7 @@ Route::get('/', function () {
 	session(['admin_login'=>null]);
 	session(['admin_userinfo'=>null]);
 	session(['admin_nodes'=>null]);
-    // return view('home/index/index');
+
 });
 
 // 前台首页
@@ -302,63 +302,3 @@ Route::get('home/shopcar/jiesuan3/{total}/{addid}','Home\ShopCarController@jiesu
 
 // 中文分词 
 Route::resource('home/search','Home\SearchController');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

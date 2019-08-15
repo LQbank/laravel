@@ -65,7 +65,9 @@
 
 
 																		@foreach($vv->sub as $k3=>$v3 )
+
 																		<dd><a title="蒸蛋糕" href="/home/list/{{$v3->id}}"><span>{{$v3->cname}}</span></a></dd>
+
 																		@endforeach
 
 

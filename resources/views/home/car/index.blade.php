@@ -44,6 +44,7 @@
 			#tab{
 				width:850px;
 			}
+		
 		</style>
 
 
@@ -74,31 +75,34 @@
 											<thead>
 												<tr class="bbb">
 													<th></th>
-													<th class="product-remove" style="width:10px;">
+													<!-- <th class="product-remove" style="width:10px;">
 														&nbsp;
-													</th>
+													</th> -->
 
 													<th class="product-price">
+														
+													</th>
+													<th class="product-price"  width="46%" style="text-align:center;">
 														Pic
 													</th>
 													
-													<th class="product-price">
+													<th class="product-price"  width="46%" style="text-align:center;">
 														Name
 													</th>
-													<th class="product-name">
+													<th class="product-name"  width="46%" style="text-align:center;">
 														Sku
 													</th>
 													
-													<th class="product-price">
+													<th class="product-price"  width="46%" style="text-align:center;">
 														Price
 													</th>
-													<th class="product-quantity">
+													<th class="product-quantity"  width="46%" style="text-align:center;">
 														Num
 													</th>
-													<th class="product-quantity">
+													<th class="product-quantity"   width="46%" style="text-align:center;">
 														number
 													</th>
-													<th class="product-subtotal">
+													<th class="product-subtotal"   width="46%" style="text-align:center;">
 														Total
 													</th>
 												</tr>
@@ -109,6 +113,7 @@
 												<tr class="cart_table_item aaa">
 													<td style="width:10px;">
 														<input class="inp" type="checkbox" name="xuan[]" value="{{ $car->id }}">
+														
 													</td>
 													<td class="product-remove" style="width:10px;">
 														<a onclick="shanchu(this,{{ $car->id }})" title="Remove this item" class="remove">
@@ -145,14 +150,18 @@
 													</td>
 												</tr>
 											@endforeach
-												<tr align="center">
+											
+												<tr >
+												
 													<td class="actions" colspan="6">
-														<div class="actions-continue">
-															<input id="tijiao2" type="submit" value="Submit Cart" class="btn btn-default">
+													<br />
+														<div class="actions-continue" style = "float:right;margin-right:-300px;margin-top:30px;">
+															<input id="tijiao2" type="submit" value="Submit Cart" class="btn  btn-danger ">
 														</div>
 													</td>
 												</tr>
-												<div class="zong">总价：100<br /><hr /></div>
+												<div class="zong">总价：100<br /></div>
+												<hr />
 											</tbody>
 										</table>
 									</form>
@@ -175,6 +184,7 @@
 		<script>
 
 		$('.minus').click(function(){
+			console.log($(this).next().val());
 			if(parseInt($(this).next().val()) <= 0){
 				$(this).next().val(0);
 			}else{

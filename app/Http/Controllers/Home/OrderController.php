@@ -9,6 +9,11 @@ use DB;
 
 class OrderController extends Controller
 {
+	/**
+     * 订单页面
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
     
