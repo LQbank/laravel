@@ -10,7 +10,7 @@ use DB;
 class LoginController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 登录首页
      *
      * @return \Illuminate\Http\Response
      */
@@ -127,6 +127,28 @@ class LoginController extends Controller
    		// 登录成功
    		// session(['home_login'=>true]);
    		session(['home_user'=>$user]);
+        $_SESSION['home_user']=$user;
+
+        if(isset($_SESSION['car'])){
+            foreach($_SESSION['car'] as $v){
+                // $cart['sku_id'] = $v->id;
+                // $cart['user_id'] = session('home_user')->id;
+                // $cart['number'] = $v->number;
+                // DB::table('cart')->insert($cart);
+
+                $data1 = DB::table('cart')->where('sku_id',$v->id)->first();
+
+                if(count($data1) == 0){
+                    $cart['sku_id'] = $v->id;
+                    $cart['user_id'] = session('home_user')->id;
+                    $cart['number'] = $v->num;
+                    DB::table('cart')->insert($cart);
+                }else{
+                    $cart2['number'] = $data1->number + $v->number;
+                    DB::table('cart')->where('sku_id',$v->id)->update($cart2);
+                } 
+            }
+        }
 
 
    		// 跳转

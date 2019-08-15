@@ -175,6 +175,7 @@
 		<script>
 
 		$('.minus').click(function(){
+			console.log($(this).next().val());
 			if(parseInt($(this).next().val()) <= 0){
 				$(this).next().val(0);
 			}else{

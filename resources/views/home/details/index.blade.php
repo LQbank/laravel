@@ -1075,10 +1075,24 @@
 		if(parseInt($('#text_box').val()) >= parseInt($('#cun').html())){
 			$('#text_box').val(parseInt($('#cun').html()) - 1);
 		}
+
+		if(parseInt($('#text_box').val()) <= 0){
+			$('#text_box').val(1);
+		}
 		// var href2 = "/home/shopcar/insert/" + $('#LikBasket').attr('sid') + '/' + (parseInt($('#text_box').val()) + 1);
 		// console.log(href2);
 		// $('#LikBasket').attr('href',href2);
 	})
+
+	setInterval(function(){
+		if(parseInt($('#text_box').val()) >= parseInt($('#cun').html())){
+			$('#text_box').val(parseInt($('#cun').html()));
+		}
+
+		if(parseInt($('#text_box').val()) <= 0){
+			$('#text_box').val(0);
+		}
+	},100)
 
 	// $('#LikBasket').click(function(){
 

@@ -7,6 +7,11 @@ use App\Http\Controllers\Controller;
 
 class CenterController extends Controller
 {
+	/**
+     * 个人中心页面
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         return view('home/center/index');

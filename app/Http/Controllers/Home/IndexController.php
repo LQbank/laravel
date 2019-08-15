@@ -10,6 +10,11 @@ use DB;
 
 class IndexController extends Controller
 {
+    /**
+     * 获取所有的分类
+     *
+     * @return \Illuminate\Http\Response
+     */
     public static function  getPidCateData($pid = 0)
     {
         //获取一级分类
@@ -116,15 +121,22 @@ class IndexController extends Controller
         
     // }
 
+    /**
+     * 商城首页
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
+        // dump($_SESSION['car']);
         return view('home/index/index');
     }
 
-    /*
-    *
-    *   退出登录
-    */
+    /**
+     * 退出登录
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function logout(Request $request)
     {
 

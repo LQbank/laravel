@@ -18,6 +18,8 @@ Route::get('/', function () {
 	session(['admin_login'=>null]);
 	session(['admin_userinfo'=>null]);
 	session(['admin_nodes'=>null]);
+	// dump(session('home_user'));
+	// dump($_SESSION);
     return view('home/index/index');
 });
 
@@ -250,4 +252,20 @@ Route::post('home/shopcar/jiesuan','Home\ShopCarController@jiesuan');
 Route::post('home/shopcar/jiesuan2','Home\ShopCarController@jiesuan2');
 
 // 购物车 跳转订单成功页面
-Route::get('home/shopcar/jiesuan3','Home\ShopCarController@jiesuan3');
+Route::get('home/shopcar/jiesuan3/{total}/{addid}','Home\ShopCarController@jiesuan3');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 中文分词 
+Route::resource('home/search','Home\SearchController');
