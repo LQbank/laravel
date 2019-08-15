@@ -85,6 +85,18 @@
 							<div class="tb-booth tb-pic tb-s310">
 								<a href="images/01.jpg"><img src="{{ $good->pic }}" big="{{ $good->pic }}" id="src" alt="细节展示放大镜特效" rel="{{ $good->pic }}" class="jqzoom" /></a>
 							</div>
+							@if($collect == null)
+								<div style="margin-left: 10px;">
+									<i class="sprite-follow-sku" style="width: 14px;height: 13px;background-image: url(/h/images/__sprite.png);background-position: -44px -40px;display: inline-block;" ></i>
+									<a href="/home/collection/{{$good->id}}/{{$sid}}"><em>收藏</em></a>
+								</div>
+							@elseif($status == '1')
+							
+								<div style="margin-left: 10px;">
+									<i class="sprite-follow-sku" style="width: 14px;height: 13px;background-image: url(/h/images/__sprite.png);background-position: -44px -40px;display: inline-block;" ></i>
+									<a href=""><em>已收藏</em></a>
+								</div>
+							@endif
 							<!-- <ul class="tb-thumb" id="thumblist">
 								<li class="tb-selected">
 									<div class="tb-pic tb-s40">

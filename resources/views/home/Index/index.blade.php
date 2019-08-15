@@ -64,7 +64,7 @@
 
 
 																		@foreach($vv->sub as $k3=>$v3 )
-																		<dd><a title="蒸蛋糕" href="#"><span>{{$v3->cname}}</span></a></dd>
+																		<dd><a title="蒸蛋糕" href="/home/list/{{$v3->id}}"><span>{{$v3->cname}}</span></a></dd>
 																		@endforeach
 
 
@@ -187,7 +187,7 @@
 						@else
 						<div class="mod-vip">
 							<div class="m-baseinfo">
-								<a href="person/index.html">
+								<a href="/home/data">
 									<img src="/uploads/{{session('home_user')->avatar}}">
 								</a>
 								<em>
@@ -196,7 +196,7 @@
 								</em>
 							</div>
 							<div class="member-logout">
-								<a class="am-btn-warning btn" href="">我的收藏</a>
+								<a class="am-btn-warning btn" href="home/collection">我的收藏</a>
 								<a href="/home/logout" class="am-btn-warning btn" href="">退出</a>
 							
 								

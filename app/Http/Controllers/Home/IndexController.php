@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Home\ShopCarController;
 use App\Models\Cates;
 use App\Models\Cartoons;
 use DB;
@@ -140,9 +141,12 @@ class IndexController extends Controller
     public function logout(Request $request)
     {
 
-        $request->session()->flush();
+        $request->session()->flush('home_user');
+
+       
+
         // 跳转
-        return redirect('/home'); 
+        return redirect('/'); 
 
     }
     

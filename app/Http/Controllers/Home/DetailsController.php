@@ -10,28 +10,14 @@ class DetailsController extends Controller
 {
     public function index(Request $request,$id)
     {
-    	// $mod = M('sku');
-
-        // $res = $mod->where('sku.good_id='.I('get.id'))->join('good on sku.good_id=good.id')->select();
-        // $res = $mod
-        // ->where('sku.id='.I('get.id'))
-        // ->join('join good on sku.good_id=good.id')
-        // ->find();
-
+        // $_SESSION['car'] = null;exit;
     	// 查出当前商品的信息
 		$res = DB::table('sku')
     	->where('sku.id',$id)
     	->leftJoin('good','sku.good_id','=','good.id')
     	->first();
         
-        // dump($res);
-        // dump($id);
-        //dump($res);
-        // $aaa = $mod->where('good_id='.$res['good_id'])->select();
-        // dump($res->good_id);
-
         $aaa = DB::table('sku')->where('good_id',$res->good_id)->get();
-        // dump($aaa);
         $ccc = [];
         foreach($aaa as $v){
             $bbb = explode('/',$v->sku);
@@ -40,45 +26,47 @@ class DetailsController extends Controller
         }
 
 
-        // dump($ccc);
-
-        
-        // $mod1 = M('good');
-        // $res1 = $mod1->where('id='.$res['good_id'])->find();
         $res1 = DB::table('good')->where('id',$res->good_id)->first();
-        // dump($res1);
-        // $mod2 = M('cate');
-        // $res2 = $mod2->where('id='.$res1['cate_id'])->find();
+        
         $res2 = DB::table('cates')->where('id',$res1->cate_id)->first();
         // dump($res2);
         $res3 = explode(',',$res2->path)[1];
         // dump($res3);
-        // $res4 = $mod2->where('id='.$res3)->find();
+        
         $res4 = DB::table('cates')->where('id',$res3)->first();
         // dump($res4);
-        // $mod3 = M('tag');
-        // $res5 = $mod3->where('cate_id='.$res4['id'])->select();
+        
         $res5 = DB::table('tag')->where('cate_id',$res4->id)->get();
         
         foreach($res5 as $kk => &$k){
 
-            // dump($res5[$kk]);
-            // dump($kk);
             $k->sub = [];
             foreach($ccc as $aa){
-                // $k['sub'] = $aaa[$kk];
+          
                 array_push($k->sub,$aa[$kk]);
             }
             $k->sub = array_unique($k->sub);
         }
         // dump($res5);
-    	return view('home/details/index',['good'=>$res,'res2'=>$res2,'sku'=>$res5,'sid'=>$id]);
+        // 收藏状态
+        $uid=session('home_user')->id;
+        $collect=DB::table('collect')
+        ->where('user_id',$uid)
+        ->where('good_id',$id)
+        ->first();
+        if ($collect == null) {
+            return view('home/details/index',['good'=>$res,'res2'=>$res2,'sku'=>$res5,'sid'=>$id,'collect'=>$collect]);
+        } else {
+            $status=$collect->status;
+            return view('home/details/index',['good'=>$res,'res2'=>$res2,'sku'=>$res5,'sid'=>$id,'status'=>$status,'collect'=>$collect]);
+        }
+        
+       
     }
 
     public function faajax(Request $request){
     	// echo '123';
 
-        // $mod = M('sku');
         $sku = $request->input('sku');
 
         $sku = $this->dealSku($sku);
@@ -99,12 +87,6 @@ class DetailsController extends Controller
         // dump($res);
         // dump($res);
         
-
-        // $res = $mod
-        // ->where($where)
-        // ->join('join good on sku.good_id=good.id')
-        // ->find();
-        // // dump($res);
         echo json_encode($res);
         
     }

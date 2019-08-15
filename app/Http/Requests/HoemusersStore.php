@@ -32,7 +32,7 @@ class HoemusersStore extends FormRequest
         // dd(request()->user()->id);
         // dd(request::all());
         return [
-            'email' => 'required|unique:users|email', 
+            'email' => 'required|email|unique:users', 
    
             'passwd' => 'required|regex:/^[\w]{6,18}$/',
             'repass' => 'required|same:passwd',
@@ -43,9 +43,9 @@ class HoemusersStore extends FormRequest
     public function messages()
     {
         return [   
-            'email.required'=>'邮箱必填', 
-            'email.uique'=>' email 已经注册',   
-            'email.email'=>'邮箱格式错误',   
+            'email.required'=>'邮箱必填',   
+            'email.email'=>'邮箱格式错误',
+            'email.unique'=>'email已经注册',    
             'passwd.required'=>'密码必填',    
             'passwd.regex'=>'密码格式错误',    
             'repass.required'=>'确认密码必填',    

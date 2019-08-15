@@ -12,14 +12,67 @@
 
 		<link rel="stylesheet" href="/h/AmazeUI-2.4.2/assets/css/amazeui.css" />
 		<link href="/h/css/dlstyle.css" rel="stylesheet" type="text/css">
+		<script src="/h/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
 	</head>
 
+	<style>
+		li {
+			font-size: 13px;
+			display: list-item;
+			text-align: -webkit-match-parent;
+			list-style-position: inside;
+			list-style-type: inherit;
+			margin: 0;
+			line-height: 20px;
+		} 
+		
+		.mws-form-message.error {	
+		background-color: #ffcbca;
+		border-color: #eb979b;
+		color: #9b4449;
+		margin:0 auto;
+		width:auto;
+		height:auto;
+		}
+
+		.mws-form-message {
+		font-size: 13px;
+		cursor: pointer;
+		border: 1px solid #d2d2d2;
+		padding: 15px 8px 15px 45px;
+		position: relative;
+		vertical-align: middle;
+		background-color: #f8f8f8;
+		background-position: 12px 12px;
+		background-repeat: no-repeat;
+		margin-bottom: 12px;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+		}
+	</style>
+	
+	</head>
+
+
+	
+
+		
 	<body>
 
 		<div class="login-boxtitle">
 			<a href="home.html"><img alt="logo" src="/h/images/logobig.png" /></a>
 		</div>
 
+		<div id="error">
+
+			@if (Session::has('success'))
+			<div class="mws-form-message error">
+				<ul class="alert alert-danger">
+						<li>{{ Session::get('success') }}</li>
+				</ul>
+			</div>
+			@endif 
 			@if ( $errors->all())
 			<div class="mws-form-message error">
 				<ul class="alert alert-danger">
@@ -29,6 +82,17 @@
 				</ul>
 			</div>
 			@endif
+    	
+		</div>
+		<script>
+		$('#error').click(function(){
+			// console.log('11');
+
+				$(this).css('display','none');
+		})
+	
+		</script>
+		
 
 		<div class="login-banner">
 			<div class="login-main">
@@ -38,7 +102,7 @@
 							<h3 class="title">登录商城</h3>
 
 							<div class="clear"></div>
-						
+							
 						<div class="login-form">
 						<form  action="/home/login/dologin" method="post">
                     			{{ csrf_field() }}

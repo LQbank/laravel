@@ -11,13 +11,17 @@
 |
 */
 
+
 Route::get('/', function () {
 
 	session(['admin_login'=>null]);
 	session(['admin_userinfo'=>null]);
 	session(['admin_nodes'=>null]);
-    return view('home/index/index');
+    // return view('home/index/index');
 });
+
+// 前台首页
+Route::get('/','Home\IndexController@index');
 
 
 //后台 登录 路由
@@ -113,6 +117,12 @@ Route::group(['middleware'=>['login']],function(){
 
 	//后台 友情链接状态 ajax
 	Route::post('/admin/link/changeStatus','Admin\linkController@changeStatus');
+
+	//后台 订单管理 查看
+	Route::resource('admin/order','Admin\OrderController');
+
+	//后台 订单管理 查看订单
+	Route::get('admin/order/showorder/{id}','Admin\OrderController@showorder');
 });
 
 
@@ -140,11 +150,20 @@ Route::get('home/login','Home\LoginController@index');
 //前台 执行登录 路由
 Route::post('home/login/dologin','Home\LoginController@dologin');
 
-// 前台首页
-Route::get('home','Home\IndexController@index');
+
 
 //退出 登录
 Route::get('home/logout','Home\IndexController@logout');
+
+
+// 继承友情链接
+Route::get('home/layout','Home\LayoutController@index');
+
+
+// 继承友情链接
+Route::get('home/layout/center','Home\LayoutController@center');
+
+
 // 列表页
 Route::get('home/list/{id}','Home\ListController@index');
 
@@ -160,22 +179,49 @@ Route::get('home/collection','Home\CollectionController@index');
 Route::get('home/data','Home\DataController@index');
 // 订单管理
 Route::get('home/order','Home\OrderController@index');
+// 地址管理
+Route::get('home/address','Home\addressController@index');
+//地址添加
+Route::get('home/address/add','Home\addressController@add');
+//地址删除
+Route::get('home/address/del','Home\addressController@del');
+
+//修改默认收货地址
+Route::get('/home/address/changeStatus','Home\addressController@changeStatus');
+
+
+//个人信息修改
+Route::post('home/data/changedata','Home\DataController@changedata');
+
+//个人头像修改
+Route::post('home/data/avatar','Home\DataController@avatar');
 
 
 
+//安全设置
+Route::get('/home/data/safety','Home\DataController@safety');
 
 
+//修改密码
+Route::get('/home/data/changepassword','Home\DataController@changepassword');
 
+//执行修改密码
+Route::post('/home/data/edit','Home\DataController@edit');
 
+//换绑邮箱页面
+Route::get('/home/data/email','Home\DataController@email');
 
+//换绑邮箱
+Route::post('/home/data/changeemail','Home\DataController@changeemail');
 
+//换绑手机号页面
+Route::get('/home/data/phone','Home\DataController@phone');
 
+//换绑手机号
+Route::post('/home/data/changephone','Home\DataController@changephone');
 
-
-
-
-
-
+//换绑手机号
+Route::post('/home/data/changephone2','Home\DataController@changephone2');
 
 
 
@@ -226,9 +272,17 @@ Route::post('home/details/faajax','Home\DetailsController@faajax');
 // 详情页 加入购物车
 Route::get('home/shopcar/insert/{id}/{num}','Home\ShopCarController@insert');
 
+// 购物车 删除购物车内的商品
+Route::post('home/car/shanajax','Home\ShopCarController@shanajax');
 
+// 购物车 结算页面
+Route::post('home/shopcar/jiesuan','Home\ShopCarController@jiesuan');
 
+// 购物车 执行结算
+Route::post('home/shopcar/jiesuan2','Home\ShopCarController@jiesuan2');
 
+// 购物车 跳转订单成功页面
+Route::get('home/shopcar/jiesuan3','Home\ShopCarController@jiesuan3');
 
 
 
@@ -243,60 +297,5 @@ Route::get('home/shopcar/insert/{id}/{num}','Home\ShopCarController@insert');
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 继承友情链接
-Route::get('home/layout','Home\LayoutController@index');
-// 继承友情链接
-Route::get('home/layout/center','Home\LayoutController@center');
+//添加收藏
+Route::get('/home/collection/{id}/{sku}','Home\CollectionController@create');
