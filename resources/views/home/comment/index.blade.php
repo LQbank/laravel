@@ -36,7 +36,7 @@
                                     @foreach($reply as $v)     	
                                         <li class="td td-item">
                                             <div class="item-pic">
-                                                <a href="#" class="J_MakePoint">
+                                                <a href="/home/details/{{$v->sku_id}}" class="J_MakePoint">
                                                     <img src="{{$v->pic}}" class="itempic">
                                                 </a>
                                             </div>

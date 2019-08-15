@@ -5,18 +5,23 @@
 
 <!-- 评星插件 -->
 
-        <link href="/h/xingxing/css/star-rating.css" media="all" rel="stylesheet"  />
-        
-       
 
-      
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-   
+    <link href="/h/xingxing/css/star-rating.css" media="all" rel="stylesheet"  />
+        
     <!--suppress JSUnresolvedLibraryURL -->
     <script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
-    
+    <script src="/h/xingxing/js/star-rating.min.js" type="text/javascript"></script>
 
+    <style>
+       
+        a{
+            color: #000; 
+            text-decoration: none;
+          
+        }
+    </style>
 @foreach($order as $v)   
         <div id="container">
             <div class="w">
@@ -51,10 +56,6 @@
                     </div>
                 </div>
                 
-             
-
-
-               
 
                 
                 <div class="f-cutline"></div>
@@ -64,11 +65,11 @@
                     <div class="fi-info">
                    
                         <div class="comment-goods">
-                            <div class="p-img"><a clstag="pageclick|keycount|fabupingjia_201608055|2" href="" >
+                            <div class="p-img"><a  href="/home/details/{{$v2->id}}" >
                             <img src="{{$v2->pic}}" alt="">
                             </a></div>
                             @foreach($v2->sub as $v3)
-                            <div class="p-name"><a clstag="pageclick|keycount|fabupingjia_201608055|3" href="" >{{$v3->name}}</a></div>
+                            <div class="p-name"><a  href="" >{{$v3->name}}</a></div>
                             @endforeach
                             <div class="p-price"><strong>{{$v2->sku}}</strong></div>
                             <div class="p-price"><strong>¥{{$v2->price}}</strong></div>
@@ -137,7 +138,6 @@
 @endsection
 @section('js')  
 
-<script src="/h/xingxing/js/star-rating.min.js" type="text/javascript"></script>
     <script>
         $(document).on('ready', function(){
         $('#input-2').rating({
@@ -146,7 +146,9 @@
                 starCaptions: {1: 'Very Poor', 2: 'Poor', 3: 'Ok', 4: 'Good', 5: 'Very Good'},
                 starCaptionClasses: {1: 'text-danger', 2: 'text-warning', 3: 'text-info', 4: 'text-primary', 5: 'text-success'}
             });
+            
         });
+
 
     </script>
 

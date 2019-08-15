@@ -70,7 +70,7 @@
 													<li class="td td-item">
 															
 														<div class="item-pic">
-															<a href="#" class="J_MakePoint">
+															<a href="/home/details/{{$v3->id}}" class="J_MakePoint">
 																<img src="{{$v3->pic}}" class="itempic J_ItemImg">
 															</a>
 														</div>
@@ -186,7 +186,7 @@
 													<li class="td td-item">
 															
 														<div class="item-pic">
-															<a href="#" class="J_MakePoint">
+															<a href="/home/details/{{$v3->id}}" class="J_MakePoint">
 																<img src="{{$v3->pic}}" class="itempic J_ItemImg">
 															</a>
 														</div>
@@ -299,7 +299,7 @@
 													<li class="td td-item">
 															
 														<div class="item-pic">
-															<a href="#" class="J_MakePoint">
+															<a href="/home/details/{{$v3->id}}" class="J_MakePoint">
 																<img src="{{$v3->pic}}" class="itempic J_ItemImg">
 															</a>
 														</div>
@@ -418,7 +418,7 @@
 													<li class="td td-item">
 															
 														<div class="item-pic">
-															<a href="#" class="J_MakePoint">
+															<a href="/home/details/{{$v3->id}}" class="J_MakePoint">
 																<img src="{{$v3->pic}}" class="itempic J_ItemImg">
 															</a>
 														</div>

@@ -65,6 +65,7 @@ class DetailsController extends Controller
         // dump($res5);
 
 
+
         //获取商品的所有评论
         $reply = DB::table('reply')
         ->join('users','reply.user_id','=','users.id')
@@ -78,7 +79,22 @@ class DetailsController extends Controller
 
 
 
-    	return view('home/details/index',['good'=>$res,'res2'=>$res2,'sku'=>$res5,'sid'=>$id,'reply'=>$reply]);
+    	// return view('home/details/index',['good'=>$res,'res2'=>$res2,'sku'=>$res5,'sid'=>$id,'reply'=>$reply]);
+
+
+        // 收藏状态
+        $uid=session('home_user')->id;
+        $collect=DB::table('collect')
+        ->where('user_id',$uid)
+        ->where('good_id',$id)
+        ->first();
+        if ($collect == null) {
+            return view('home/details/index',['good'=>$res,'res2'=>$res2,'sku'=>$res5,'sid'=>$id,'collect'=>$collect,'reply'=>$reply]);
+        } else {
+            $status=$collect->status;
+            return view('home/details/index',['good'=>$res,'res2'=>$res2,'sku'=>$res5,'sid'=>$id,'status'=>$status,'collect'=>$collect,'reply'=>$reply]);
+        }
+        
 
     }
 

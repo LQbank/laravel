@@ -130,6 +130,7 @@ class IndexController extends Controller
      */
     public function index()
     {
+        
         // $cates_data = self::getPidCateData();
         // dump($cates_data);
 
@@ -143,7 +144,6 @@ class IndexController extends Controller
 
         // dd($cartoon);
         return view('home/index/index',['cartoon'=>$cartoon]);
-
 
     }
 

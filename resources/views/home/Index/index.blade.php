@@ -199,7 +199,7 @@
 								</em>
 							</div>
 							<div class="member-logout">
-								<a class="am-btn-warning btn" href="">我的收藏</a>
+								<a class="am-btn-warning btn" href="home/collection">我的收藏</a>
 								<a href="/home/logout" class="am-btn-warning btn" href="">退出</a>
 							
 								

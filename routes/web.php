@@ -17,8 +17,9 @@ Route::get('/', function () {
 	session(['admin_login'=>null]);
 	session(['admin_userinfo'=>null]);
 	session(['admin_nodes'=>null]);
-
+    // return view('home/index/index');
 });
+
 
 // 前台首页
 Route::get('/','Home\IndexController@index');
@@ -179,6 +180,11 @@ Route::get('home/car','Home\CarController@index');
 Route::get('home/center','Home\CenterController@index');
 // 收藏夹
 Route::get('home/collection','Home\CollectionController@index');
+
+//添加收藏
+Route::get('/home/collection/{id}/{sku}','Home\CollectionController@create');
+
+
 // 个人资料
 Route::get('home/data','Home\DataController@index');
 // 订单管理
@@ -285,7 +291,6 @@ Route::post('home/details/faajax','Home\DetailsController@faajax');
 // 详情页 加入购物车
 Route::get('home/shopcar/insert/{id}/{num}','Home\ShopCarController@insert');
 
-
 // 购物车 删除购物车内的商品
 Route::post('home/car/shanajax','Home\ShopCarController@shanajax');
 
@@ -297,8 +302,19 @@ Route::post('home/shopcar/jiesuan2','Home\ShopCarController@jiesuan2');
 
 
 
+
 // 购物车 跳转订单成功页面
 Route::get('home/shopcar/jiesuan3/{total}/{addid}','Home\ShopCarController@jiesuan3');
 
 // 中文分词 
 Route::resource('home/search','Home\SearchController');
+
+
+
+
+
+
+
+
+
+
