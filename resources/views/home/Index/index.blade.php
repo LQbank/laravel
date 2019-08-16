@@ -333,7 +333,7 @@
 						<div class="am-container ">
 							<div class="shopTitle ">
 								<h4>{{$v->cname}}</h4>
-								<h3>你是我的优乐美么？不，我是你小鱼干</h3>
+								<!-- <h3>你是我的优乐美么？不，我是你小鱼干</h3> -->
 								<div class="today-brands ">
 									<!-- <a href="# ">小鱼干</a> -->
 									@foreach($v->sub as $k2=>$v2 )
@@ -362,7 +362,7 @@
 
 															<a href="/home/details/{{$v4->id}}"><img style="height:183.15px;" src="{{$v4->pic}}" /></a>
 
-														<div class="pro-title "> {{$v4->name}} </div>
+														<div class="pro-title scarce"> {{$v4->name}} </div>
 														<span class="e-price "> {{$v4->price}} ￥</span>
 													</a>
 												</div>
@@ -393,5 +393,14 @@
 		
 @endsection
 
-
+@section('js')
+	<script type="text/javascript">
+		$('.scarce').each(function(){
+			console.log($(this).html());
+			if($(this).html().length > 10){
+				$(this).html($(this).html().slice(0,10) + '...');
+			}
+		})
+	</script>
+@endsection
 	

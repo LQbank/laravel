@@ -55,6 +55,33 @@ class ShopCarController extends Controller
     }
 
     /**
+     * 提交地址
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function address(Request $request)
+    {
+        // dump($request->all()['uname']);
+        $address['user_id'] = $_SESSION['home_user']->id;
+
+        $address['uname'] = $request->all()['uname'];
+        $address['phone'] = $request->all()['phone'];
+        $address['province'] = $request->all()['province'];
+        $address['city'] = $request->all()['city'];
+        $address['district'] = $request->all()['district'];
+        $address['address'] = $request->all()['address'];
+        $address['postcode'] = $request->all()['postcode'];
+
+        $res = DB::table('addresses')->insertGetId($address);
+
+        if($res){
+            echo json_encode($res);
+        }else{
+            echo 'no';
+        }
+    }
+
+    /**
      * 查出购物车商品数目
      *
      * @return \Illuminate\Http\Response
@@ -218,9 +245,17 @@ class ShopCarController extends Controller
             $order_detail['sku_id'] = $sku_id;
             $order_detail['num'] = $request->all()['number'][$key];
 
-            // 查出商品数量
-            $num = DB::table('sku')->where('id',$sku_id)->select('num')->first();
+            // 查出商品数量和商品id
+            $num = DB::table('sku')->where('id',$sku_id)->select('num','good_id')->first();
             // dump($num->num - 1);
+
+            // 修改商品的销量
+            $sales = DB::table('good')->where('id',$num->good_id)->select('sales_nums')->first();
+            // dd($sales);
+
+            $sales2['sales_nums'] = $sales->sales_nums + $request->all()['number'][$key];
+
+            $sales3 = DB::table('good')->where('id',$num->good_id)->update($sales2);
 
             // 新商品总数 = 商品总数 - 购买的数量
             $num2['num'] = $num->num - $request->all()['number'][$key];

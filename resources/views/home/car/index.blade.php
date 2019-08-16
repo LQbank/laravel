@@ -134,7 +134,7 @@
 														
 															<div class="quantity">
 																<input type="button" class="minus" value="-">
-																<input type="text" style="width:50px;" class="input-text qty text" name="num[{{ $car->id }}]" title="Qty" value="{{ $car->number }}" >
+																<input type="text" style="width:50px;" disabled class="input-text qty text" name="num[{{ $car->id }}]" title="Qty" value="{{ $car->number }}" >
 																<input type="button" class="plus" value="+">
 															</div>
 														

@@ -254,6 +254,9 @@ Route::post('home/shopcar/jiesuan2','Home\ShopCarController@jiesuan2');
 // 购物车 跳转订单成功页面
 Route::get('home/shopcar/jiesuan3/{total}/{addid}','Home\ShopCarController@jiesuan3');
 
+// 购物车 添加地址
+Route::post('home/shopcar/address','Home\ShopCarController@address');
+
 
 
 

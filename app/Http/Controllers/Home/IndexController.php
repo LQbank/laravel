@@ -129,6 +129,7 @@ class IndexController extends Controller
     public function index()
     {
         // dump($_SESSION['car']);
+        
         return view('home/index/index');
     }
 
