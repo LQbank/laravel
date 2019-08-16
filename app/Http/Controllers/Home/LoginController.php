@@ -97,7 +97,6 @@ class LoginController extends Controller
         ],[
 
             'email.required'=>'邮箱/手机号必填',    
-            'email.email'=>'邮箱/手机号格式错误',  
             'passwd.required'=>'密码必填',    
               
         ]);
@@ -108,7 +107,7 @@ class LoginController extends Controller
         $passwd = $request->input('passwd','');
 
 
-        $user = DB::table('users')->where('email',$email)->orwhere('phone',$email)->first();
+        $user = DB::table('users')->where('email',$email)->first();
         
 
         // dd( $user);

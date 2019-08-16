@@ -4,9 +4,6 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="csrf-token" content="{{ csrf_token() }}">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<meta name="csrf-token" content="{{ csrf_token() }}">
-
 		<!-- <title>首页</title> -->
 
 		<link href="/h/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
@@ -98,15 +95,15 @@
 			{{ csrf_field() }}
 		<div class="address">
 			<h3>确认收货地址 </h3>
-			<div class="control">
+			<!-- <div class="control">
 				<div class="tc-btn createAddr theme-login am-btn am-btn-danger">使用新地址</div>
-			</div>
+			</div> -->
 			<div class="clear"></div>
-			<ul id="aaaa">
+			<ul>
 				<div class="per-border"></div>
 				<input id="addressid" type="hidden" name="addid" value="">
 				@foreach($address as $address)
-				<li class="user-addresslist ccc" addid="{{ $address->id }}" onclick="aaaaa($(this))">
+				<li class="user-addresslist ccc" addid="{{ $address->id }}">
 
 					<div class="address-left">
 						<div class="user">
@@ -142,7 +139,6 @@
 						<a href="javascript:void(0);" onclick="delClick(this);">删除</a>
 					</div> -->
 				</li>
-				
 				@endforeach
 			</ul>
 
@@ -494,84 +490,7 @@
 			</div>
 		</div>
 
-		<div class="theme-popover-mask"></div>
-			<div class="theme-popover">
 
-				<!--标题 -->
-				<div class="am-cf am-padding">
-					<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">新增地址</strong> / <small>Add address</small></div>
-				</div>
-				<hr/>
-
-				<div class="am-u-md-12">
-					<form class="am-form am-form-horizontal" action="" method="post">
-						{{ csrf_field() }}
-						<div class="am-form-group">
-							<label for="user-name" class="am-form-label">收货人</label>
-							<div class="am-form-content">
-								<input type="text" id="uname" placeholder="收货人">
-							</div>
-						</div>
-
-						<div class="am-form-group">
-							<label for="user-phone" class="am-form-label">手机号码</label>
-							<div class="am-form-content">
-								<input id="phone" placeholder="手机号必填" type="text">
-							</div>
-						</div>
-
-						<div class="am-form-group">
-							<label for="user-phone" class="am-form-label">邮政编码</label>
-							<div class="am-form-content">
-								<input id="postcode" placeholder="邮政编码必填" type="text">
-							</div>
-						</div>
-
-						<div class="am-form-group">
-							<label for="user-phone" class="am-form-label">所在地</label>
-							<div class="am-form-content address">
-								<form class="form-inline">
-							      <div data-toggle="distpicker">
-							        <div class="form-group">
-							          <!-- <label class="sr-only" for="province1">Province</label> -->
-							          <select class="form-control" id="province"></select>
-							        </div>
-							        <div class="form-group">
-							          <!-- <label class="sr-only" for="city1">City</label> -->
-							          <select class="form-control" id="city"></select>
-							        </div>
-							        <div class="form-group">
-							          <!-- <label class="sr-only" for="district1">District</label> -->
-							          <select class="form-control" id="district"></select>
-							        </div>
-							      </div>
-							    </form>
-							</div>
-						</div>
-
-						<div class="am-form-group">
-							<label for="user-intro" class="am-form-label">详细地址</label>
-							<div class="am-form-content">
-								<textarea class="" rows="3" cols="56" id="address" placeholder="100字以内写出你的详细地址..."></textarea>
-								<!-- <small>100字以内写出你的详细地址...</small> -->
-							</div>
-						</div>
-
-						<div class="am-form-group theme-poptit">
-							<div class="am-u-sm-9 am-u-sm-push-3">
-								<div id="baocun" class="am-btn am-btn-danger close">保存</div>
-								<div class="am-btn am-btn-danger close">取消</div>
-							</div>
-						</div>
-					</form>
-				</div>
-
-			</div>
-		<script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script>
-		<script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
-		<script src="/address/js/distpicker.data.js"></script>
-	    <script src="/address/js/distpicker.js"></script>
-	    <script src="/address/js/main.js"></script>
 		<script>
 			window.jQuery || document.write('<script src="/h/basic/js/jquery.min.js "><\/script>');
 		</script>
@@ -584,19 +503,6 @@
 	            }
 	        });
 	    </script>
-
-		<script>
-		$.ajaxSetup({
-
-				headers: {
-					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				}
-			});
-		</script>
-
-
-
-
 
 		<script type="text/javascript">
 			$('#J_Go').click(function(){
@@ -624,101 +530,10 @@
 			// })
 			
 			// $('addressid')
-			// $('.aaaa').on('click','li .ccc',function(){
-			// 	// console.log($(this).attr('addid'));
-			// 	$('#addressid').val($(this).attr('addid'));
-			// 	// console.log($('addressid').val());
-			// })
-
-			function aaaaa(address){
-				$('.defaultAddr').attr('class','user-addresslist ccc');
-				address.attr('class','user-addresslist ccc defaultAddr');
-				
-				$('#addressid').val(address.attr('addid'));
-			}
-		</script>
-
-		<script type="text/javascript">
-			// console.log($('#aaaa'));
-			$('#baocun').click(function(){
-				var arr = [];
-				var province = $('#province').val().replace('省',"");
-				
-				// console.log(province1);
-
-				var uname = $('#uname').val();
-				// console.log(uname);
-				var phone = $('#phone').val();
-				var province1 = province.replace('市',"");
-				var city = $('#city').val();
-				var district = $('#district').val();
-				var address = $('#address').val();
-				var postcode = $('#postcode').val();
-				// console.log($('#district').val());
-				// console.log($('#address').val());
-				// console.log($('#postcode').val());
-				
-				arr['uname'] = uname;
-				arr['phone'] = phone;
-				arr['province'] = province1;
-				arr['city'] = city;
-				arr['district'] = district;
-				arr['address'] = address;
-				arr['postcode'] = postcode;
-				// var aaa = 'wskfksjf';
-				console.log(arr);
-				if(uname && phone && province1 && city && district && address && postcode){
-					// console.log('完成');
-					$.ajax({
-						url:'/home/shopcar/address',
-						data:{'uname':uname,'phone':phone,'province':province1,'city':city,'district':district,'address':address,'postcode':postcode},
-						type:'POST',
-						dataType:'json',
-						success:function(mes){
-							console.log(mes);
-							if(mes){
-								var tr = `
-						            <li class="user-addresslist ccc" addid="${mes}" onclick="aaaaa($(this))">
-
-										<div class="address-left">
-											<div class="user">
-
-												<span class="buy-address-detail">   
-					       						<span class="buy-user">${uname} </span>
-												<span class="buy-phone">${phone}</span>
-												</span>
-											</div>
-											<div class="default-address">
-												<span class="buy-line-title buy-line-title-type">收货地址：</span>
-												<span class="buy--address-detail">
-										   		<span class="province">${province1}</span>省
-												<span class="city">${city}</span>
-												<span class="dist">${district}</span>
-												<span class="street">${address}</span>
-												</span>
-
-												
-											</div>
-											
-										</div>
-										<div class="address-right">
-											<a href="person/address.html">
-												<span class="am-icon-angle-right am-icon-lg"></span></a>
-										</div>
-										<div class="clear"></div>
-										
-									</li>
-						        `;
-
-						        $('#aaaa').append(tr);
-							}
-						}
-					});
-				}else{
-					alert('请把信息填写完整');
-				}
-
-				
+			$('.ccc').click(function(){
+				// console.log($(this).attr('addid'));
+				$('#addressid').val($(this).attr('addid'));
+				// console.log($('addressid').val());
 			})
 		</script>
 

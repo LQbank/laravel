@@ -24,7 +24,7 @@
 
 										<div class="s-pic">
 											<a href="/home/details/{{$v->sku_id}}" class="s-pic-link">
-											<img src="{{$v->pic}}" class="s-pic-img s-guess-item-img">
+											<img src="{{$v->pic}}" class="s-pic-img s-guess-item-img" style="height:183.15px;">
 											</a>
 										</div>
 										<div class="s-info">

@@ -196,10 +196,14 @@ class ShopCarController extends Controller
         // 开启事务
         DB::beginTransaction();
 
+
         // code user_id address_id sku_id num total status
+
 
         // 具体的时间日期 连接随机字符串生成订单号
         $order['code'] = date('Ymd').uniqid();
+
+
 
 
         $order['user_id'] = session('home_user')->id;
@@ -208,9 +212,12 @@ class ShopCarController extends Controller
         $order['status'] = 0;
 
 
+
+
         // 执行添加 并返回id
         $order_id = DB::table('order1')->insertGetId($order);
         // dump($order_id);
+
 
         // 把购买的商品sku id遍历
         foreach($request->all()['id'] as $key=>$sku_id){
@@ -218,8 +225,6 @@ class ShopCarController extends Controller
             $order_detail['sku_id'] = $sku_id;
             $order_detail['num'] = $request->all()['number'][$key];
 
-            // 查出商品数量
-            // $num = DB::table('sku')->where('id',$sku_id)->select('num')->first();
 
             // 查出商品数量和商品id
             $num = DB::table('sku')->where('id',$sku_id)->select('num','good_id')->first();
@@ -235,27 +240,33 @@ class ShopCarController extends Controller
 
 
             $sales3 = DB::table('good')->where('id',$num->good_id)->update($sales2);
-            // dump($num->num - 1);
+
 
             // 新商品总数 = 商品总数 - 购买的数量
             $num2['num'] = $num->num - $request->all()['number'][$key];
 
+
             // 修改数据库
             $res = DB::table('sku')->where('id',$sku_id)->update($num2);
+
 
             // 执行插入订单详情表
             $res2 = DB::table('order_detail')->insert($order_detail);
 
+
             // 购物车商品的删除
             $res3 = DB::table('cart')->where('sku_id',$sku_id)->delete();
+
 
             // 删除session 中的商品
             unset($_SESSION['car'][$sku_id]);
         }
 
+
         // if($order_id && $res && $res2){
         //     $_SESSION['car'] = null;
         // }
+
 
         // 判断是否成功
         if($order_id && $res && $res2){
@@ -267,6 +278,7 @@ class ShopCarController extends Controller
             return back()->with('error', '添加失败');
         }
 
+
         // function build_order_no(){
         //     return date('Ymd').substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8);
         // }
@@ -277,7 +289,6 @@ class ShopCarController extends Controller
         // dump($request->all()['addid']);
         // dump($request->all());
     }
-
     /**
      * 订单完成页面
      *
@@ -296,6 +307,34 @@ class ShopCarController extends Controller
         return view('home.order.successes',['total'=>$total,'address'=>$address]);
     }
 
+   
+    /**
+     * 提交地址
+     */
+    public function address(Request $request)
+    {
+        // dump($request->all()['uname']);
+        $address['user_id'] = $_SESSION['home_user']->id;
 
+
+        $address['uname'] = $request->all()['uname'];
+        $address['phone'] = $request->all()['phone'];
+        $address['province'] = $request->all()['province'];
+        $address['city'] = $request->all()['city'];
+        $address['district'] = $request->all()['district'];
+        $address['address'] = $request->all()['address'];
+        $address['postcode'] = $request->all()['postcode'];
+
+
+        // dump ($address);
+        $res = DB::table('addresses')->insertGetId($address);
+
+
+        if($res){
+            echo json_encode($res);
+        }else{
+            echo 'no';
+        }
+    }
     
 }

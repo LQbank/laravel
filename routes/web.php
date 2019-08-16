@@ -200,8 +200,12 @@ Route::group(['middleware'=>['login']],function(){
 	// 购物车 跳转订单成功页面
 	Route::get('home/shopcar/jiesuan3/{total}/{addid}','Home\ShopCarController@jiesuan3');
 
+	// 购物车 添加地址
+	Route::post('home/shopcar/address','Home\ShopCarController@address');
+
 	// 中文分词 
 	Route::resource('home/search','Home\SearchController');
+	
 
 
 
