@@ -23,6 +23,10 @@ class RolesController extends Controller
             'rolescontroller'=>'角色管理',
             'nodescontroller'=>'权限管理',
             'adminusercontroller'=>'管理员管理',
+            'cartooncontroller'=>'轮播图管理',
+            'linkcontroller'=>'友情链接管理',
+            'ordercontroller'=>'订单管理',
+
         ];
     } 
 

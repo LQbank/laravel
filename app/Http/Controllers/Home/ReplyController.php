@@ -45,6 +45,17 @@ class ReplyController extends Controller
         // dump($detail);
         // dd($request->input());
 
+         //验证数据
+         $this->validate($request, [ 
+            'content' => 'required',
+        ],[
+               
+            'content.required'=>'评价不能为空',    
+
+        ]);
+         // 开启事务
+         DB::beginTransaction();
+
         $reply = new reply;
         $reply->user_id = session('home_user')->id ;
         $reply->good_id = $id;
@@ -66,9 +77,11 @@ class ReplyController extends Controller
 
         // 判断是否成功
         if($res1 && $save){
+            DB::commit();
             return redirect('/home/reply/replyok')->with('success', '添加成功');
            
         }else{
+            DB::rollBack();
             return back()->with('error', '添加失败');
         }
 

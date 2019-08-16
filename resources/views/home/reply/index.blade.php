@@ -15,13 +15,46 @@
     <script src="/h/xingxing/js/star-rating.min.js" type="text/javascript"></script>
 
     <style>
-       
         a{
             color: #000; 
             text-decoration: none;
           
         }
-    </style>
+		li {
+			font-size: 13px;
+			display: list-item;
+			text-align: -webkit-match-parent;
+			list-style-position: inside;
+			list-style-type: inherit;
+			margin: 0;
+			line-height: 20px;
+			list-style-type:none;
+		} 
+		
+		
+	</style>
+    <div id="error">
+			@if ( $errors->all())
+			<div class="mws-form-message error">
+				<ul class="alert alert-danger">
+					@foreach ( $errors->all() as $error)
+						<li>{{ $error }}</li>
+					@endforeach
+				</ul>
+			</div>
+			@endif
+    	
+			
+		</div>
+		<script>
+		$('#error').click(function(){
+			// console.log('11');
+
+				$(this).css('display','none');
+		})
+	
+	</script>
+
 @foreach($order as $v)   
         <div id="container">
             <div class="w">
@@ -97,7 +130,7 @@
                             <div class="fop-label">评价晒单</div>
                             <div class="fop-main">
                                 <div class="f-textarea">
-                                    <textarea name="content" id="" placeholder="分享体验心得，给万千想买的人一个参考~"></textarea>
+                                    <textarea name="content" id="" value="{{old('content')}}" placeholder="分享体验心得，给万千想买的人一个参考~"></textarea>
                                     <div class="textarea-ext"><em class="textarea-num"><b>0</b> / 500</em><span class="tips">（评价多于<span class="ftc1">10</span>个字,有机会奖励京豆哦~）</span></div>
                                 </div>
                                 	

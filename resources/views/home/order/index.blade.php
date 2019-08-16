@@ -44,9 +44,9 @@
 								<div class="th th-status">
 									交易状态
 								</div>
-								<div class="th th-change">
+								<!-- <div class="th th-change">
 									交易操作
-								</div>
+								</div> -->
 							</div>
 							
 							@foreach($order as $v)
@@ -123,10 +123,10 @@
 															<p class="order-info"><a href="logistics.html">查看物流</a></p> -->
 														</div>
 													</li>
-													<li class="td td-change">
+													<!-- <li class="td td-change">
 														<div class="am-btn am-btn-danger anniu">
 															删除订单</div>
-													</li>
+													</li> -->
 												</div>
 											</div>
 										</div>
@@ -160,9 +160,9 @@
 								<div class="th th-status">
 									交易状态
 								</div>
-								<div class="th th-change">
+								<!-- <div class="th th-change">
 									交易操作
-								</div>
+								</div> -->
 							</div>
 
 							@foreach($order0 as $v)
@@ -238,10 +238,10 @@
 															<!-- <p class="order-info"><a href="orderinfo.html">订单详情</a></p> -->
 														</div>
 													</li>
-													<li class="td td-change">
+													<!-- <li class="td td-change">
 														<div class="am-btn am-btn-danger anniu">
 															提醒发货</div>
-													</li>
+													</li> -->
 												</div>
 											</div>
 										</div>

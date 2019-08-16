@@ -371,7 +371,7 @@
 
 															<a href="/home/details/{{$v4->id}}"><img style="height:183.15px;" src="{{$v4->pic}}" /></a>
 
-														<div class="pro-title "> {{$v4->name}} </div>
+														<div class="pro-title cutString">{{$v4->name}}</div>
 														<span class="e-price "> {{$v4->price}} ￥</span>
 													</a>
 												</div>
@@ -403,4 +403,73 @@
 @endsection
 
 
+@section('js')
+<script>
+	// * 根据长度截取先使用字符串，超长部分追加… 
+ 
+//  * str 对象字符串 
+ 
+//  * len 目标字节长度 
+ 
+//  * 返回值： 处理结果字符串 
+
+
+
+
+function cutString(str, len) { 
+         
+		 //length属性读出来的汉字长度为1 
+	   
+		 if(str.length*2 <= len) { 
+	   
+		   return str; 
+	   
+		 } 
+	   
+		 var strlen = 0; 
+	   
+		 var s = ""; 
+	   
+		 for(var i = 0;i < str.length; i++) { 
+	   
+		   s = s + str.charAt(i); 
+	   
+		   if (str.charCodeAt(i) > 128) { 
+	   
+			 strlen = strlen + 2; 
+	   
+			 if(strlen >= len){ 
+	   
+			   return s.substring(0,s.length-1) + "..."; 
+	   
+			 } 
+	   
+		   } else { 
+	   
+			 strlen = strlen + 1; 
+	   
+			 if(strlen >= len){ 
+	   
+			   return s.substring(0,s.length-2) + "..."; 
+	   
+			 } 
+	   
+		   } 
+	   
+		  } 
+	   
+		  return s; 
+		
+	  } 
+
+	  $('.cutString').each(function(index){
+
+		$(this).text(cutString($(this).text(), 20))
+
+
+	})	
+</script>
+
+		
+@endsection
 	
