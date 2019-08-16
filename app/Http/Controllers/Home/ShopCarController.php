@@ -219,7 +219,22 @@ class ShopCarController extends Controller
             $order_detail['num'] = $request->all()['number'][$key];
 
             // 查出商品数量
-            $num = DB::table('sku')->where('id',$sku_id)->select('num')->first();
+            // $num = DB::table('sku')->where('id',$sku_id)->select('num')->first();
+
+            // 查出商品数量和商品id
+            $num = DB::table('sku')->where('id',$sku_id)->select('num','good_id')->first();
+            // dump($num->num - 1);
+
+
+            // 修改商品的销量
+            $sales = DB::table('good')->where('id',$num->good_id)->select('sales_nums')->first();
+            // dd($sales);
+
+
+            $sales2['sales_nums'] = $sales->sales_nums + $request->all()['number'][$key];
+
+
+            $sales3 = DB::table('good')->where('id',$num->good_id)->update($sales2);
             // dump($num->num - 1);
 
             // 新商品总数 = 商品总数 - 购买的数量

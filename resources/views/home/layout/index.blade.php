@@ -82,7 +82,7 @@
 						<div class="footer-hd ">
 							<p>
 							@foreach ($link as $k=>$v)
-								<a href="{{$v->link}}"><img src="/uploads/{{$v->pic}}" style="width: 50px;" alt=""></a>
+								<a href="//{{$v->link}}"><img src="/uploads/{{$v->pic}}" style="width: 50px;" alt=""></a>
 								<b>|</b>
 							@endforeach
 							</p>
@@ -100,7 +100,7 @@
 
 		<!--引导 -->
 		<div class="navCir">
-			<li class="active"><a href="home.html"><i class="am-icon-home "></i>首页</a></li>
+			<li class="active"><a href="/"><i class="am-icon-home "></i>首页</a></li>
 			<li><a href="sort.html"><i class="am-icon-list"></i>分类</a></li>
 			<li><a href="shopcart.html"><i class="am-icon-shopping-basket"></i>购物车</a></li>	
 			<li><a href="person/index.html"><i class="am-icon-user"></i>我的</a></li>					

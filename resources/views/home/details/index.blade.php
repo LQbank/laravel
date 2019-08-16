@@ -85,18 +85,46 @@
 							<div class="tb-booth tb-pic tb-s310">
 								<a href="images/01.jpg"><img src="{{ $good->pic }}" big="{{ $good->pic }}" id="src" alt="细节展示放大镜特效" rel="{{ $good->pic }}" class="jqzoom" /></a>
 							</div>
-							@if($collect == null)
+							
+							@if(empty(session('home_user')))
+
+								<div style="margin-left: 10px;">
+									<i class="sprite-follow-sku" style="width: 14px;height: 13px;background-image: url(/h/images/__sprite.png);background-position: -44px -40px;display: inline-block;" ></i>
+									<a href="" id="shoucang"    ><em>收藏</em></a>
+								</div>
+
+
+								<script>
+								
+									$('#shoucang').click(function(){
+
+										if (confirm("尚未登录,无法收藏，是否前往登录")) {
+											console.log('11');
+											window.location.href = '/home/login';
+											
+											return false;
+										} else {
+											self.location=document.referrer;
+										}	
+
+									})
+										
+
+								</script>
+							@elseif( $collect == null)
+
 								<div style="margin-left: 10px;">
 									<i class="sprite-follow-sku" style="width: 14px;height: 13px;background-image: url(/h/images/__sprite.png);background-position: -44px -40px;display: inline-block;" ></i>
 									<a href="/home/collection/{{$good->id}}/{{$sid}}"><em>收藏</em></a>
 								</div>
-							@elseif($status == '1')
+
+							@elseif($collect->status == '1')
 							
 								<div style="margin-left: 10px;">
 									<i class="sprite-follow-sku" style="width: 14px;height: 13px;background-image: url(/h/images/__sprite.png);background-position: -44px -40px;display: inline-block;" ></i>
 									<a href=""><em>已收藏</em></a>
 								</div>
-							@endif
+							@endif 
 							<!-- <ul class="tb-thumb" id="thumblist">
 								<li class="tb-selected">
 									<div class="tb-pic tb-s40">
@@ -765,7 +793,7 @@
 			return false;
 		}
 		var href2 = '/home/shopcar/insert/' + $('#LikBasket').attr('sid') + '/' + parseInt($('#text_box').val());
-		console.log(href2);
+		// console.log(href2);
 		window.location.href = href2;
 	}
 </script>

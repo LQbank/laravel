@@ -86,18 +86,18 @@
             
             	<!-- User Photo -->
             	<div id="mws-user-photo">
-                	<img src="/file/example/profile.jpg" alt="User Photo">
+                	<img src="/uploads/{{session('admin_userinfo')->profile}}" alt="User Photo">
                 </div>
                 
                 <!-- Username and Functions -->
                 <div id="mws-user-functions">
                     <div id="mws-username">
-                        Hello, John Doe
+                        Hello, {{session('admin_userinfo')->name}}
                     </div>
                     <ul>
-                    	<li><a href="#">Profile</a></li>
-                        <li><a href="#">Change Password</a></li>
-                        <li><a href="index.html">Logout</a></li>
+                    	<!-- <li><a href="#">Profile</a></li>
+                        <li><a href="#">Change Password</a></li> -->
+                        <li><a href="/admin/logout">Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -193,9 +193,9 @@
                         </ul>
                     </li>
 
-                    <li  class="active"> 
-                        <a href="#"><i class="icon-envelope"></i>友情链接模块</a>
-                        <ul  >
+                    <li> 
+                        <a href="#"><i class="icon-pictures"></i>友情链接模块</a>
+                        <ul class="closed">
                         
                             <li><a href="/admin/link">浏览友情链接</a></li>
                             <li><a href="/admin/link/create">添加友情链接</a></li>

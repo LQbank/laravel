@@ -92,12 +92,12 @@ class LoginController extends Controller
 
         //验证数据
         $this->validate($request, [ 
-            'email' => 'required|email',
+            'email' => 'required',
             'passwd' => 'required',         
         ],[
 
-            'email.required'=>'邮箱必填',    
-            'email.email'=>'邮箱格式错误',  
+            'email.required'=>'邮箱/手机号必填',    
+            'email.email'=>'邮箱/手机号格式错误',  
             'passwd.required'=>'密码必填',    
               
         ]);
@@ -108,7 +108,9 @@ class LoginController extends Controller
         $passwd = $request->input('passwd','');
 
 
-        $user = DB::table('users')->where('email',$email)->first();
+        $user = DB::table('users')->where('email',$email)->orwhere('phone',$email)->first();
+        
+
         // dd( $user);
 
             if(!empty($user))
@@ -165,6 +167,9 @@ class LoginController extends Controller
             return back()->with('success', '账户或密码错误');
         
         }
+
+          
+
 
     }
 }
