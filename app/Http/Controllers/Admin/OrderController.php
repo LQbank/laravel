@@ -17,7 +17,7 @@ class OrderController extends Controller
     public function index()
     {
         // 查出所有的订单信息
-        $Order = DB::select("select order1.*,users.email,addresses.*,order1.id as orderid from order1,users,addresses where order1.user_id=users.id and order1.address_id=addresses.id");
+        $Order = DB::select("select order1.*,users.email,addresses.uname,addresses.phone,order1.id as orderid from order1,users,addresses where order1.user_id=users.id and order1.address_id=addresses.id");
         // $Order = DB::select("select * from order1");
         // dump($Order);
 

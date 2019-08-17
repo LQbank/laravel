@@ -54,6 +54,8 @@ class ShopCarController extends Controller
         return back();
     }
 
+    
+
     /**
      * 查出购物车商品数目
      *
@@ -157,7 +159,7 @@ class ShopCarController extends Controller
         // dump($res);
 
         $message = $request->all();
-        // dump($message['xuan']);
+        // dd($message);
         // dump($message['num']);
         $array = [];
 
@@ -236,10 +238,15 @@ class ShopCarController extends Controller
             // dd($sales);
 
 
+            
+
+
+
             $sales2['sales_nums'] = $sales->sales_nums + $request->all()['number'][$key];
 
 
             $sales3 = DB::table('good')->where('id',$num->good_id)->update($sales2);
+
 
 
             // 新商品总数 = 商品总数 - 购买的数量

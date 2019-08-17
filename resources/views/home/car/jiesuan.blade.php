@@ -639,7 +639,7 @@
 		</script>
 
 		<script type="text/javascript">
-			// console.log($('#aaaa'));
+			console.log($('#aaaa'));
 			$('#baocun').click(function(){
 				var arr = [];
 				var province = $('#province').val().replace('省',"");
@@ -658,24 +658,24 @@
 				// console.log($('#address').val());
 				// console.log($('#postcode').val());
 				
-				arr['uname'] = uname;
-				arr['phone'] = phone;
-				arr['province'] = province1;
-				arr['city'] = city;
-				arr['district'] = district;
-				arr['address'] = address;
-				arr['postcode'] = postcode;
+				// arr['uname'] = uname;
+				// arr['phone'] = phone;
+				// arr['province'] = province1;
+				// arr['city'] = city;
+				// arr['district'] = district;
+				// arr['address'] = address;
+				// arr['postcode'] = postcode;
 				// var aaa = 'wskfksjf';
-				console.log(arr);
+				// console.log(arr);
 				if(uname && phone && province1 && city && district && address && postcode){
 					// console.log('完成');
 					$.ajax({
 						url:'/home/shopcar/address',
-						data:{'uname':uname,'phone':phone,'province':province1,'city':city,'district':district,'address':address,'postcode':postcode},
+						data:{'uname':uname,'phone':phone,'province':province1,'city':city,'district':district,'address':address,'postcode':postcode,},
 						type:'POST',
 						dataType:'json',
 						success:function(mes){
-							// console.log(mes);
+							
 							if(mes){
 								var tr = `
 						            <li class="user-addresslist ccc" addid="${mes}" onclick="aaaaa($(this))">

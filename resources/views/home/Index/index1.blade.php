@@ -10,7 +10,7 @@
 						
 							<ul class="am-slides">
 								@foreach($cartoon as $k=>$v)
-									<li class="banner1" ><a href=""><img src="/uploads/{{ $v->pic }}"  style="width: 1488px;float: left;display: block;height: 430px;"/></a></li>
+									<li class="banner1" ><a href="/home/list"><img src="/uploads/{{ $v->pic }}"  style="width: 1488px;float: left;display: block;height: 430px;"/></a></li>
 								@endforeach
 								
 							</ul>
@@ -26,7 +26,7 @@
 					   
 					   <div class="nav-cont">
 							<ul>
-								<li class="/home"><a href="/">首页</a></li>
+								<li class="index"><a href="/">首页</a></li>
                                 <li class="qc"><a href="#">闪购</a></li>
                                 <li class="qc"><a href="#">限时抢</a></li>
                                 <li class="qc"><a href="#">团购</a></li>
@@ -50,7 +50,7 @@
 											@foreach($common_cates_data as $k=>$v )
 											<li class="appliance js_toggle relative first">
 												<div class="category-info">
-													<h3 class="category-name b-category-name"><i><img src="h/images/cake.png"></i><a href="" class="ml-22" title="点心">{{$v->cname}}</a></h3>
+													<h3 class="category-name b-category-name"><i><img src="h/images/cake.png"></i><a href="/home/list" class="ml-22" title="点心">{{$v->cname}}</a></h3>
 													<em>&gt;</em></div>
 												<div class="menu-item menu-in top">
 													<div class="area-in">
@@ -126,7 +126,7 @@
 					<!--小导航 -->
 					<div class="am-g am-g-fixed smallnav">
 						<div class="am-u-sm-3">
-							<a href=""><img src="h/images/navsmall.jpg" />
+							<a href="sort.html"><img src="h/images/navsmall.jpg" />
 								<div class="title">商品分类</div>
 							</a>
 						</div>
@@ -167,7 +167,7 @@
 						
 						<div class="mod-vip">
 							<div class="m-baseinfo">
-								<a href="">
+								<a href="person/index.html">
 									<img src="h/images/getAvatar.do.jpg">
 								</a>
 								<em>
@@ -251,7 +251,7 @@
 								<h4>开年福利篇</h4>
 							</div>
 							<div class="recommendationMain one">
-								<a href=""><img src="h/images/tj.png "></img></a>
+								<a href="introduction.html"><img src="h/images/tj.png "></img></a>
 							</div>
 						</div>						
 						<div class="am-u-sm-4 am-u-lg-3 ">
@@ -340,15 +340,26 @@
 						<div class="am-container ">
 							<div class="shopTitle ">
 								<h4>{{$v->cname}}</h4>
+
+								<!-- <h3>你是我的优乐美么？不，我是你小鱼干</h3> -->
+								<div class="today-brands ">
+									<!-- <a href="# ">小鱼干</a> -->
+									
+
 								<h3>
-								@foreach($v->sub as $k2=>$v2 )
+									@foreach($v->sub as $k2=>$v2 )
+
 										@foreach($v2->sub as $k3=>$v3 )
 										<a class="outer" href="/home/list/{{$v3->id}}"><span class="inner"><b class="text">{{$v3->cname}}</b></span></a>
 										@endforeach
 									
 									@endforeach
 								</h3>
-								
+								<div class="today-brands ">
+									<!-- <a href="# ">小鱼干</a> -->
+									
+
+								</div>
 								<span class="more ">
 						<a class="more-link " href="# ">更多美味</a>
 							</span>
@@ -366,6 +377,7 @@
 													<a href="# ">
 
 															<a href="/home/details/{{$v4->id}}"><img style="height:183.15px;" src="{{$v4->pic}}" /></a>
+
 
 														<div class="pro-title cutString">{{$v4->name}}</div>
 														<span class="e-price "> {{$v4->price}} ￥</span>
@@ -399,7 +411,19 @@
 @endsection
 
 
+
+	
+
+
 @section('js')
+<script type="text/javascript">
+		$('.scarce').each(function(){
+			console.log($(this).html());
+			if($(this).html().length > 10){
+				$(this).html($(this).html().slice(0,10) + '...');
+			}
+		})
+	</script>
 <script>
 	// * 根据长度截取先使用字符串，超长部分追加… 
  

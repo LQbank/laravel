@@ -29,8 +29,8 @@
                     <td>{{ $order->phone }}</td>
                     <td>{{ $order->total }}</td>
                     <td  class="qy"  info="{{ $order->orderid }}">
-									
-                            <input class="ibutton" type="checkbox" data-label-on="已发货" data-label-off="未发货"  @if($order->status) checked @else @endif }} >
+                   
+                            <input class="ibutton" type="checkbox" data-label-on="已发货" data-label-off="未发货" @if($order->status) checked @else @endif  >		
                     </td>
                     <td><a href="/admin/order/showorder/{{ $order->orderid }}" class='btn btn-info'>查看订单</a></td>
                 </tr>

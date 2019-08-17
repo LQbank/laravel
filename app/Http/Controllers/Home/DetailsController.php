@@ -95,6 +95,7 @@ class DetailsController extends Controller
             ->first();
 
         }
+        // dump($res);
 
         if ($collect == null) {
             return view('home/details/index',['good'=>$res,'res2'=>$res2,'sku'=>$res5,'sid'=>$id,'collect'=>$collect,'reply'=>$reply]);

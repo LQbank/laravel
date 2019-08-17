@@ -22,7 +22,9 @@ class IndexController extends Controller
         $users = count(DB::table('users')->get());
         $order1 = count(DB::table('order1')->get());
         $good = count(DB::table('good')->get());
+
         // dump($admin);
+
         return view('admin/index/index',['admin'=>$admin,'users'=>$users,'order1'=>$order1,'good'=>$good,]);
     }
 }

@@ -19,8 +19,8 @@ class AdminuserController extends Controller
     public function index()
     {
         //查看所有用户
-    	$adminusers = DB::table('admin_user')->get();
-
+        $adminusers = DB::table('admin_user')->get();
+ 
         // 加载表单
         return view('admin.adminuser.index',['adminusers'=>$adminusers]);
     }
@@ -32,8 +32,12 @@ class AdminuserController extends Controller
      */
     public function create()
     {
+         //查询所有用户
+         $role = DB::table('role')->get();
+        //  dd($role);
+ 
         // 加载表单
-        return view('admin.adminuser.create');
+        return view('admin.adminuser.create',['role'=>$role]);
     }
 
     /**
@@ -43,7 +47,12 @@ class AdminuserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(AdminsStore $request)
+    // public function store(Request $request)
     {
+        // dd($request->input());
+        // 开启事务
+        DB::beginTransaction();
+        
         // 检查文件上传
         if ($request->hasFile('profile')) {
             // 获取头像
@@ -63,10 +72,20 @@ class AdminuserController extends Controller
         // 保存
         $res1 = $user->save();
 
+        $rid =  $request->input('rid','');
+
+        $uid = $user->id;
+
+        $role = DB::table('user_role')->insert(['uid' => $uid, 'rid' => $rid]);
+       
+
+
         // 判断是否成功
-        if($res1){
+        if($res1 && $role){
+            DB::commit();
             return redirect('admin/adminuser')->with('success', '添加成功');
         }else{
+            DB::rollBack();
             return back()->with('error', '添加失败');
         }
     }

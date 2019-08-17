@@ -282,6 +282,8 @@ Route::group(['middleware' => ['home']], function () {
 	//前台 订单管理 修改状态ajax
 	Route::post('home/order/changeStatus','Home\OrderController@changeStatus');
 
+	//前台 订单管理 退货
+	Route::post('home/order/tuihuo','Home\OrderController@tuihuo');
 
 
 
@@ -299,46 +301,6 @@ Route::group(['middleware' => ['home']], function () {
 	Route::get('home/comment','Home\CommentController@index');
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

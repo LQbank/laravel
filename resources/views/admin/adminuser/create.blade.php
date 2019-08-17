@@ -44,6 +44,24 @@
                     </div>
                 </div>
 
+                <div class="mws-form-row">
+                    <label class="mws-form-label">选取角色</label>
+                    <div class="mws-form-item">
+                    
+                        <select class="small" name="rid">
+
+                            @foreach ($role as $v)
+                                <option  value="{{$v->id}}">{{$v->rname}}</option>
+                            @endforeach   
+                        </select>
+                    </div>
+                </div>
+
+
+
+
+                
+
                 <div class="mws-form-row" style="width: 610px;">
                     <label class="mws-form-label">管理员头像</label>
                     <div class="mws-form-item">

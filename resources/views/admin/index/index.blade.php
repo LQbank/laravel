@@ -14,7 +14,6 @@
             </span>
         </a>
 
-
     	<a class="mws-stat" href="#">
         	<!-- Statistic Icon (edit to change icon) -->
         	<span class="mws-stat-icon icol32-sport"></span>
@@ -25,7 +24,6 @@
                 <span class="mws-stat-value"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ $users }}</font></font></span>
             </span>
         </a>
-
 
     	<a class="mws-stat" href="#">
         	<!-- Statistic Icon (edit to change icon) -->
@@ -57,7 +55,6 @@
     <script type="text/javascript" src="/table/echarts-all-3.js"></script>
     <script type="text/javascript" src="/table/china.js"></script>
 
-
     <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
         var admin = {{ $admin }};
@@ -87,8 +84,6 @@
                 data: [admin,users,good,order1]
             }]
         };
-
-
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
     </script>

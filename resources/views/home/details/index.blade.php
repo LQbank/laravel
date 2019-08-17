@@ -22,25 +22,14 @@
 
 	
 	<style>
-        a{
-            color: #000; 
-            text-decoration: none;
-          
+        a, a:hover{
+			color: #000; 
         }
-		a:link, a:visited, a:hover {
+
+		a:link, a:visited, a:hover {	
 			text-decoration: none;
 			outline: none;
 		}
-		/* li {
-			font-size: 13px;
-			display: list-item;
-			text-align: -webkit-match-parent;
-			list-style-position: inside;
-			list-style-type: inherit;
-			margin: 0;
-			line-height: 20px;
-			list-style-type:none;
-		}  */
 		.nav.white .logoBig {
 			display: block;
 			float: left;
@@ -236,9 +225,11 @@
 
 							<!--销量-->
 							<ul class="tm-ind-panel">
+							
 								<!-- <li class="tm-ind-item tm-ind-sellCount canClick">
 									<div class="tm-indcon"><span class="tm-label">月销量</span><span class="tm-count">1015</span></div>
 								</li> -->
+
 								<li class="tm-ind-item tm-ind-sumCount canClick">
 									<div class="tm-indcon"><span class="tm-label">累计销量</span><span class="tm-count">{{$good->sales_nums}}</span></div>
 								</li>

@@ -57,6 +57,7 @@
 
 <body>
 
+
 	<!-- Themer (Remove if not needed) -->  
 	
     <!-- Themer End -->
@@ -223,6 +224,23 @@
         
         	<!-- Inner Container Start -->
             <div class="container">
+
+
+            @if (Session::has('success'))
+                <div class="mws-form-message success">
+				    <ul class="alert alert-success"  style="list-style-type:none">
+                         <li>{{ Session::get('success') }}</li>
+                    </ul>
+			    </div>
+            @endif 
+            @if (Session::has('error'))
+                <div class="mws-form-message error" style="list-style-type:none">
+				    <ul class="alert alert-danger">
+                         <li>{{ Session::get('error') }}</li>
+                    </ul>
+			    </div>
+            @endif 
+           
                 @section('content')
                     
                 @show

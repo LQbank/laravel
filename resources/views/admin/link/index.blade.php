@@ -38,7 +38,7 @@
                                   
                                     <td  class="qy"  info="{{ $v->id }}">
 									
-										<input class="ibutton" type="checkbox" data-label-on="启用" data-label-off="禁用" @if($v->status) checked @else @endif }} >
+										<input class="ibutton" type="checkbox" data-label-on="启用" data-label-off="禁用" @if($v->status) checked @else @endif  >
 									</td>
                                     <td>
                                         <form action="/admin/link/{{ $v->id }}" method="post" style="display: inline;">
