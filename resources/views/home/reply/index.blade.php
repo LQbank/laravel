@@ -20,6 +20,10 @@
             text-decoration: none;
           
         }
+        a:link, a:visited, a:hover {
+			text-decoration: none;
+			outline: none;
+		}
 		li {
 			font-size: 13px;
 			display: list-item;

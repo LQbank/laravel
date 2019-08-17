@@ -19,7 +19,7 @@ class IndexController extends Controller
     public static function  getPidCateData($pid = 0)
     {
         //获取一级分类
-        $data = Cates::where('pid',$pid)->get();
+        $data = Cates::where('pid',$pid)->where('cates.status',0)->get();
 
         //获取商品  信息
         $good = DB::table('good')->get();
@@ -47,6 +47,8 @@ class IndexController extends Controller
                             ->join('sku','sku.good_id','=','good.id')
                             // 关联查cate表和good表
                             ->join('cates','cates.id','=','good.cate_id')
+                            ->where('good.status','1')
+                            ->where('sku.status',1)
                             // // 按照good表id进行分组统计
                             ->groupBy('good.id')
                             ->select('good.*','cates.cname','sku.*')	

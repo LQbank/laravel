@@ -12,6 +12,45 @@
 		<script type="text/javascript" src="/h/js/list.js"></script>
 
 
+
+	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="/h/xingxing/css/star-rating.css" media="all" rel="stylesheet"  />
+        
+   
+    <script src="/h/xingxing/js/star-rating.min.js" type="text/javascript"></script>
+
+	
+	<style>
+        a{
+            color: #000; 
+            text-decoration: none;
+          
+        }
+		a:link, a:visited, a:hover {
+			text-decoration: none;
+			outline: none;
+		}
+		/* li {
+			font-size: 13px;
+			display: list-item;
+			text-align: -webkit-match-parent;
+			list-style-position: inside;
+			list-style-type: inherit;
+			margin: 0;
+			line-height: 20px;
+			list-style-type:none;
+		}  */
+		.nav.white .logoBig {
+			display: block;
+			float: left;
+			height: 90px;
+			width: 200px;
+			margin-left: -31px;
+		}
+		
+	</style>
+
         <div class="listMain">
 
 				<!--分类-->
@@ -197,14 +236,14 @@
 
 							<!--销量-->
 							<ul class="tm-ind-panel">
-								<li class="tm-ind-item tm-ind-sellCount canClick">
+								<!-- <li class="tm-ind-item tm-ind-sellCount canClick">
 									<div class="tm-indcon"><span class="tm-label">月销量</span><span class="tm-count">1015</span></div>
-								</li>
+								</li> -->
 								<li class="tm-ind-item tm-ind-sumCount canClick">
-									<div class="tm-indcon"><span class="tm-label">累计销量</span><span class="tm-count">6015</span></div>
+									<div class="tm-indcon"><span class="tm-label">累计销量</span><span class="tm-count">{{$good->sales_nums}}</span></div>
 								</li>
 								<li class="tm-ind-item tm-ind-reviewCount canClick tm-line3">
-									<div class="tm-indcon"><span class="tm-label">累计评价</span><span class="tm-count">640</span></div>
+									<div class="tm-indcon"><span class="tm-label">累计评价</span><span class="tm-count">{{count($reply)}}</span></div>
 								</li>
 							</ul>
 							<div class="clear"></div>
@@ -458,7 +497,7 @@
 															<time datetime="">{{$v->created_at}}</time>
 														</div>
 													</header>
-
+						<input id="input-21b" value="{{$v->num}}" type="text" class="rating" required  disabled>
 													<div class="am-comment-bd">
 														<div class="tb-rev-item " data-id="255776406962">
 															<div class="J_TbcRate_ReviewContent tb-tbcr-content ">
@@ -797,4 +836,24 @@
 		window.location.href = href2;
 	}
 </script>
+
+<script>
+        $(document).on('ready', function(){
+
+			$('.clear-rating ').each(function(){
+
+				$(this).css('display','none');
+
+			})
+			
+			$('.caption').each(function(){
+
+				$(this).css('display','none');
+
+			})
+            
+        });
+
+</script>
+
 @endsection

@@ -18,10 +18,11 @@ class DetailsController extends Controller
         // $_SESSION['car'] = null;exit;
     	// 查出商品的信息和sku
 		$res = DB::table('sku')
-    	->where('sku.id',$id)
-    	->leftJoin('good','sku.good_id','=','good.id')
+       
+        ->leftJoin('good','sku.good_id','=','good.id')
+        ->where('sku.id',$id)
         ->first();
-        // dump($res);
+        // dd($res);
         
         // 查出商品的sku
         $aaa = DB::table('sku')->where('good_id',$res->good_id)->get();
@@ -65,7 +66,7 @@ class DetailsController extends Controller
         // dump($res5);
 
 
-
+        // dump($res->good_id);
         //获取商品的所有评论
         $reply = DB::table('reply')
         ->join('users','reply.user_id','=','users.id')
@@ -124,9 +125,9 @@ class DetailsController extends Controller
 
         // 判断sku是否存在 存在就拼接SQL语句 否则不拼接
         if($sku){
-            $where = ' where sku.good_id='.$request->input('id').' and '.$sku;
+            $where = ' where sku.status=1 and  sku.good_id='.$request->input('id').' and '.$sku;
         }else{
-            $where = ' where sku.good_id='.$request->input('id');
+            $where = ' where  sku.status=1 and sku.good_id='.$request->input('id');
         }
         // echo $where;
         // dump($where);

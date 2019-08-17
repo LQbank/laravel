@@ -27,6 +27,7 @@ class ListController extends Controller
 		// 关联查cates表和good表
         ->join('cates','cates.id','=','good.cate_id')
         ->where('good.cate_id','=',$id)
+        ->where('sku.status',1)
         ->orderBy('good.id', 'desc')
         ->select('good.*','cates.cname','sku.*')
         ->get();
@@ -107,6 +108,7 @@ class ListController extends Controller
 
             ->orderBy($field, 'desc')
             ->where('good.cate_id','=',$cate_id)
+            ->where('sku.status',1)
             ->select('good.*','cates.cname','sku.*')
 			->get();	
 
@@ -116,7 +118,7 @@ class ListController extends Controller
 
 			$like = $this->dealSku($sku);
 
-			$goods = DB::select("select * from good  join sku on  sku.good_id =good.id   join cates on cates.id = good.cate_id   where(good.cate_id = $cate_id and $like) order by $field desc");
+			$goods = DB::select("select * from good  join sku on  sku.good_id =good.id   join cates on cates.id = good.cate_id   where(good.cate_id = $cate_id and sku.status=1  and $like) order by $field desc");
 
 
 

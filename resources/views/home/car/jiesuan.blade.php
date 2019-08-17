@@ -675,7 +675,7 @@
 						type:'POST',
 						dataType:'json',
 						success:function(mes){
-							console.log(mes);
+							// console.log(mes);
 							if(mes){
 								var tr = `
 						            <li class="user-addresslist ccc" addid="${mes}" onclick="aaaaa($(this))">

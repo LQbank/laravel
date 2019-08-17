@@ -15,12 +15,13 @@
 
 					<ul class="am-avg-sm-5 am-tabs-nav am-nav am-nav-tabs">
 						<li class="am-active"><a href="#tab1">所有订单{{count($order)}}</a></li>
-						<!-- <li><a href="#tab2">待付款</a></li> -->
+					
 						<li><a href="#tab3">待发货{{count($order0)}}</a>
 						
 						</li>
 						<li><a href="#tab4">待收货{{count($order1)}}</a></li>
 						<li><a href="#tab5">待评价{{$count}}</a></li>
+						<li><a href="#tab2">我要退货</a></li>
 					</ul>
 
 					<div class="am-tabs-bd" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">

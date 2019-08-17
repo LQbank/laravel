@@ -103,10 +103,13 @@ class DataController extends Controller
 
 
             // 查出当前数据
-            // $usersinfo = Users::where('id',$id)->first();
+            $usersinfo = Users::where('id',$id)->first();
 
-            // 删除图片
-            // Storage::delete([$usersinfo->avatar]);
+            if($usersinfo->avatar !=='20190727/DFl323SLCZq4QyXzt95SSE63L02nl4TuZCq59RIs.jpeg'){
+                // 删除图片
+                Storage::delete([$usersinfo->avatar]);
+            }
+            
  
             //连接表修改
             $user = Users::find($id);

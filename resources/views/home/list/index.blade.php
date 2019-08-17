@@ -91,8 +91,8 @@
 									<li class="sku">
 										<div class="i-pic limit">
 											
-											<a href="/home/details/{{$v->id}}"><img src="{{$v->pic}}" /></a>
-											<p class="title fl">{{$v->name}} &nbsp;&nbsp; <b>{{$v->sku}}</b></p>
+											<a href="/home/details/{{$v->id}}"><img src="{{$v->pic}}" style="height:218px"/></a>
+											<p class="title fl  cutString">{{$v->name}}</p> &nbsp;&nbsp; <b>{{$v->sku}}</b>
 											<p class="price fl">
 												<b>¥</b>
 												<strong>{{$v->price}}</strong>
@@ -358,8 +358,8 @@
 								<li class="sku">
 									<div class="i-pic limit">
 										
-										<img src="${$(this).attr('pic')}" />
-										<p class="title fl">${$(this).attr('name')} &nbsp;&nbsp; <b>${$(this).attr('sku')}</b></p>
+										<img src="${$(this).attr('pic')}"  style="height:218px"/>
+										<p class="title fl  cutString">${$(this).attr('name')} </p> &nbsp;&nbsp; <b>${$(this).attr('sku')}</b>
 										<p class="price fl">
 											<b>¥</b>
 											<strong>${$(this).attr('price')}</strong>
@@ -385,4 +385,70 @@
 
 
 		</script>
+
+<script>
+	// * 根据长度截取先使用字符串，超长部分追加… 
+ 
+//  * str 对象字符串 
+ 
+//  * len 目标字节长度 
+ 
+//  * 返回值： 处理结果字符串 
+
+
+
+
+function cutString(str, len) { 
+         
+		 //length属性读出来的汉字长度为1 
+	   
+		 if(str.length*2 <= len) { 
+	   
+		   return str; 
+	   
+		 } 
+	   
+		 var strlen = 0; 
+	   
+		 var s = ""; 
+	   
+		 for(var i = 0;i < str.length; i++) { 
+	   
+		   s = s + str.charAt(i); 
+	   
+		   if (str.charCodeAt(i) > 128) { 
+	   
+			 strlen = strlen + 2; 
+	   
+			 if(strlen >= len){ 
+	   
+			   return s.substring(0,s.length-1) + "..."; 
+	   
+			 } 
+	   
+		   } else { 
+	   
+			 strlen = strlen + 1; 
+	   
+			 if(strlen >= len){ 
+	   
+			   return s.substring(0,s.length-2) + "..."; 
+	   
+			 } 
+	   
+		   } 
+	   
+		  } 
+	   
+		  return s; 
+		
+	  } 
+
+	  $('.cutString').each(function(index){
+
+		$(this).text(cutString($(this).text(),58))
+
+
+	})	
+</script>
 @endsection

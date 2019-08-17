@@ -107,7 +107,7 @@ class LoginController extends Controller
         $passwd = $request->input('passwd','');
 
 
-        $user = DB::table('users')->where('email',$email)->first();
+        $user = DB::table('users')->where('email',$email)->orwhere('phone',$email)->first();
         
 
         // dd( $user);

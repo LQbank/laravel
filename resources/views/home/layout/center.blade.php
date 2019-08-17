@@ -82,7 +82,7 @@
 								
 							</div>
 							<div class="topMessage mini-cart">
-								<div class="menu-hd"><a id="mc-menu-hd" href="/home/car" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
+								<div class="menu-hd"><a id="mc-menu-hd" href="/home/car" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">{{ $number }}</strong></a></div>
 							</div>
 							<div class="topMessage favorite">
 								<div class="menu-hd"><a href="/home/collection" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
@@ -129,7 +129,7 @@
 					<div class="footer-hd">
 						<p>
 							@foreach ($link as $k=>$v)
-								<a href="{{$v->link}}"><img src="/uploads/{{$v->pic}}" style="width: 50px;" alt=""></a>
+							<a href="//{{$v->link}}"><img src="/uploads/{{$v->pic}}" style="width: 50px;" alt=""></a>
 								<b>|</b>
 							@endforeach
 						</p>
