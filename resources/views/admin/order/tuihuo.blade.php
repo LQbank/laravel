@@ -21,7 +21,7 @@
             </thead>
             <tbody>
                 <!-- 遍历出每一个商品 -->
-                @foreach($order1 as $order)
+                @foreach($order2 as $order)
                 <tr align="center">
                     <td>{{ $order->code }}</td>
                     <td>{{ $order->email }}</td>
@@ -30,7 +30,7 @@
                     <td>{{ $order->total }}</td>
                     <td  class="qy"  info="{{ $order->orderid }}">
 									
-                            <input class="ibutton" type="checkbox" data-label-on="已发货" data-label-off="未发货"  @if($order->status) checked @else @endif  >
+                            <input class="ibutton" type="checkbox" data-label-on="未退货" data-label-off="已退货"  @if($order->status == 3) checked @else @endif >
                     </td>
                     <td><a href="/admin/order/showorder/{{ $order->orderid }}" class='btn btn-info'>查看订单</a></td>
                 </tr>
@@ -57,7 +57,7 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: '/admin/order/changeStatus', 
+                    url: '/admin/order/changeStatus2', 
                     data: { 'id': id },
                     dataType: 'json',
                     success: function(data){

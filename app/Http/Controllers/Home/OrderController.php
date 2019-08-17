@@ -94,7 +94,7 @@ class OrderController extends Controller
          }
 
          ///退货订单
-        $order33 = DB::table('order1')->where('order1.user_id',session('home_user')->id)->where('status','!=','3')->get();
+        $order33 = DB::table('order1')->where('order1.user_id',session('home_user')->id)->get();
 
         foreach ($order33 as $k => &$v) {
             //查询详情插入数组

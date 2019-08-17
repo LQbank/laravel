@@ -209,6 +209,7 @@
                         <ul  >
                         
                             <li><a href="/admin/order">查看订单</a></li>
+                            <li><a href="/admin/order/tuihuo">查看退货订单</a></li>
                           
                             
 

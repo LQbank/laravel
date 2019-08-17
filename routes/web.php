@@ -42,6 +42,11 @@ Route::get('admin/allow',function(){
 
 // 权限验证的中间件  【allow】
 Route::group(['middleware'=>['login']],function(){
+	//后台 订单管理 查看退货订单
+	Route::get('admin/order/tuihuo','Admin\OrderController@tuihuo');
+
+	//后台 订单管理 查看退货订单
+	Route::post('admin/order/changeStatus2','Admin\OrderController@changeStatus2');
 
 
 	// 后台 首页 的路由
@@ -131,6 +136,8 @@ Route::group(['middleware'=>['login']],function(){
 	
 	//后台 订单管理 修改状态ajax
 	Route::post('admin/order/changeStatus','Admin\OrderController@changeStatus');
+
+	
 });
 
 

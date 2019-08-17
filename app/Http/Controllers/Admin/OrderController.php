@@ -62,12 +62,41 @@ class OrderController extends Controller
        
     }
 
-   
+    /**
+     *  退货订单显示
+     *
+     */
+    public function tuihuo(Request $request)
+    {
+        // dump(789);
+        // $order = DB::table('order1')->where('status',3)->get();
+        // 查出所有的订单信息
+        $order = DB::select("select order1.*,users.email,addresses.*,order1.id as orderid from order1,users,addresses where (order1.status=3 or order1.status=4) and order1.user_id=users.id and order1.address_id=addresses.id");
+        // dd($order);
+        return view('admin.order.tuihuo',['order2'=>$order]);
+    }
 
-   
-
-
-   
-
-    
+    /**
+     *  是否退货完成
+     *
+     */
+    public function  changeStatus2(Request $request)
+    {
+        $res = DB::table('order1')->find($request->input('id'));
+        // 把轮播图状态取反
+        $status =  $res->status == 3  ? 4 : 3;
+        
+        // 查出当前轮播图数据
+        $save = DB::table('order1')
+        ->where('id', $request->input('id'))
+        ->update(['status' => $status]);
+        
+        // 判断是否成功
+        if($save){
+            echo 'ok';
+        }else{
+            echo 'no';
+        }
+       
+    }
 }
