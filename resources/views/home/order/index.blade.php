@@ -586,9 +586,17 @@
 												</li>
 												<div class="move-right">
 													<li class="td td-status">
+														@if($v->status != 3 and $v->status != 4)
 														<div class="am-btn am-btn-danger anniu  woyaotui"  orderid="{{$v->id}}">
 															确认退货
 														</div>
+														@elseif($v->status == 3)
+
+														等待退货
+
+														@elseif($v->status == 4)
+														已退货
+														@endif
 
 													</li>
 													<!-- <li class="td td-change">
