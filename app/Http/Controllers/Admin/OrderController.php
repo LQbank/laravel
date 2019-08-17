@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 use DB;
 
 class OrderController extends Controller
@@ -38,68 +39,35 @@ class OrderController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     *  改变订单的状态
      *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function  changeStatus(Request $request)
     {
-        //
+        $res = DB::table('order1')->find($request->input('id'));
+        // 把轮播图状态取反
+        $status =  $res->status  ? '0' : '1';
+        
+        // 查出当前轮播图数据
+        $save = DB::table('order1')
+        ->where('id', $request->input('id'))
+        ->update(['status' => $status]);
+        
+        // 判断是否成功
+        if($save){
+            echo 'ok';
+        }else{
+            echo 'no';
+        }
+       
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+   
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+   
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+   
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
 }

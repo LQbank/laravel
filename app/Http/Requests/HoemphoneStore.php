@@ -25,7 +25,7 @@ class HoemphoneStore extends FormRequest
     public function rules()
     {
         return [
-            'phone' => 'required|regex:/^1{1}[3-9]{1}[\d]{9}$/',
+            'phone' => 'required|regex:/^1{1}[3-9]{1}[\d]{9}$/|unique:users',
             'code' => 'required',
             'passwd' => 'required|regex:/^[\w]{6,18}$/',
             'repass' => 'required|same:passwd',
@@ -36,6 +36,7 @@ class HoemphoneStore extends FormRequest
         return [   
             
             'phone.required'=>'手机号必填',    
+            'phone.unique'=>'手机号已被注册',    
             'phone.regex'=>'手机号格式错误',
             'code.required'=>'验证码必填',
             'passwd.required'=>'密码必填',    

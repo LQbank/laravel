@@ -1,28 +1,32 @@
 @extends('home.layout.index')
 @section('content')
-		    
+  
 		
-		<div class="hmtop">
-			<!--顶部导航条 -->
+		
 			
 			<div class="banner">
-                      <!--轮播 -->
+                   
 						<div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
+						
 							<ul class="am-slides">
-								<li class="banner1"><a href="/home/list"><img src="/h/images/ad1.jpg" /></a></li>
-								<li class="banner1"><a href="/home/list"><img src="/h/images/ad1.jpg" /></a></li>
-
+								@foreach($cartoon as $k=>$v)
+									<li class="banner1" ><a href="/home/list"><img src="/uploads/{{ $v->pic }}"  style="width: 1488px;float: left;display: block;height: 430px;"/></a></li>
+								@endforeach
+								
 							</ul>
+						
 						</div>
 						<div class="clear"></div>	
 			</div>
+			
+
 			<div class="shopNav">
 				<div class="slideall">
 					
-					   <div class="long-title"><span class="all-goods">全部分类</span></div>
+					   
 					   <div class="nav-cont">
 							<ul>
-								<li class="index"><a href="/home">首页</a></li>
+								<li class="index"><a href="/">首页</a></li>
                                 <li class="qc"><a href="#">闪购</a></li>
                                 <li class="qc"><a href="#">限时抢</a></li>
                                 <li class="qc"><a href="#">团购</a></li>
@@ -37,6 +41,7 @@
 						<!--侧边导航 -->
 						<div id="nav" class="navfull">
 							<div class="area clearfix">
+								<div class="long-title" style="margin-top: -45px;"><span class="all-goods">全部分类</span></div>
 								<div class="category-content" id="guide_2">
 									
 									<div class="category">
@@ -60,7 +65,9 @@
 
 
 																		@foreach($vv->sub as $k3=>$v3 )
-																		<dd><a title="蒸蛋糕" href="/home/list/{{ $v3->id }}"><span>{{$v3->cname}}</span></a></dd>
+
+																		<dd><a title="蒸蛋糕" href="/home/list/{{$v3->id}}"><span>{{$v3->cname}}</span></a></dd>
+
 																		@endforeach
 
 
@@ -183,7 +190,7 @@
 						@else
 						<div class="mod-vip">
 							<div class="m-baseinfo">
-								<a href="person/index.html">
+								<a href="/home/data">
 									<img src="/uploads/{{session('home_user')->avatar}}">
 								</a>
 								<em>
@@ -192,7 +199,7 @@
 								</em>
 							</div>
 							<div class="member-logout">
-								<a class="am-btn-warning btn" href="">我的收藏</a>
+								<a class="am-btn-warning btn" href="home/collection">我的收藏</a>
 								<a href="/home/logout" class="am-btn-warning btn" href="">退出</a>
 							
 								
@@ -333,17 +340,15 @@
 						<div class="am-container ">
 							<div class="shopTitle ">
 								<h4>{{$v->cname}}</h4>
-								<!-- <h3>你是我的优乐美么？不，我是你小鱼干</h3> -->
-								<div class="today-brands ">
-									<!-- <a href="# ">小鱼干</a> -->
-									@foreach($v->sub as $k2=>$v2 )
+								<h3>
+								@foreach($v->sub as $k2=>$v2 )
 										@foreach($v2->sub as $k3=>$v3 )
 										<a class="outer" href="/home/list/{{$v3->id}}"><span class="inner"><b class="text">{{$v3->cname}}</b></span></a>
 										@endforeach
 									
 									@endforeach
-
-								</div>
+								</h3>
+								
 								<span class="more ">
 						<a class="more-link " href="# ">更多美味</a>
 							</span>
@@ -362,7 +367,7 @@
 
 															<a href="/home/details/{{$v4->id}}"><img style="height:183.15px;" src="{{$v4->pic}}" /></a>
 
-														<div class="pro-title scarce"> {{$v4->name}} </div>
+														<div class="pro-title cutString">{{$v4->name}}</div>
 														<span class="e-price "> {{$v4->price}} ￥</span>
 													</a>
 												</div>
@@ -387,20 +392,80 @@
 					
 					
 
-		</div>
-		</div>
+			</div>
+	
 
 		
 @endsection
 
+
 @section('js')
-	<script type="text/javascript">
-		$('.scarce').each(function(){
-			console.log($(this).html());
-			if($(this).html().length > 10){
-				$(this).html($(this).html().slice(0,10) + '...');
-			}
-		})
-	</script>
+<script>
+	// * 根据长度截取先使用字符串，超长部分追加… 
+ 
+//  * str 对象字符串 
+ 
+//  * len 目标字节长度 
+ 
+//  * 返回值： 处理结果字符串 
+
+
+
+
+function cutString(str, len) { 
+         
+		 //length属性读出来的汉字长度为1 
+	   
+		 if(str.length*2 <= len) { 
+	   
+		   return str; 
+	   
+		 } 
+	   
+		 var strlen = 0; 
+	   
+		 var s = ""; 
+	   
+		 for(var i = 0;i < str.length; i++) { 
+	   
+		   s = s + str.charAt(i); 
+	   
+		   if (str.charCodeAt(i) > 128) { 
+	   
+			 strlen = strlen + 2; 
+	   
+			 if(strlen >= len){ 
+	   
+			   return s.substring(0,s.length-1) + "..."; 
+	   
+			 } 
+	   
+		   } else { 
+	   
+			 strlen = strlen + 1; 
+	   
+			 if(strlen >= len){ 
+	   
+			   return s.substring(0,s.length-2) + "..."; 
+	   
+			 } 
+	   
+		   } 
+	   
+		  } 
+	   
+		  return s; 
+		
+	  } 
+
+	  $('.cutString').each(function(index){
+
+		$(this).text(cutString($(this).text(), 20))
+
+
+	})	
+</script>
+
+		
 @endsection
 	

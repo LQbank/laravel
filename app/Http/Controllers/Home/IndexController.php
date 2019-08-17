@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Home\ShopCarController;
 use App\Models\Cates;
+use App\Models\Cartoons;
 use DB;
 
 class IndexController extends Controller
@@ -121,6 +122,7 @@ class IndexController extends Controller
         
     // }
 
+
     /**
      * 商城首页
      *
@@ -128,9 +130,22 @@ class IndexController extends Controller
      */
     public function index()
     {
-        // dump($_SESSION['car']);
         
-        return view('home/index/index');
+
+        
+        // $cates_data = self::getPidCateData();
+        // dump($cates_data);
+
+        // return view('home/index/index',['cates_data'=>$cates_data]);
+        
+        // $arr = self::getGoods();
+
+        // dump($arr);
+        // $link=DB::table('links')->get();
+        $cartoon=DB::table('cartoons')->where('status','1')->get();
+
+        // dd($cartoon);
+        return view('home/index/index',['cartoon'=>$cartoon]);
     }
 
     /**
@@ -141,7 +156,10 @@ class IndexController extends Controller
     public function logout(Request $request)
     {
 
-        $request->session()->flush();
+        $request->session()->flush('home_user');
+
+       
+
         // 跳转
         return redirect('/'); 
 

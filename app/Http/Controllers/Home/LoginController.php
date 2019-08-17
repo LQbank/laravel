@@ -92,12 +92,11 @@ class LoginController extends Controller
 
         //验证数据
         $this->validate($request, [ 
-            'email' => 'required|email',
+            'email' => 'required',
             'passwd' => 'required',         
         ],[
 
-            'email.required'=>'邮箱必填',    
-            'email.email'=>'邮箱格式错误',  
+            'email.required'=>'邮箱/手机号必填',    
             'passwd.required'=>'密码必填',    
               
         ]);
@@ -109,19 +108,27 @@ class LoginController extends Controller
 
 
         $user = DB::table('users')->where('email',$email)->first();
+        
 
-        //状态是否为已经激活
-        if($user->status !== '1'){
-            echo "<script>alert('该邮箱没有激活，请前往邮箱激活');location.href='/home/login';</script>";   			
-   			exit;
-        }
-      
-   		// 验证密码正确
-   		if (!Hash::check($passwd, $user->passwd)) {
+        // dd( $user);
 
-   		    echo "<script>alert('用户名或者密码错误');location.href='/home/login';</script>";   			
-      			exit;
-   		}
+            if(!empty($user))
+            {
+
+
+        
+                //状态是否为已经激活
+                if($user->status !== '1'){
+                    echo "<script>alert('该邮箱没有激活，请前往邮箱激活');location.href='/home/login';</script>";   			
+                    exit;
+                }
+            
+                // 验证密码正确
+                if (!Hash::check($passwd, $user->passwd)) {
+
+                    echo "<script>alert('用户名或者密码错误');location.href='/home/login';</script>";   			
+                        exit;
+                }
 
 
    		// 登录成功
@@ -151,10 +158,17 @@ class LoginController extends Controller
         }
 
 
-   		// 跳转
-        return redirect('/'); 
+                // 跳转
+                return redirect('/'); 
        
-    }
+        
+        }else{
+            return back()->with('success', '账户或密码错误');
+        
+        }
 
-    
+          
+
+
+    }
 }

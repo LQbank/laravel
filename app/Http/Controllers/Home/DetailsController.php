@@ -20,7 +20,8 @@ class DetailsController extends Controller
 		$res = DB::table('sku')
     	->where('sku.id',$id)
     	->leftJoin('good','sku.good_id','=','good.id')
-    	->first();
+        ->first();
+        // dump($res);
         
         // 查出商品的sku
         $aaa = DB::table('sku')->where('good_id',$res->good_id)->get();
@@ -60,8 +61,49 @@ class DetailsController extends Controller
             // 去除重复的sku
             $k->sub = array_unique($k->sub);
         }
+
+        // dump($res5);
+
+
+
+        //获取商品的所有评论
+        $reply = DB::table('reply')
+        ->join('users','reply.user_id','=','users.id')
+        ->join('sku','reply.sku_id','=','sku.id')
+        ->join('good','reply.good_id','=','good.id')
+        ->where('reply.good_id',$res->good_id)	
+        ->select('reply.*','sku.pic','sku.sku','good.name','users.avatar','users.nickname')
+        ->get();
+       
+        // dump( $reply);
+
+
+
+    	// return view('home/details/index',['good'=>$res,'res2'=>$res2,'sku'=>$res5,'sid'=>$id,'reply'=>$reply]);
+
+
+        // 收藏状态
+        if (session('home_user')==null) {
+            $collect = null;
+        }else{
+          
+            $uid=session('home_user')->id;
+            $collect=DB::table('collect')
+            ->where('user_id',$uid)
+            ->where('sku_id',$id)
+            ->first();
+
+        }
+        dump($res);
+
+        if ($collect == null) {
+            return view('home/details/index',['good'=>$res,'res2'=>$res2,'sku'=>$res5,'sid'=>$id,'collect'=>$collect,'reply'=>$reply]);
+        } else {
+           
+            return view('home/details/index',['good'=>$res,'res2'=>$res2,'sku'=>$res5,'sid'=>$id,'collect'=>$collect,'reply'=>$reply]);
+        }
         
-    	return view('home/details/index',['good'=>$res,'res2'=>$res2,'sku'=>$res5,'sid'=>$id]);
+
     }
 
     /**

@@ -84,10 +84,22 @@ class LoginController extends Controller
         // 将权限压入session
 		session(['admin_nodes'=>$node_data]);
 		 
-	
-
    		// 跳转
    		return redirect('admin'); 
 
-   	}
+	   }
+	   
+	/**
+	* 	退出登录
+	*/
+	public function logout(Request $request)
+	{
+
+		session(['admin_login'=>false]);
+   		session(['admin_userinfo'=>'']);
+		
+		// 跳转
+		return redirect('admin/login'); 
+	}
+
 }

@@ -44,6 +44,7 @@
 			#tab{
 				width:850px;
 			}
+		
 		</style>
 
 
@@ -74,31 +75,34 @@
 											<thead>
 												<tr class="bbb">
 													<th></th>
-													<th class="product-remove" style="width:10px;">
+													<!-- <th class="product-remove" style="width:10px;">
 														&nbsp;
-													</th>
+													</th> -->
 
 													<th class="product-price">
+														
+													</th>
+													<th class="product-price"  width="46%" style="text-align:center;">
 														Pic
 													</th>
 													
-													<th class="product-price">
+													<th class="product-price"  width="46%" style="text-align:center;">
 														Name
 													</th>
-													<th class="product-name">
+													<th class="product-name"  width="46%" style="text-align:center;">
 														Sku
 													</th>
 													
-													<th class="product-price">
+													<th class="product-price"  width="46%" style="text-align:center;">
 														Price
 													</th>
-													<th class="product-quantity">
+													<th class="product-quantity"  width="46%" style="text-align:center;">
 														Num
 													</th>
-													<th class="product-quantity">
+													<th class="product-quantity"   width="46%" style="text-align:center;">
 														number
 													</th>
-													<th class="product-subtotal">
+													<th class="product-subtotal"   width="46%" style="text-align:center;">
 														Total
 													</th>
 												</tr>
@@ -109,6 +113,7 @@
 												<tr class="cart_table_item aaa">
 													<td style="width:10px;">
 														<input class="inp" type="checkbox" name="xuan[]" value="{{ $car->id }}">
+														
 													</td>
 													<td class="product-remove" style="width:10px;">
 														<a onclick="shanchu(this,{{ $car->id }})" title="Remove this item" class="remove">
@@ -120,7 +125,7 @@
 														<img src="{{ $car->pic }}" style="width:50px;">
 													</td>
 
-													<td>
+													<td class="cutString">
 														{{ $car->goodname }}
 													</td>
 													
@@ -134,7 +139,7 @@
 														
 															<div class="quantity">
 																<input type="button" class="minus" value="-">
-																<input type="text" style="width:50px;" disabled class="input-text qty text" name="num[{{ $car->id }}]" title="Qty" value="{{ $car->number }}" >
+																<input type="text" style="width:50px;" class="input-text qty text" name="num[{{ $car->id }}]" title="Qty" value="{{ $car->number }}" >
 																<input type="button" class="plus" value="+">
 															</div>
 														
@@ -145,14 +150,18 @@
 													</td>
 												</tr>
 											@endforeach
-												<tr align="center">
+											
+												<tr >
+												
 													<td class="actions" colspan="6">
-														<div class="actions-continue">
-															<input id="tijiao2" type="submit" value="Submit Cart" class="btn btn-default">
+													<br />
+														<div class="actions-continue" style = "float:right;margin-right:-300px;margin-top:30px;">
+															<input id="tijiao2" type="submit" value="Submit Cart" class="btn  btn-danger ">
 														</div>
 													</td>
 												</tr>
-												<div class="zong">总价：100<br /><hr /></div>
+												<div class="zong">总价：100<br /></div>
+												<hr />
 											</tbody>
 										</table>
 									</form>
@@ -306,6 +315,73 @@
 		// 	}
 			
 		// })
+
+	
+// * 根据长度截取先使用字符串，超长部分追加… 
+ 
+//  * str 对象字符串 
+ 
+//  * len 目标字节长度 
+ 
+//  * 返回值： 处理结果字符串 
+
+
+
+
+	function cutString(str, len) { 
+         
+		 //length属性读出来的汉字长度为1 
+	   
+		 if(str.length*2 <= len) { 
+	   
+		   return str; 
+	   
+		 } 
+	   
+		 var strlen = 0; 
+	   
+		 var s = ""; 
+	   
+		 for(var i = 0;i < str.length; i++) { 
+	   
+		   s = s + str.charAt(i); 
+	   
+		   if (str.charCodeAt(i) > 128) { 
+	   
+			 strlen = strlen + 2; 
+	   
+			 if(strlen >= len){ 
+	   
+			   return s.substring(0,s.length-1) + "..."; 
+	   
+			 } 
+	   
+		   } else { 
+	   
+			 strlen = strlen + 1; 
+	   
+			 if(strlen >= len){ 
+	   
+			   return s.substring(0,s.length-2) + ""; 
+	   
+			 } 
+	   
+		   } 
+	   
+		  } 
+	   
+		  return s; 
+		
+	  } 
+
+	  $('.cutString').each(function(index){
+
+		$(this).text(cutString($(this).text(), 25))
+
+
+	})	
+
+		
 		
 		
 	</script>
