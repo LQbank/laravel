@@ -57,10 +57,12 @@
 				</div>
 
 				<div class="nav white">
+					<a href="/">
 					<div class="logo"><img src="/h/images/logo.png" /></div>
 					<div class="logoBig">
 						<li><img src="/h/images/logobig.png" /></li>
 					</div>
+					</a>
 
 					<div class="search-bar pr">
 						<a name="index_none_header_sysc" href="#"></a>
@@ -266,6 +268,8 @@
 				</div>
 			</div>
 		</div>
+		<a id="ibangkf" href="https://www.ibangkf.com">在线客服</a>
+		<script type="text/javascript" src="https://c.ibangkf.com/i/c-youare.js"></script>
 
 
 		<script>

@@ -71,7 +71,7 @@ class OrderController extends Controller
         // dump(789);
         // $order = DB::table('order1')->where('status',3)->get();
         // 查出所有的订单信息
-        $order = DB::select("select order1.*,users.email,addresses.*,order1.id as orderid from order1,users,addresses where (order1.status=3 or order1.status=4) and order1.user_id=users.id and order1.address_id=addresses.id");
+        $order = DB::select("select order1.*,users.email,addresses.uname,addresses.phone,order1.id as orderid from order1,users,addresses where (order1.status=3 or order1.status=4) and order1.user_id=users.id and order1.address_id=addresses.id");
         // dd($order);
         return view('admin.order.tuihuo',['order2'=>$order]);
     }

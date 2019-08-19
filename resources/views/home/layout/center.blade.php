@@ -92,9 +92,11 @@
 						<!--悬浮搜索框-->
 
 						<div class="nav white">
+							<a href="/">
 							<div class="logoBig">
 								<li><img src="/h/images/logobig.png" /></li>
 							</div>
+							</a>
 
 							<div class="search-bar pr">
 								<a name="index_none_header_sysc" href="#"></a>

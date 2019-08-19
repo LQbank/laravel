@@ -657,7 +657,7 @@
 
         $('.woyaotui').click(function(){
         	var order_id = $(this).attr('orderid');
-        	$(this).parent().html('已退货');
+        	$(this).parent().html('等待退货');
 
         	$.ajax({
                 type: 'POST',

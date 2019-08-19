@@ -81,6 +81,8 @@ class RolesController extends Controller
         // 查出所有的权限大分类
         $controllernames = self::controllernames();
        
+
+        // dd($nodes);
         // 加载页面
         return view('admin.roles.create',['nodes'=>$nodes,'controllernames'=>$controllernames]);
     }

@@ -57,7 +57,7 @@
     <script type="text/javascript">
         $('.status').click(function(){
             var checked = $(this).find('input').attr('checked');
-            // console.log(checked);
+            console.log(checked);
 
             var status;
 

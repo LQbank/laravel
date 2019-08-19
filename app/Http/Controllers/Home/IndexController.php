@@ -19,7 +19,7 @@ class IndexController extends Controller
     public static function  getPidCateData($pid = 0)
     {
         //获取一级分类
-        $data = Cates::where('pid',$pid)->where('cates.status',0)->get();
+        $data = Cates::where('pid',$pid)->where('cates.status',1)->get();
 
         //获取商品  信息
         $good = DB::table('good')->get();

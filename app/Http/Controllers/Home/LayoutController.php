@@ -10,7 +10,7 @@ class LayoutController extends Controller
 {
      public static function index()
     {
-        $link=DB::table('links')->get();
+        $link=DB::table('links')->where('status','1')->get();
         // dd($link);
         return $link;
     }

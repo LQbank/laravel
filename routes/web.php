@@ -41,7 +41,9 @@ Route::get('admin/allow',function(){
 
 
 // 权限验证的中间件  【allow】
+// Route::group(['middleware'=>['login','allow']],function(){
 Route::group(['middleware'=>['login']],function(){
+
 	//后台 订单管理 查看退货订单
 	Route::get('admin/order/tuihuo','Admin\OrderController@tuihuo');
 

@@ -179,14 +179,22 @@ class UsersController extends Controller
 
         $path = $userinfo->avatar;
         
+
+        // 查出当前数据
+        $usersinfo = Users::where('id',$id)->first();
+
+        if($usersinfo->avatar !=='20190727/DFl323SLCZq4QyXzt95SSE63L02nl4TuZCq59RIs.jpeg'){
+            // 删除图片
+            Storage::delete([$usersinfo->avatar]);
+        }
         // 删除主用户
         $res1 = Users::destroy($id);
     
         // 判断用户删除是否成功
         if($res1){
            
-            // 删除图片
-            $res2 = Storage::delete([$path]);
+           
+           
            
             return redirect('admin/users')->with('success', '删除成功');
         }else{
